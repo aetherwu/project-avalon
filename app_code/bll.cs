@@ -28,10 +28,10 @@ namespace BLL
 			return dal.GetRecentPost();
 		}
 
-		public IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS)
+		public IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS,int limit)
 		{
 			IPost dal = DALFactory.Post.Create();
-			return dal.GetDays(year,month,day,page,keywords,isRSS);
+			return dal.GetDays(year,month,day,page,keywords,isRSS,limit);
 		}
 
 	}

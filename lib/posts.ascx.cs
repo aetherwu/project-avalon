@@ -42,11 +42,17 @@ namespace Avalon.Web {
 			get { return _keyword; }
 			set { this._keyword = value; }
 		}
+		private int _limit;
+		public int Limit
+		{
+			get { return _limit; }
+			set { this._limit = value; }
+		}
 
 		public void Page_Load(object sender, EventArgs e)¡¡
 		{
 			Post c = new Post();
-			lst = c.GetDays(_year,_month,_day,_page,_keyword,false);
+			lst = c.GetDays(_year,_month,_day,_page,_keyword,false,_limit);
 
 			if (lst != null) {
                 postList.DataSource = lst;

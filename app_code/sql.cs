@@ -89,9 +89,12 @@ namespace SQLServerDAL
 		private const string SQL_SELECT_PostS_Day = "AND DAY(log_PostTime) = @day ";
 		private const string SQL_SELECT_PostS_End = "GROUP BY CONVERT(char(10), log_PostTime, 21) ORDER BY PostTime DESC";
 
-		public IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS) {
+		public IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS, int limit) {
 			
-            IList<PostIndexInfo> Posts = new List<PostIndexInfo>();
+			if (limit==0)
+				limit=6;
+
+			IList<PostIndexInfo> Posts = new List<PostIndexInfo>();
 			
 			SqlParameter[] parms = new SqlParameter[3];
 				parms[0] = new SqlParameter(PARM_year, SqlDbType.BigInt, 4);
@@ -128,7 +131,7 @@ namespace SQLServerDAL
 					PostIndexInfo Post = new PostIndexInfo(tmpDate);
 					Posts.Add(Post);
 					i++;
-					if (i>=6)
+					if (i>=limit)
 						break;
                 }
             }

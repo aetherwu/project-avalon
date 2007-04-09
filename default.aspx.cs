@@ -21,6 +21,8 @@ namespace Avalon.Web {
 			posts.Year=year;
 			posts.Month=month;
 
+			posts.Limit=5;
+
 		}
 
 	}
