@@ -15,7 +15,7 @@
 		<asp:Repeater id="postList" OnItemDataBound="postList_ItemDataBound" runat="server"><ItemTemplate><item>
 			<title><%# DataBinder.Eval(Container.DataItem,"PostTime","{0:D}") %> - Aether</title>
 			<link>http://woooh.com/<%# DataBinder.Eval(Container.DataItem,"PostTime","{0:yyyy\\/MM\\/dd}") %></link>
-			<pubDate><%# Eval("PostTime") %></pubDate>
+			<pubDate><%# DataBinder.Eval(Container.DataItem,"PostTime","{0:r}") %></pubDate>
 			<guid isPermaLink="true">http://woooh.com/<%# DataBinder.Eval(Container.DataItem,"PostTime","{0:yyyy\\/MM\\/dd}") %></guid>
 			<content:encoded>
 			<![CDATA[ 

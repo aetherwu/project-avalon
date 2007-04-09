@@ -24,7 +24,7 @@ namespace Avalon.Web {
 		{
 			
 			Post c = new Post();
-			lst = c.GetDays(_year,_month,_day,_page,_keyword,true);
+			lst = c.GetDays(_year,_month,_day,_page,_keyword,true,10);
 
 			if (lst != null) {
                 postList.DataSource = lst;

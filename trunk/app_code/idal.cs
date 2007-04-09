@@ -10,7 +10,7 @@ namespace IDAL
 		void Insert(PostInfo newPost);
 		IList<PostInfo> GetOneDay(int year,int month,int day);
 		IList<PostInfo> GetRecentPost();
-		IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS);
+		IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS,int limit);
 	}
 
 	public interface IComment
