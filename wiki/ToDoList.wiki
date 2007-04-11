@@ -3,17 +3,17 @@
 
 == 正在处理 ==
 
-  * 翻页：使用Timeline平滑滚动机制，废弃页码
-
-  * 关键字全文搜索，关键字输出RSS订阅
-  * Refer防伪造机制：A标签转换，XML中统一使用anchor，在XSL中解析为a标签。
+  * Blog Cache - Web Picks，独立的blog网摘系统，抓取相关的html、css等在本地储存，并且抓取远程屏幕截图。实现分布式储存。
+  * 翻页：使用Timeline平滑滚动机制，废弃页码。
+  * BloggerOwner使用OpenID登录和主控。
+  * 本地独立的发表和修改平台，发布的话，这一步必须做。
 
 == 等待处理的功能 ==
 
-  * 本地独立的发表和修改平台。
-  * 从IM到Midgard到blog的发表。
   * 相关：最近更新的/前几日的，后几日的/内容最相关的/历史上的今天（Wiki抓取以及本站）
   * Archives List Link
+  * 关键字全文搜索，关键字输出RSS订阅
+  * 从IM到Project Midgard到blog的发表。
 
 == 较独立的功能 ==
 
@@ -24,16 +24,18 @@
 == 确认中 ==
 
   * API for Project Midgard，实现从IM到Midgard到blog的同步评论和回复
-  * IM Account 就是OpenID
-  * BlogCache - WebPicks，独立的blog网摘系统，抓取相关的html、css等在本地储存，并且抓取远程屏幕截图。实现分布式储存。
 
 == 期待合作者分配 ==
-  * 数据层扩展，支持Access，MySQL，Oracle
+
+  * 数据层扩展，支持Access。 ~~MySQL/Oracle~~
+  * Avalon原生的独立Skin
 
 == 远景版本预期 ==
+
   * 启用数据持久层，考虑NH，Castle，关注中
   * SQL查询从代码中分离，独立为储存过程
   * 大规模并发访问量支持
+  * 好友系统，可信任的好友可以给clip添加和修改Tag
 
 == 已完成 == 
 === 2007.03.27 ===
@@ -58,3 +60,4 @@
   * ~~兼容ZBlog升级，把"/post/id.html"重定向到新的页面，但是自定义链接的可能会失效，被放弃。~~ 因为没有对应的id和自定义url结尾使用，所以以前的页面将完全失效。
   * ~~RSS手动更新~~ 这个不好，所以不做了
   * ~~UrlRewrite需要兼容最后一个划线~~ 最后一个划线表明是目录，语义错误
+  * ~~Refer防伪造机制：A标签转换，XML中统一使用anchor，在XSL中解析为a标签。~~
