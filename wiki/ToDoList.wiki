@@ -1,4 +1,4 @@
-#labels Featured,Phase-Design,Phase-Implementation
+﻿#labels Featured,Phase-Design,Phase-Implementation
 #准备做的事情
 
 == 正在处理 ==
@@ -25,6 +25,7 @@
 
   * API for Project Midgard，实现从IM到Midgard到blog的同步评论和回复
   * IM Account 就是OpenID
+  * BlogCache - WebPicks，独立的blog网摘系统，抓取相关的html、css等在本地储存，并且抓取远程屏幕截图。实现分布式储存。
 
 == 期待合作者分配 ==
   * 数据层扩展，支持Access，MySQL，Oracle
