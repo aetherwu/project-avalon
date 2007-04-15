@@ -92,7 +92,7 @@ namespace SQLServerDAL
 		public IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS, int limit) {
 			
 			if (limit==0)
-				limit=6;
+				limit=9999;
 
 			IList<PostIndexInfo> Posts = new List<PostIndexInfo>();
 			
@@ -161,6 +161,26 @@ namespace SQLServerDAL
                 }
             }
             return RecentPost;
+        }
+
+		//
+		//Archives
+		//
+		private const string SQL_SELECT_ARCHIVES = "SELECT CONVERT(char(7), log_PostTime, 21) FROM [blog_Post] GROUP BY CONVERT(char(7), log_PostTime, 21) ORDER BY CONVERT(char(7), log_PostTime, 21) DESC";
+
+        public IList<PostIndexInfo> GetArchives() {
+
+            IList<PostIndexInfo> Archives = new List<PostIndexInfo>();
+
+            //Execute
+            using (SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, SQL_SELECT_ARCHIVES)) {
+                while (sdr.Read())
+				{
+                    PostIndexInfo Post = new PostIndexInfo(Convert.ToDateTime(sdr.GetString(0)));
+                    Archives.Add(Post);
+                }
+            }
+            return Archives;
         }
 
 	}
