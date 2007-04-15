@@ -100,4 +100,20 @@ namespace Model
 		public DateTime RequestDate { get	{ return _requestDate; } }
 	}
 
+
+	public class ArchiveIndexInfo
+	{
+		private DateTime _month;
+		private int _count;
+
+		public ArchiveIndexInfo(DateTime month, int count)
+		{
+			this._month = month;
+			this._count = count;
+		}
+
+		public DateTime Month { get	{ return _month; } }
+		public int Count { get	{ return _count; } }
+	}
+
 }

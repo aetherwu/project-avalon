@@ -166,18 +166,18 @@ namespace SQLServerDAL
 		//
 		//Archives
 		//
-		private const string SQL_SELECT_ARCHIVES = "SELECT CONVERT(char(7), log_PostTime, 21) FROM [blog_Post] GROUP BY CONVERT(char(7), log_PostTime, 21) ORDER BY CONVERT(char(7), log_PostTime, 21) DESC";
+		private const string SQL_SELECT_ARCHIVES = "SELECT CONVERT(char(7), log_PostTime, 21),COUNT(CONVERT(char(7), log_PostTime, 21)) FROM [blog_Post] GROUP BY CONVERT(char(7), log_PostTime, 21) ORDER BY CONVERT(char(7), log_PostTime, 21) DESC";
 
-        public IList<PostIndexInfo> GetArchives() {
+        public IList<ArchiveIndexInfo> GetArchives() {
 
-            IList<PostIndexInfo> Archives = new List<PostIndexInfo>();
+            IList<ArchiveIndexInfo> Archives = new List<ArchiveIndexInfo>();
 
             //Execute
             using (SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, SQL_SELECT_ARCHIVES)) {
                 while (sdr.Read())
 				{
-                    PostIndexInfo Post = new PostIndexInfo(Convert.ToDateTime(sdr.GetString(0)));
-                    Archives.Add(Post);
+                    ArchiveIndexInfo AMonth = new ArchiveIndexInfo(Convert.ToDateTime(sdr.GetString(0)),sdr.GetInt32(1));
+                    Archives.Add(AMonth);
                 }
             }
             return Archives;
