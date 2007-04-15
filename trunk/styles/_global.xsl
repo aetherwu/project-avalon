@@ -139,6 +139,7 @@
 								<xsl:attribute name="href">/<xsl:value-of select="@address" /></xsl:attribute>
 								<xsl:value-of select="text()"/>
 							</xsl:element>
+							(<xsl:value-of select="@count" />)
 						</li>
 					</xsl:for-each>
 				</ul>

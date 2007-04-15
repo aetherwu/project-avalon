@@ -34,7 +34,7 @@ namespace BLL
 			return dal.GetDays(year,month,day,page,keywords,isRSS,limit);
 		}
 
-		public IList<PostIndexInfo> GetArchives()
+		public IList<ArchiveIndexInfo> GetArchives()
 		{
 			IPost dal = DALFactory.Post.Create();
 			return dal.GetArchives();

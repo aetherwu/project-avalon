@@ -10,7 +10,7 @@ namespace Avalon.Web {
 
     public partial class archives : System.Web.UI.UserControl {
 
-		private IList<PostIndexInfo> ar;
+		private IList<ArchiveIndexInfo> ar;
 
         public void Page_Load(object sender, EventArgs e) {
 
