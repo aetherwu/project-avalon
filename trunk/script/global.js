@@ -1,7 +1,7 @@
 $(function(){
 	if(!document.all){
 		$(".text").each(function(e){
-			this.innerHTML = this.firstChild.data;
+			this.innerHTML = this.textContent;
 		})
 	}
 

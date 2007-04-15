@@ -13,7 +13,6 @@ namespace Avalon.Web {
 		{
 			int year = WebComponents.CleanString.GetInt(HttpContext.Current.Request["year"]);
 			int month = WebComponents.CleanString.GetInt(HttpContext.Current.Request["month"]);
-			int day = WebComponents.CleanString.GetInt(HttpContext.Current.Request["day"]);
 
 			int page = WebComponents.CleanString.GetInt(HttpContext.Current.Request["page"]);
 			string keywords = HttpContext.Current.Request["key"];
@@ -21,7 +20,8 @@ namespace Avalon.Web {
 			posts.Year=year;
 			posts.Month=month;
 
-			posts.Limit=5;
+			if (year==0||month==0)
+				posts.Limit=3;
 
 		}
 

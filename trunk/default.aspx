@@ -7,6 +7,7 @@
 	<relative>
 		<include:list id="recentPosts" Name="最近写的" runat="server" />
 		<include:cmt id="recentComments" Name="最近路过" runat="server" />
+		<include:arv id="archives" Name="最近路过" runat="server" />
 	</relative>
 	<!-- #Include File="lib/about.xml" -->
 </avalon>
