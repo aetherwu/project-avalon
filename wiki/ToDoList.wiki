@@ -3,27 +3,26 @@
 
 == 正在处理 ==
 
-  * Blog Cache - Web Picks，独立的blog网摘系统，抓取相关的html、css等在本地储存，并且抓取远程屏幕截图。实现分布式储存。
   * 翻页：使用Timeline平滑滚动机制，废弃页码。
-  * BloggerOwner使用OpenID登录和主控。
   * 本地独立的发表和修改平台，发布的话，这一步必须做。
 
 == 等待处理的功能 ==
 
   * 相关：最近更新的/前几日的，后几日的/内容最相关的/历史上的今天（Wiki抓取以及本站）
-  * Archives List Link
   * 关键字全文搜索，关键字输出RSS订阅
   * 从IM到Project Midgard到blog的发表。
+  * Archives Update：类似WordPress的层次分类，显示多少天，~~多少clip（已完成）~~。
 
 == 较独立的功能 ==
 
   * 404错误，500错误等容错处理
   * 页面、对象、数据和数据库相关的应用程序级缓存
   * 自定义http请求，将静态的文件从asp.net引擎重新做静态文件处理。
+  * Blog Cache - Web Picks，独立的blog网摘系统，抓取相关的html、css等在本地储存，并且抓取远程屏幕截图。实现分布式储存。
 
 == 确认中 ==
 
-  * API for Project Midgard，实现从IM到Midgard到blog的同步评论和回复
+  * BloggerOwner使用OpenID登录和主控。
 
 == 期待合作者分配 ==
 
@@ -55,9 +54,12 @@
   * ~~Referer，替代传统的Trackback——确实检测到返回点击的更加有效。~~
 === 2007.04.09 ===
   * ~~GoogleSiteMap~~
+=== 2007.04.16 ===
+  * ~~Archives List Link~~
 
 == 丢弃 ==
   * ~~兼容ZBlog升级，把"/post/id.html"重定向到新的页面，但是自定义链接的可能会失效，被放弃。~~ 因为没有对应的id和自定义url结尾使用，所以以前的页面将完全失效。
   * ~~RSS手动更新~~ 这个不好，所以不做了
   * ~~UrlRewrite需要兼容最后一个划线~~ 最后一个划线表明是目录，语义错误
   * ~~Refer防伪造机制：A标签转换，XML中统一使用anchor，在XSL中解析为a标签。~~
+  * ~~API for Project Midgard，实现从IM到Midgard到blog的同步评论和回复~~
