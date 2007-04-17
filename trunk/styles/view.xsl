@@ -49,7 +49,6 @@
 		<div class="box comment">
 		<div class="inner">
 			<div class="caption">
-				<span><xsl:value-of select="postTime" /></span>
 				<i><xsl:value-of select="position()" /></i>
 				<xsl:choose>
 					<xsl:when test="home[.!='http://']">
@@ -63,6 +62,8 @@
 						<xsl:value-of select="author" />
 					</xsl:otherwise>
 				</xsl:choose>
+				<br/>
+				<span><xsl:value-of select="postTime" /></span>
 			</div>
 			<div class="contain text"><xsl:apply-templates select="text"/></div>
 		</div>

@@ -7,11 +7,11 @@
 	<xsl:template match="posts">
 	<div class="content">
 		<xsl:for-each select="post">
-		<div class="box">
+		<div class="box post">
 		<div>
-			<div class="caption date">
+			<div class="caption">
 				<xsl:for-each select="date">
-				<h2>
+				<h2 class="date">
 					<xsl:element name="a">
 						<xsl:attribute name="href">/<xsl:value-of select="@address" /></xsl:attribute>
 						<xsl:value-of select="text()"/>
@@ -93,11 +93,10 @@
 				<ul class="recentComments">
 					<xsl:for-each select="summary">
 						<li>
-							<xsl:element name="a">
+							<xsl:value-of select="text()" /> (<xsl:element name="a">
 								<xsl:attribute name="href">/<xsl:value-of select="@logTime" /></xsl:attribute>
 								<xsl:value-of select="@guest"/>
-							</xsl:element> : 
-							<xsl:value-of select="text()" />
+							</xsl:element>)
 						</li>
 					</xsl:for-each>
 				</ul>
@@ -107,18 +106,17 @@
 		</xsl:for-each>
 
 		<xsl:for-each select="recentPosts">
-		<div class="box">
+		<div class="box recentPosts">
 		<div>
 			<h2 class="caption"><xsl:value-of select="@sortType" /></h2>
 			<div class="contain">
 				<ul class="">
 					<xsl:for-each select="summary">
 						<li>
-							<xsl:value-of select="@postTime" /><br/>
-							<xsl:element name="a">
+							 <xsl:value-of select="text()" /> (<xsl:element name="a">
 								<xsl:attribute name="href">/<xsl:value-of select="@address" /></xsl:attribute>
-								<xsl:value-of select="text()"/>
-							</xsl:element>
+								<xsl:value-of select="@postTime"/>
+							</xsl:element>)
 						</li>
 					</xsl:for-each>
 				</ul>

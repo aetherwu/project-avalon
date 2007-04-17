@@ -2,30 +2,30 @@
 
 	.main .refer {margin-bottom:5px;}
 
-.comments{}
-	.comment { background:#363E44 url(/images/author_round_corner.gif) no-repeat;padding-top:20px; }
-	.main .comment {margin-bottom:10px;}
-		.comment .inner { background:url(/images/comments_round_corner.gif) no-repeat 0 bottom;padding-bottom:20px; }
-		.comment .caption {background:none;text-align:left;padding:0 15px 0 25px;font-weight:bold;}
-			.comment .caption span {float:right;color:#777B80;font-weight:normal;}
-			.comment .caption i {font-weight:normal;font-style:normal;margin-right:10px;color:#5C6368;}
-		.comment .contain {padding:5px 20px 5px 25px;line-height:150%;margin:0;}
-	.commentGuild {color:#FFA826;margin-top:25px;margin-bottom:10px;}
+.comments{background:url(/images/text.png) no-repeat right 25px;padding-right:15px;}
+	.comment { padding-top:10px;}
+	.main .comment {margin-bottom:0;border-bottom:1px solid #ccc;}
+		.comment .inner { padding-bottom:10px; }
+		.comment .caption {background:none;text-align:left;padding:5px 0;font-weight:bold;}
+			.comment .caption span {color:#777B80;font-weight:normal;font-family:Arial;font-size:9px;}
+			.comment .caption i {float:right;font-size:22px;color:#999;font-family:"Times New Roman";}
+		.comment .contain {padding:5px 0;line-height:150%;margin:0;}
+	.commentGuild {color:#666;margin-top:35px;margin-bottom:10px;font-weight:bold;}
 
-	.commentPost {background:transparent url(/images/fieldset.gif) no-repeat;}
-		.commentPost .inner {padding:10px 10px 0 25px;font-size:14px;color:#fff;}
+	.commentPost {background:url(/images/text.png) no-repeat right 0;border-bottom:none !important;}
+		.commentPost .inner {padding:15px 10px 0 25px;font-size:14px;}
 		.commentPost li {margin-bottom:10px;}
 		.commentPost .input {border:2px #292F33 solid;padding:3px;width:175px;}
 		.commentPost .inner textarea {
-			width:440px;height:180px;
+			width:420px;height:180px;
 			padding:3px;margin-top:5px;
 		}
 		.commentPost .submit {
 			margin:0pt 10px 0pt 0pt;padding:2px 6px 3px;
 			background:transparent;border-color:#5C6166;border-style:solid;border-width:1px 2px 2px 1px;
-			color:#FFFFFF;cursor:pointer;
+			color:#000;cursor:pointer;margin-bottom:20px;
 		}
-	.commentNew {background-color:#990000;}
+	.commentNew {background-color:#E3E3E3;padding-left:15px;padding-right:15px;}
 
 
 /* rewrite _global.css */
@@ -34,7 +34,5 @@
 }
 	.banner a {
 		position:absolute;
-		padding:30px 23px;
-		margin-top:45px;margin-left:60px;
+		width:97%;height:150px;
 	}
-	.banner a:hover {background:none;}

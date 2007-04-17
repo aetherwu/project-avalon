@@ -1,33 +1,25 @@
 
 * {margin:0;padding:0;}
-	html {border-top:3px solid #6B7073;color:#D9D5D0;background:#3B4349;}
-	body {font-size:12px;font-family:"Lucida Grande",Verdana,Arial,Helvetica,sans-serif,"ËÎÌו";}
+	html {border-top:3px solid #2D393B;color:#525B5C;background:#EEEEEE;}
+	body {
+		font-size:12px;font-family:"Lucida Grande",Verdana,Arial,Helvetica,sans-serif,"ËÎÌו";
+		background:url(/images/bg.png) repeat-x;
+	}
 	h1{font-family:"Times New Roman";font-size:18px;color:#fff;}
-	a {text-decoration: none;color:#fff;}
-	a:hover { background-color:#802000; color:#FFA826; }
+	a {text-decoration: none;color:#314FA9;}
+	a:hover { color:#213571; }
 	li {list-style:none;}
 	img {border:none;}
 
 .banner {
-	padding:10px;
-	height:230px;width:750px;margin:0 auto;
-	background:url(/images/logo.gif) no-repeat center -10px;
+	height:148px;margin-bottom:40px;
+	background:#2D393B url(/images/logo.gif) no-repeat center 0;
 }
 .banner h1 i {display:none;}
-.navigation {
-	display:none;
-	position:absolute;
-}
-	.navigation li {float:left;display:none;}
-	.navigation a {
-		display:block;width:95px;height:20px;padding-top:20px;text-align:center;
-		border-left:1px solid #6B7073;
-	}
 
-.frame {background:url(/images/burnrubber_bg.gif) repeat-x 0 bottom;}
+.frame {}
 	.wrapper {
-		clear:both;width:750px;margin:0 auto;padding-bottom:80px;
-		background:url(/images/rubber_bg.gif) no-repeat bottom center;
+		clear:both;width:750px;margin:0 auto;padding-bottom:10px;
 	}
 	.main .box {margin-bottom:40px;}
 	.side .box {margin-bottom:20px;}
@@ -35,20 +27,18 @@
 
 .main {float:left;width:500px;}
 	.main img {border:1px solid #292F34;padding:3px;margin:0 10px 10px 0;}
-	.main .caption {
-		padding-bottom:16px;margin-bottom:10px;
-		text-align:center;
-		background:url(/images/hr.gif) no-repeat 0 bottom;
-	}
-		.main .caption h2 {font-size:22px;font-family:Georgia,"Times New Roman",serif;font-weight:normal;color:#fff;}
-		.main .caption h2 a:hover {background:none;color:#FFA826}
+	.main .post {background:url(/images/text.png) no-repeat right 45px;min-height:180px;}
+	.main .caption {padding-bottom:40px;text-align:right;}
+		.main .caption h2 {font-size:26px;font-family:Georgia,"Times New Roman",serif;font-weight:normal;color:#fff;}
+		.main .caption a {color:#000;}
+		.main .caption a:hover {color:#666;text-decoration: underline;}
 	.infomations {
 		margin-top:15px;padding-top:8px;margin-bottom:18px;
 		border-top:1px solid #2F3941;color:#777B80;
 	}
 		.infomations li {float:left;margin-right:15px;}
-	.time {margin-bottom:10px;color:#777B80;text-align:center;}
-	.text {margin-bottom:20px;line-height:150%;}
+	.time {margin-bottom:15px;color:#A8ADAD;text-indent:28px;font-family:'Lucida Grande',Tahoma,Verdana,sans-serif;}
+	.text {margin-bottom:20px;padding-right:15px;line-height:150%;font-size:14px;}
 		.text a {text-decoration: underline;}
 		.text a:hover {text-decoration: none;}
 		.text textarea {
@@ -56,20 +46,21 @@
 			width:95%;overflow:auto;
 		}
 
-.side {float:right;width:200px;padding-top:30px;padding-bottom:80px;background:url(/images/sidebar_bottom.gif) no-repeat 0 bottom;}
+.side {float:right;width:240px;padding-top:85px;padding-bottom:80px;}
+	.side .box {background:url(/images/sidebar.png) no-repeat right 0;margin-bottom:30px;}
 	.side .caption {
-		height:31px;margin-bottom:12px;
-		font-size:12px;font-weight:normal;color:#FFA826;text-align:center;
-		background:url(/images/line.gif) no-repeat left bottom;
+		padding:20px 0 0 0;margin-bottom:12px;
+		font-size:12px;color:#525B5C; padding-left:12px;
 	}
-	.side .contain { line-height:150%; }
-		.side .contain li { background:url(/images/arrowright.gif) no-repeat -495px 7px;padding-left:12px; }
-	.subscribe .contain {background:url(/images/feed/feedsky.gif) no-repeat 33px 0;}
+	.side .contain { line-height:150%;padding:0 15px; }
 
 	.side .recentComments a {text-decoration: underline;}
-	.side .recentComments li {margin:8px 0;background:none;padding-left:0;}
+	.side .recentComments li, .side .recentPosts li {margin:8px 0;background:none;padding-left:0;}
 
-.about {clear:both;padding:60px;background:#292F34;text-align:center;color:#525659}
+.about {
+	clear:both;padding:30px;text-align:center;color:#000;
+	background:url(/images/bottom.png) repeat-x;
+}
 
 
 /* Tool Kit //////////*/
