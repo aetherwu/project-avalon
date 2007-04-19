@@ -8,21 +8,18 @@
 
 == 等待处理的功能 ==
 
-  * 相关：最近更新的/前几日的，后几日的/内容最相关的/历史上的今天（Wiki抓取以及本站）
-  * 关键字全文搜索，关键字输出RSS订阅
+  * 相关：最近更新的/前几日的，后几日的/内容最相关的/历史上的今天（指向Wiki以及搜索本站，用GoogleBloggerSeach做吧）
   * 从IM到Project Midgard到blog的发表。
   * Archives Update：类似WordPress的层次分类，显示多少天，~~多少clip（已完成）~~。
 
 == 较独立的功能 ==
 
-  * 404错误，500错误等容错处理
   * 页面、对象、数据和数据库相关的应用程序级缓存
   * 自定义http请求，将静态的文件从asp.net引擎重新做静态文件处理。
   * Blog Cache - Web Picks，独立的blog网摘系统，抓取相关的html、css等在本地储存，并且抓取远程屏幕截图。实现分布式储存。
 
 == 确认中 ==
 
-  * BloggerOwner使用OpenID登录和主控。
 
 == 期待合作者分配 ==
 
@@ -56,6 +53,10 @@
   * ~~GoogleSiteMap~~
 === 2007.04.16 ===
   * ~~Archives List Link~~
+=== 2007.04.20===
+  * ~~关键字全文搜索，关键字输出RSS订阅~~ using googlebloggersearch
+  * ~~404错误，500错误等容错处理~~
+  * ~~BloggerOwner使用OpenID登录和主控。~~
 
 == 丢弃 ==
   * ~~兼容ZBlog升级，把"/post/id.html"重定向到新的页面，但是自定义链接的可能会失效，被放弃。~~ 因为没有对应的id和自定义url结尾使用，所以以前的页面将完全失效。
