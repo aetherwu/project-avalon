@@ -21,7 +21,7 @@ namespace Avalon.Web {
 			posts.Month=month;
 
 			if (year==0||month==0)
-				posts.Limit=3;
+				posts.Limit=4;
 
 		}
 

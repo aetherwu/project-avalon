@@ -10,6 +10,11 @@
 		<changefreq>hourly</changefreq>
 		<priority>0.8</priority>
 	</url>
+	<asp:Repeater id="monthList" runat="server"><ItemTemplate><url>
+		<loc>http://woooh.com/<%# DataBinder.Eval(Container.DataItem,"Month","{0:yyyy\\/MM}") %></loc>
+		<changefreq>never</changefreq>
+	</url>
+	</ItemTemplate></asp:Repeater>
 	<asp:Repeater id="postList" runat="server"><ItemTemplate><url>
 		<loc>http://woooh.com/<%# DataBinder.Eval(Container.DataItem,"PostTime","{0:yyyy\\/MM\\/dd}") %></loc>
 		<changefreq>never</changefreq>

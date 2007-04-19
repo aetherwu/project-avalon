@@ -3,8 +3,10 @@
 		<contact>admin.ae@gmail.com</contact>
 		<project>Avalon</project>
 		<version>Greeting</version>
-		<release>2007.4.16 build 11</release>
+		<release>2007.4.18 build 13</release>
 		<note>Build in Starbucks</note>
 		<base>PetShop4.0</base>
 		<theme>hellowiki.com</theme>
+		<link rel="openid.server" href="http://www.openid.cn/openid.server" />
+		<link rel="openid.delegate" href="http://aether.openid.cn/" />
 	</about>

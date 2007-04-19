@@ -1,14 +1,41 @@
 $(function(){
-	if(!document.all){
-		$(".text").each(function(e){
-			this.innerHTML = this.textContent;
+
+	/*
+	$(".text").each(function(){
+		$(this).oneclick(function(){
+			$(this).html("<textarea class='textarea' style='background:transparent;border:none;width:"+$(this).width()+"px;height:"+$(this).height()+"px'>"+$(this).html()+"</textarea>").removeClass("text");
 		})
-	}
+	})
+	//*/
+
+	/*
+	// @code from http://ma.la/
+	// @author ma.la <timpo@ma.la>
+	var watch_scroll = function(){
+		try{
+			var sc = document.body.scrollTop;
+			var wh = window.innerHeight ? window.innerHeight : document.body.clientHeight;
+			var total = (document.body.scrollHeight - wh);
+			var remain = total - sc;
+			if(remain < 500 && Enable == 1){
+				requestMore()
+			}
+		}catch(e){
+		}
+		var self = arguments.callee;
+		setTimeout(self,100);
+	};
+	//*/
 
 	reSizeImg();
 })
 
-function reSizeImg(){
+var currentPage = 0;
+var requestMore = function(){
+	
+}
+
+var reSizeImg = function(){
 	var Allimg=document.getElementsByTagName("img");
 	for (var i in Allimg) {
 		drawImage(Allimg[i]);
@@ -27,8 +54,4 @@ var drawImage = function(ImgD){
 			ImgD.height=image.height; 
 		}  
 	} 
-} 
-
-babel_ing_prefix="";
-babel_ing_color_prefix = "#999";
-babel_ing_color_time = "#999";
+}

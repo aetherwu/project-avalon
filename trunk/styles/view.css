@@ -12,7 +12,7 @@
 		.comment .contain {padding:5px 0;line-height:150%;margin:0;}
 	.commentGuild {color:#666;margin-top:35px;margin-bottom:10px;font-weight:bold;}
 
-	.commentPost {background:url(/images/text.png) no-repeat right 0;border-bottom:none !important;}
+	.commentPost {border-bottom:none !important;}
 		.commentPost .inner {padding:15px 10px 0 25px;font-size:14px;}
 		.commentPost li {margin-bottom:10px;}
 		.commentPost .input {border:2px #292F33 solid;padding:3px;width:175px;}

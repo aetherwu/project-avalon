@@ -12,6 +12,7 @@ namespace Avalon.Web {
 	{
 
 		private IList<PostIndexInfo> lst;
+		private IList<ArchiveIndexInfo> ar;
 
 		private int _year;
 		private int _month;
@@ -29,6 +30,14 @@ namespace Avalon.Web {
 			if (lst != null) {
                 postList.DataSource = lst;
                 postList.DataBind();
+			}
+
+			Post p = new Post();
+			ar = p.GetArchives();
+
+			if (ar != null) {
+                monthList.DataSource = ar;
+                monthList.DataBind();
 			}
 
 		}
