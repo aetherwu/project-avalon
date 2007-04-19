@@ -1,6 +1,6 @@
 <%@ Page Language="C#" CodeFile="view.aspx.cs" Inherits="Avalon.Web._view" %>
 <% Response.ContentType = "text/xml";%><?xml version="1.0" encoding="UTF-8" ?>
-<?xml-stylesheet href="/styles/view.xsl" type="text/xsl"?>
+<?xml-stylesheet href="/styles/view.xsl?update=13" type="text/xsl"?>
 <avalon>
 	<!-- #Include File="lib/navigation.xml" -->
 	<include:posts id="posts" runat="server" />

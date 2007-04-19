@@ -13,10 +13,9 @@
 				<title><xsl:value-of select="name"/></title>
 				<link type="text/css" href="http://static.woooh.com/styles/default.css" rel="stylesheet" media="screen"/>
 				<link type="application/rss+xml" href="http://rss.woooh.com" rel="alternate" title="RSS 2.0"  />
-				<link rel="openid.server" href="http://www.openid.cn/openid.server" />
-				<link rel="openid.delegate" href="http://aether.openid.cn/" />
 				<script type="text/javascript" src="http://static.woooh.com/script/lib/jquery.js"></script>
 				<script type="text/javascript" src="http://static.woooh.com/script/global.js"></script>
+				<script type="text/javascript" src="http://static.woooh.com/editor/fckeditor.js"></script>
 			</head>
 			<body>
 				<div class="banner">

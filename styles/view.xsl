@@ -48,7 +48,7 @@
 		<xsl:for-each select="comment">
 		<div class="box comment">
 		<div class="inner">
-			<div class="caption">
+			<div class="caption fix">
 				<i><xsl:value-of select="position()" /></i>
 				<xsl:choose>
 					<xsl:when test="home[.!='http://']">

@@ -38,7 +38,7 @@
 	}
 		.infomations li {float:left;margin-right:15px;}
 	.time {margin-bottom:15px;color:#A8ADAD;text-indent:28px;font-family:'Lucida Grande',Tahoma,Verdana,sans-serif;}
-	.text {margin-bottom:20px;padding-right:15px;line-height:150%;font-size:14px;}
+	.text,#editor .textarea {margin-bottom:20px;padding-right:15px;line-height:160%;font-size:14px;}
 		.text a {text-decoration: underline;}
 		.text a:hover {text-decoration: none;}
 		.text textarea {
@@ -46,8 +46,9 @@
 			width:95%;overflow:auto;
 		}
 
-.side {float:right;width:240px;padding-top:85px;padding-bottom:80px;}
-	.side .box {background:url(/images/sidebar.png) no-repeat right 0;margin-bottom:30px;}
+
+.side {float:right;width:240px;padding-top:45px;padding-bottom:80px;}
+	.side .box {background:url(/images/sidebar.png) no-repeat right 0;margin-bottom:30px;min-height:160px;}
 	.side .caption {
 		padding:20px 0 0 0;margin-bottom:12px;
 		font-size:12px;color:#525B5C; padding-left:12px;
@@ -56,6 +57,10 @@
 
 	.side .recentComments a {text-decoration: underline;}
 	.side .recentComments li, .side .recentPosts li {margin:8px 0;background:none;padding-left:0;}
+
+	.side .search form {margin-bottom:10px;}
+		.side .search .key {padding:2px;margin-right:2px;width:120px;}
+		.side .search .btn {padding:1px;}
 
 .about {
 	clear:both;padding:30px;text-align:center;color:#000;
