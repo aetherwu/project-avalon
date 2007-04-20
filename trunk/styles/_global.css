@@ -19,7 +19,7 @@
 
 .frame {}
 	.wrapper {
-		clear:both;width:750px;margin:0 auto;padding-bottom:10px;
+		clear:both;width:760px;margin:0 auto;padding-bottom:10px;
 	}
 	.main .box {margin-bottom:40px;}
 	.side .box {margin-bottom:20px;}
@@ -28,10 +28,18 @@
 .main {float:left;width:500px;}
 	.main img {border:1px solid #292F34;padding:3px;margin:0 10px 10px 0;}
 	.main .post {background:url(/images/text.png) no-repeat right 45px;min-height:180px;}
-	.main .caption {padding-bottom:40px;text-align:right;}
+	.main .caption {padding-bottom:40px;text-align:right;position:relative;}
 		.main .caption h2 {font-size:26px;font-family:Georgia,"Times New Roman",serif;font-weight:normal;color:#fff;}
 		.main .caption a {color:#000;}
 		.main .caption a:hover {color:#666;text-decoration: underline;}
+	.main .contain {border-bottom:1px solid #e3e3e3;}
+	.main .foot {margin-top:5px;}
+		.main .foot a {color:#999;}
+		.main .foot a:hover {text-decoration: underline;}
+
+	.main .history {}
+		.main .history i {font-style:normal;}
+
 	.infomations {
 		margin-top:15px;padding-top:8px;margin-bottom:18px;
 		border-top:1px solid #2F3941;color:#777B80;

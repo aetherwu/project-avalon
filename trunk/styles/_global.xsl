@@ -11,12 +11,7 @@
 		<div>
 			<div class="caption">
 				<xsl:for-each select="date">
-				<h2 class="date">
-					<xsl:element name="a">
-						<xsl:attribute name="href">/<xsl:value-of select="@address" /></xsl:attribute>
-						<xsl:value-of select="text()"/>
-					</xsl:element>				
-				</h2>
+					<h2 class="date"><a href="/{@address}"><xsl:value-of select="text()"/></a></h2>
 				</xsl:for-each>
 			</div>
 			<div class="contain">
@@ -24,6 +19,17 @@
 					<div class="time"><xsl:value-of select="time" /></div>
 					<div class="text"><xsl:apply-templates select="text"/></div>
 				</xsl:for-each>
+			</div>
+			<div class="foot">
+				<span class="history">
+					<xsl:for-each select="date">
+						<xsl:element name="a">
+							<xsl:attribute name="href">http://door.woooh.com/index.php?q=uggc%3A%2F%2Fmu.jvxvcrqvn.bet%2Fjvxv%2F<xsl:value-of select="substring(@address,6,2)" />%25R6%259P%2588<xsl:value-of select="substring(@address,9,2)" />%25R6%2597%25N5</xsl:attribute>
+							<xsl:attribute name="target">_blank</xsl:attribute>
+							历史上的<xsl:value-of select="substring(text(),6,10)"/>
+						</xsl:element>
+					</xsl:for-each>
+				</span>
 			</div>
 		</div>
 		</div>
@@ -37,10 +43,7 @@
 		<ul>
 			<xsl:for-each select="archor">
 				<li>
-					<xsl:element name="a">
-						<xsl:attribute name="href">/<xsl:value-of select="@address" /></xsl:attribute>
-						<xsl:value-of select="text()"/>
-					</xsl:element>
+					<a href="/{@address}"><xsl:value-of select="text()"/></a>
 				</li>
 			</xsl:for-each>
 		</ul>
@@ -70,13 +73,16 @@
 
 		<div class="box search">
 		<div>
-			<h2 class="caption">搜索</h2>
+			<h2 class="caption">使用GoogleBlogger搜索</h2>
 			<div class="contain">
-				<form action="http://www.google.com/search" method="get" target="_blank">
-					<input type="text" class="key" name="q" maxlength="50" value="" />
+				<form action="http://www.google.com/blogsearch" method="get" target="_blank">
+					<input type="text" class="key" name="as_q" maxlength="50" value="" />
 					<input type="submit" class="btn" value="翻翻看" />
-					<input type="hidden" name="sitesearch" value="woooh.com" checked="true" />
+					<input type="hidden" name="btnG" value="Search+Blogs" />
+					<input type="hidden" name="bl_url" value="woooh.com" />
+					<input type="hidden" name="scoring" value="d" />
 				</form>
+				在搜索结果页面，你有多种办法订阅你关注的更新：Email提醒，RSS源，或者添加到你的GoogleIG。
 			</div>
 			<h2 class="caption">世界正在发生...</h2>
 			<div class="contain">
@@ -93,10 +99,7 @@
 				<ul class="">
 					<xsl:for-each select="summary">
 						<li>
-							 <xsl:value-of select="text()" /> (<xsl:element name="a">
-								<xsl:attribute name="href">/<xsl:value-of select="@address" /></xsl:attribute>
-								<xsl:value-of select="@postTime"/>
-							</xsl:element>)
+							 <xsl:value-of select="text()" /> (<a href="/{@address}"><xsl:value-of select="@postTime"/></a>)
 						</li>
 					</xsl:for-each>
 				</ul>
@@ -113,10 +116,7 @@
 				<ul class="recentComments">
 					<xsl:for-each select="summary">
 						<li>
-							<xsl:value-of select="text()" /> (<xsl:element name="a">
-								<xsl:attribute name="href">/<xsl:value-of select="@logTime" /></xsl:attribute>
-								<xsl:value-of select="@guest"/>
-							</xsl:element>)
+							<xsl:value-of select="text()" /> (<a href="{@logTime}"><xsl:value-of select="@guest"/></a>)
 						</li>
 					</xsl:for-each>
 				</ul>
@@ -133,10 +133,7 @@
 				<ul>
 					<xsl:for-each select="month">
 						<li>
-							<xsl:element name="a">
-								<xsl:attribute name="href">/<xsl:value-of select="@address" /></xsl:attribute>
-								<xsl:value-of select="text()"/>
-							</xsl:element>
+							<a href="/{@address}"><xsl:value-of select="text()"/></a>
 							(<xsl:value-of select="@count" />)
 						</li>
 					</xsl:for-each>

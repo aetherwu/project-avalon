@@ -33,6 +33,7 @@
 	background-image:url(/images/logo_v.gif);
 }
 	.banner a {
-		position:absolute;
-		width:97%;height:150px;
+		position:relative;
+		width:800px;height:150px;margin:0 auto;
+		display:block;
 	}

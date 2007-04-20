@@ -4,7 +4,7 @@
 			<author><%# Eval("Author") %></author>
 			<home><%# Eval("Homepage") %></home>
 			<postTime><%# Eval("postTime") %></postTime>
-			<text><![CDATA[ <%# Eval("Content") %> ]]></text>
+			<text><%# Eval("Content") %></text>
 		</comment>
 	</ItemTemplate></asp:Repeater>
 	</comments>	
