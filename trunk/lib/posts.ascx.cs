@@ -48,11 +48,17 @@ namespace Avalon.Web {
 			get { return _limit; }
 			set { this._limit = value; }
 		}
+		private DateTime _begin;
+		public DateTime Begin
+		{
+			get { return _begin; }
+			set { this._begin = value; }
+		}
 
 		public void Page_Load(object sender, EventArgs e)¡¡
 		{
 			Post c = new Post();
-			lst = c.GetDays(_year,_month,_day,_page,_keyword,false,_limit);
+			lst = c.GetDays(_year,_month,_day,_page,_keyword,false,_limit,_begin);
 
 			if (lst != null) {
                 postList.DataSource = lst;

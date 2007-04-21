@@ -18,13 +18,14 @@ namespace Avalon.Web {
 		private int _day;
 		private int _page;
 		private string _keyword;
+		private DateTime _begin;
 		private DateTime now;
 
 	　　protected void Page_Load(object sender, EventArgs e)　
 		{
 			
 			Post c = new Post();
-			lst = c.GetDays(_year,_month,_day,_page,_keyword,true,10);
+			lst = c.GetDays(_year,_month,_day,_page,_keyword,true,10,_begin);
 
 			if (lst != null) {
                 postList.DataSource = lst;

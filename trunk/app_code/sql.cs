@@ -83,13 +83,15 @@ namespace SQLServerDAL
 		//
 		private const string PARM_keyword = "@keyword";
 		private const string PARM_page = "@page";
+		private const string PARM_begin = "@begin";
 		private const string SQL_SELECT_PostS_Start = "SELECT CONVERT(char(10), log_PostTime, 21) AS PostTime FROM [blog_Post] ";
 		private const string SQL_SELECT_PostS_Year = "YEAR(log_PostTime) = @year ";
 		private const string SQL_SELECT_PostS_Month = "AND MONTH(log_PostTime) = @month ";
 		private const string SQL_SELECT_PostS_Day = "AND DAY(log_PostTime) = @day ";
+		private const string SQL_SELECT_PostS_Begin = "Where [log_PostTime] < @begin ";
 		private const string SQL_SELECT_PostS_End = "GROUP BY CONVERT(char(10), log_PostTime, 21) ORDER BY PostTime DESC";
 
-		public IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS, int limit) {
+		public IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS, int limit, DateTime begin) {
 			
 			if (limit==0)
 				limit=9999;
@@ -103,6 +105,8 @@ namespace SQLServerDAL
 				parms[1].Value = month;
 				parms[2] = new SqlParameter(PARM_day, SqlDbType.BigInt, 2);
 				parms[2].Value = day;
+				//parms[3] = new SqlParameter(PARM_begin, SqlDbType.DateTime);
+				//parms[3].Value = begin;
 
 			StringBuilder sql = new StringBuilder(SQL_SELECT_PostS_Start);
 			if (year!=0||month!=0)
@@ -113,6 +117,9 @@ namespace SQLServerDAL
 				sql.Append(SQL_SELECT_PostS_Month);
 			if (day!=0)
 				sql.Append(SQL_SELECT_PostS_Day);
+			
+			//if (begin!=null)
+				//sql.Append(SQL_SELECT_PostS_Begin);
 
 			sql.Append(SQL_SELECT_PostS_End);
             string sqlPosts = sql.ToString();

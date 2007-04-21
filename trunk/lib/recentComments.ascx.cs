@@ -12,18 +12,10 @@ namespace Avalon.Web {
 
 		private IList<CommentInfo> ci;
 
-		private string _name;
-		public string Name
-		{
-			get { return _name; }
-			set { this._name = value; }
-		}			
         public void Page_Load(object sender, EventArgs e) {
 
 			Comment c = new Comment();
 			ci = c.GetRecentComment();
-
-			this.postType.Text= _name;
 
 			if (ci != null) {
                 recentComment.DataSource = ci;
