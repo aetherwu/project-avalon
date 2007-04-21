@@ -1,9 +1,9 @@
-<about>
+	<about>
 		<auther>Aether</auther>
 		<contact>admin.ae at gmail.com</contact>
 		<project>Avalon</project>
 		<version>Greeting</version>
-		<release>2007.4.20 build 14</release>
+		<release>2007.4.20 build 16</release>
 		<note>Born in Starbucks</note>
 		<base>PetShop4.0</base>
 		<theme>hellowiki.com</theme>

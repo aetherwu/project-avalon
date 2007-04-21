@@ -5,9 +5,10 @@
 	<!-- #Include File="lib/navigation.xml" -->
 	<include:posts id="posts" runat="server" />
 	<relative>
-		<include:list id="recentPosts" Name="最近写的" runat="server" />
-		<include:cmt id="recentComments" Name="最近路过" runat="server" />
-		<include:arv id="archives" Name="最近路过" runat="server" />
+		<include:list id="recentPosts" runat="server" />
+		<include:cmt id="recentComments" runat="server" />
+		<include:arv id="archives" runat="server" />
+	<!-- #Include File="lib/links.xml" -->
 	</relative>
 	<!-- #Include File="lib/about.xml" -->
 </avalon>

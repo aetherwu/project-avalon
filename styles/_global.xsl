@@ -71,6 +71,15 @@
 	<xsl:template match="relative">
 	<div class="side">
 
+		<div class="box auther">
+		<div>
+			<h2 class="caption">在世者</h2>
+			<div class="contain">
+				<img src="http://photo7.yupoo.com/20070422/021144_488158533_vmvvmjsq.jpg" title="aether" />
+			</div>
+		</div>
+		</div>
+
 		<div class="box search">
 		<div>
 			<h2 class="caption">使用GoogleBlogger搜索</h2>
@@ -82,11 +91,7 @@
 					<input type="hidden" name="bl_url" value="woooh.com" />
 					<input type="hidden" name="scoring" value="d" />
 				</form>
-				在搜索结果页面，你有多种办法订阅你关注的更新：Email提醒，RSS源，或者添加到你的GoogleIG。
-			</div>
-			<h2 class="caption">世界正在发生...</h2>
-			<div class="contain">
-				<embed src="http://static.twitter.com/flash/twitter_timeline_badge.swf" flashvars="user_id=754682&amp;color1=0x5b5b5b&amp;color2=0x111&amp;textColor1=0xdbdbdb&amp;textColor2=0xD6BE24&amp;backgroundColor=0xefefef&amp;textSize=12" width="205" height="300" quality="high" name="twitter_timeline_badge" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"></embed>
+				搜索以后，你可以<b>订阅</b>你关注的更新：Email提醒，RSS源，或者是添加到你的Google自定义主页。
 			</div>
 		</div>
 		</div>
@@ -94,7 +99,7 @@
 		<xsl:for-each select="recentPosts">
 		<div class="box recentPosts">
 		<div>
-			<h2 class="caption"><xsl:value-of select="@sortType" /></h2>
+			<h2 class="caption">最近记录</h2>
 			<div class="contain">
 				<ul class="">
 					<xsl:for-each select="summary">
@@ -111,7 +116,7 @@
 		<xsl:for-each select="recentComments">
 		<div class="box">
 		<div>
-			<h2 class="caption"><xsl:value-of select="@sortType" /></h2>
+			<h2 class="caption">最近路过</h2>
 			<div class="contain">
 				<ul class="recentComments">
 					<xsl:for-each select="summary">
@@ -143,9 +148,41 @@
 		</div>
 		</xsl:for-each>
 
+		<div class="box store">
+		<div>
+			<h2 class="caption">土豆小店</h2>
+			<div class="contain">
+				<a href="http://auction1.taobao.com/auction/0/item_detail-0db1-d5b30540574212b2e0d1f2f889d822f6.jhtml" target="_blank"><img src="http://farm1.static.flickr.com/64/202756239_96fd48e300_s.jpg" title="土豆T恤衫" /></a>
+				<a href="http://auction1.taobao.com/auction/0/item_detail-0db1-d5b30540574212b2e0d1f2f889d822f6.jhtml" target="_blank"><img src="http://farm1.static.flickr.com/70/202755611_ce043f5c55_s.jpg" title="土豆T恤衫" /></a>
+				<a href="http://auction1.taobao.com/auction/0/item_detail-0db1-d5b30540574212b2e0d1f2f889d822f6.jhtml" target="_blank"><img src="http://farm1.static.flickr.com/63/202755383_0f14330cd6_s.jpg" title="土豆T恤衫" /></a>
+				<a href="http://auction1.taobao.com/auction/0/item_detail-0db1-d5b30540574212b2e0d1f2f889d822f6.jhtml" target="_blank"><img src="http://farm1.static.flickr.com/68/202755850_5fb27d2416_s.jpg" title="土豆T恤衫" /></a>
+			</div>
+		</div>
+		</div>
+
+		<xsl:for-each select="links">
+		<div class="box links">
+		<div>
+			<h2 class="caption">链接</h2>
+			<div class="contain">
+				<xsl:for-each select="group">
+					<ul>
+						<li class="sort"><xsl:value-of select="@sort"/></li>
+						<xsl:for-each select="a">
+						<li>
+							<a href="{@href}" target="_blank"><xsl:value-of select="text()"/></a>
+						</li>
+						</xsl:for-each>
+					</ul>
+				</xsl:for-each>
+			</div>
+		</div>
+		</div>
+		</xsl:for-each>
+
 		<div class="box archives">
 		<div>
-			<h2 class="caption">订阅并关注</h2>
+			<h2 class="caption">订阅</h2>
 			<div class="contain">
 				<ul class="">
 					<li><a href="http://rss.woooh.com"><img alt="feedsky" src="http://static.woooh.com/images/feed/feed.png"/></a></li>

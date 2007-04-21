@@ -28,12 +28,12 @@
 .main {float:left;width:500px;}
 	.main img {border:1px solid #292F34;padding:3px;margin:0 10px 10px 0;}
 	.main .post {background:url(/images/text.png) no-repeat right 45px;min-height:180px;}
-	.main .caption {padding-bottom:40px;text-align:right;position:relative;}
+	.main .caption {padding-bottom:40px;text-align:center;position:relative;}
 		.main .caption h2 {font-size:26px;font-family:Georgia,"Times New Roman",serif;font-weight:normal;color:#fff;}
 		.main .caption a {color:#000;}
 		.main .caption a:hover {color:#666;text-decoration: underline;}
 	.main .contain {border-bottom:1px solid #e3e3e3;}
-	.main .foot {margin-top:5px;}
+	.main .foot {margin-top:5px;text-align:right;padding-right:5px;}
 		.main .foot a {color:#999;}
 		.main .foot a:hover {text-decoration: underline;}
 
@@ -56,12 +56,14 @@
 
 
 .side {float:right;width:240px;padding-top:45px;padding-bottom:80px;}
-	.side .box {background:url(/images/sidebar.png) no-repeat right 0;margin-bottom:30px;min-height:160px;}
+	.side .box {background:url(/images/sidebar.png) no-repeat right 0;margin-bottom:30px;min-height:150px;}
 	.side .caption {
 		padding:20px 0 0 0;margin-bottom:12px;
 		font-size:12px;color:#525B5C; padding-left:12px;
 	}
 	.side .contain { line-height:150%;padding:0 15px; }
+	
+	.side .auther img {border:1px solid #ccc;padding:3px}
 
 	.side .recentComments a {text-decoration: underline;}
 	.side .recentComments li, .side .recentPosts li {margin:8px 0;background:none;padding-left:0;}
@@ -69,6 +71,12 @@
 	.side .search form {margin-bottom:10px;}
 		.side .search .key {padding:2px;margin-right:2px;width:120px;}
 		.side .search .btn {padding:1px;}
+	
+	.side .store img{margin-right:5px;border:1px solid #999;}
+
+	.side .links ul {margin-bottom:10px;}
+	.side .links li {margin-left:25px;list-style:circle ;}
+	.side .links .sort {margin-left:0;list-style:none;}
 
 .about {
 	clear:both;padding:30px;text-align:center;color:#000;
