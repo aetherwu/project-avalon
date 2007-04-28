@@ -23,17 +23,10 @@
 				<br/>
 				<%# DataBinder.Eval(Container.DataItem,"PostTime","{0:HH:mm:ss}") %>
 				<br/>
-				<br/>
 				<%# Eval("Content") %>
-				<br/>
 				<br/>
 				</ItemTemplate></asp:Repeater>
 				<br/>
-				<br/>
-				============================================<br/>
-				你可能正在通过URL重写订阅到我的blog，以前的地址将在月内失效。<br/>
-				请更换我的RSS订阅地址到：http://rss.woooh.com/<br/>
-				带来些麻烦，我非常抱歉。
 			]]>
 			</content:encoded>
 		</item>

@@ -83,43 +83,44 @@ namespace SQLServerDAL
 		//
 		private const string PARM_keyword = "@keyword";
 		private const string PARM_page = "@page";
-		private const string PARM_begin = "@begin";
+		private const string PARM_after = "@after";
 		private const string SQL_SELECT_PostS_Start = "SELECT CONVERT(char(10), log_PostTime, 21) AS PostTime FROM [blog_Post] ";
-		private const string SQL_SELECT_PostS_Year = "YEAR(log_PostTime) = @year ";
+		private const string SQL_SELECT_PostS_Begin = "Where [log_PostTime] < @after ";
+		private const string SQL_SELECT_PostS_Year = "AND YEAR(log_PostTime) = @year ";
 		private const string SQL_SELECT_PostS_Month = "AND MONTH(log_PostTime) = @month ";
 		private const string SQL_SELECT_PostS_Day = "AND DAY(log_PostTime) = @day ";
-		private const string SQL_SELECT_PostS_Begin = "Where [log_PostTime] < @begin ";
 		private const string SQL_SELECT_PostS_End = "GROUP BY CONVERT(char(10), log_PostTime, 21) ORDER BY PostTime DESC";
 
-		public IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS, int limit, DateTime begin) {
+		public IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS, int limit, DateTime after) {
 			
 			if (limit==0)
-				limit=9999;
+				limit=3;
+			if (after==Convert.ToDateTime("0001-1-1 0:00:00"))
+			{
+				DateTime dt = DateTime.Now;
+				after = dt;
+			}
 
 			IList<PostIndexInfo> Posts = new List<PostIndexInfo>();
 			
-			SqlParameter[] parms = new SqlParameter[3];
+			SqlParameter[] parms = new SqlParameter[4];
 				parms[0] = new SqlParameter(PARM_year, SqlDbType.BigInt, 4);
 				parms[0].Value = year;
 				parms[1] = new SqlParameter(PARM_month, SqlDbType.BigInt, 2);
 				parms[1].Value = month;
 				parms[2] = new SqlParameter(PARM_day, SqlDbType.BigInt, 2);
 				parms[2].Value = day;
-				//parms[3] = new SqlParameter(PARM_begin, SqlDbType.DateTime);
-				//parms[3].Value = begin;
+				parms[3] = new SqlParameter(PARM_after, SqlDbType.DateTime);
+				parms[3].Value = after;
 
 			StringBuilder sql = new StringBuilder(SQL_SELECT_PostS_Start);
-			if (year!=0||month!=0)
-				sql.Append("WHERE ");
+				sql.Append(SQL_SELECT_PostS_Begin);
 			if (year!=0)
 				sql.Append(SQL_SELECT_PostS_Year);
 			if (month!=0)
 				sql.Append(SQL_SELECT_PostS_Month);
 			if (day!=0)
 				sql.Append(SQL_SELECT_PostS_Day);
-			
-			//if (begin!=null)
-				//sql.Append(SQL_SELECT_PostS_Begin);
 
 			sql.Append(SQL_SELECT_PostS_End);
             string sqlPosts = sql.ToString();
@@ -336,7 +337,7 @@ namespace SQLServerDAL
 		}
 
 		//
-		//List Refer
+		//List Refer By Log
 		//
 		private const string PARM_logTime = "@logTime";
 		private const string SQL_SELECT_REFERS = "SELECT re_URL,COUNT(re_URL) AS re_Count FROM [blog_Refer] Where CONVERT(char(10), log_PostTime, 21) = @logTime GROUP BY [re_URL]";
@@ -359,6 +360,7 @@ namespace SQLServerDAL
 			}
 			return RefersByLog;
 		}
+
 
 	}
 
