@@ -74,9 +74,11 @@
 	
 	.side .store img{margin-right:5px;border:1px solid #999;}
 
-	.side .links ul {margin-bottom:10px;}
-	.side .links li {margin-left:25px;list-style:circle ;}
-	.side .links .sort {margin-left:0;list-style:none;}
+	.side .blogosphere ul {margin-bottom:10px;}
+	.side .blogosphere li {margin-left:25px;list-style:circle ;}
+	.side .blogosphere .sort {margin-left:0;list-style:none;}
+
+	.side #archives {padding:2px;background:#e3e3e3;}
 
 .about {
 	clear:both;padding:30px;text-align:center;color:#000;

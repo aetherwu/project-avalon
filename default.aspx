@@ -8,7 +8,7 @@
 		<include:list id="recentPosts" runat="server" />
 		<include:cmt id="recentComments" runat="server" />
 		<include:arv id="archives" runat="server" />
-	<!-- #Include File="lib/links.xml" -->
+	<!-- #Include File="lib/blogosphere.xml" -->
 	</relative>
 	<!-- #Include File="lib/about.xml" -->
 </avalon>
