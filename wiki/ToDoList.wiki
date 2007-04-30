@@ -11,6 +11,7 @@
 
 == 等待处理的功能 ==
 
+  * Tag for Clip, and aggregate to day/month/year/whole.
   * 相关：~~最近更新的~~ 前几日的，后几日的/内容最相关的
   * 从IM到Project Midgard到blog的发表。
   * Archives Update：类似WordPress的层次分类，显示多少天，~~多少clip（已完成）~~。
