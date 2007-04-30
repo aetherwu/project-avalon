@@ -3,12 +3,15 @@
 
 == 正在处理 ==
 
-  * 翻页：使用Timeline平滑滚动机制，废弃页码。
-  * 本地独立的发表和修改平台，发布的话，这一步必须做。
+  * 还是用翻页吧。
+  * OpenID验证，客户端验证，对API验证；
+  * 点击即编辑模式。
+  * Del.icio.us/Flickr整合进入每天的日志，并且输出到Feed
+  * 指向Wiki以及搜索本站（GoogleBloggerSeach）
 
 == 等待处理的功能 ==
 
-  * 相关：最近更新的/前几日的，后几日的/内容最相关的/历史上的今天（指向Wiki以及搜索本站，用GoogleBloggerSeach做吧）
+  * 相关：~~最近更新的~~ 前几日的，后几日的/内容最相关的
   * 从IM到Project Midgard到blog的发表。
   * Archives Update：类似WordPress的层次分类，显示多少天，~~多少clip（已完成）~~。
 
@@ -57,6 +60,9 @@
   * ~~关键字全文搜索，关键字输出RSS订阅~~ using googlebloggersearch
   * ~~404错误，500错误等容错处理~~
   * ~~BloggerOwner使用OpenID登录和主控。~~
+=== 2007.04.26===
+  * ~~历史上的今天（指向Wiki）~~
+
 
 == 丢弃 ==
   * ~~兼容ZBlog升级，把"/post/id.html"重定向到新的页面，但是自定义链接的可能会失效，被放弃。~~ 因为没有对应的id和自定义url结尾使用，所以以前的页面将完全失效。
