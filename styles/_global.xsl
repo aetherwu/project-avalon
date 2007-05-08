@@ -3,7 +3,6 @@
 
 <!-- Global Styles -->
 
-	<xsl:include href="/styles/posts.xsl" />
 
 	<!-- Navigation -->
 	<xsl:template match="navigation">
