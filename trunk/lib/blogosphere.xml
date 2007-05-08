@@ -1,19 +1,11 @@
 	<blogosphere>
 			<group sort="Family">
 				<person blog="http://haohui.wealog.com/" flickr="haohui">haohui</person>
-				<person blog="http://kkvip.blogcn.com">KK</person>
-				<person blog="http://my.poco.cn/?id=23799805">lan</person>
-				<person blog="http://624732569.qzone.qq.com/">Sherry</person>
 			</group>
 			<group sort="Rounded">
-				<person blog="http://w3.org.cn/lex" flickr="lexrus">Lexrus</person>
+				<person blog="http://my.opera.com/lexrus" flickr="lexrus">Lexrus</person>
 				<person blog="http://alick-blue.com/dlog/">Alick Blue</person>
 				<person blog="http://myzinke.spaces.live.com/">Myzinke</person>
-				<person blog="http://www.bulaoge.com/?icekernel" flickr="icekernel">Icekernel</person>
-				<person blog="http://zdream.net" flickr="archey">Archey</person>
-				<person blog="http://spaces.msn.com/members/happy4nothing/" flickr="happy4nothing">Daan</person>
-				<person blog="http://bobslove.blog.sohu.com/">Linyang</person>
-				<person blog="http://www.oihehe.com/">Oihehe</person>
 			</group>
 			<group sort="Friends">
 				<person blog="http://www.ipang.net" flickr="ipang">Ipang</person>
@@ -24,18 +16,11 @@
 				<person blog="http://www.livid.cn/" flickr="lividecay">Livid</person>
 				<person blog="http://herock.net/" flickr="herock">Herock</person>
 				<person blog="http://www.webleon.org" flickr="webleon" delicious="webleon">WebLeOn</person>
-				<person blog="http://plod.popoever.com/" flickr="popever" delicious="popever">POPO</person>
-				<person blog="http://hi.baidu.com/rainbowsoft">rainbowsoft</person>
+				<person blog="http://plod.popoever.com/" flickr="popever" delicious="popever">Popo</person>
+				<person blog="http://hi.baidu.com/rainbowsoft">Rainbowsoft</person>
 				<person blog="http://talk.blogbus.com/" flickr="shizhao">Shizhao</person>
 				<person blog="http://rconversation.blogs.com/" flickr="rebeccamack">Rebecca</person>
 				<person blog="http://www.we8log.com/" flickr="raptor">Raptor</person>
-			</group>
-			<group sort="Paowang">
-				<person blog="http://www.wangpei.net/" flickr="lookoo">Wangpei</person>
-				<person blog="http://www.golao.com/">Laogao</person>
-				<person blog="http://www.zhangyining.net/" flickr="yining">Yining</person>
-				<person blog="http://blog.sina.com.cn/m/hecaitou/">Hecaitou</person>
-				<person blog="http://www.royalshi.com/">Royal</person>
 			</group>
 			<group sort="Technique">
 				<person blog="http://realazy.org/blog/">Realazy</person>
@@ -65,6 +50,13 @@
 				<person blog="http://www.moneywood.com" flickr="moneywood">MoneyWood</person>
 				<person blog="http://wen-xin.net/" flickr="kevin">Wenxin</person>
 				<person blog="http://www.dbanotes.net/" flickr="fenng">DavidFeng</person>
+			</group>
+			<group sort="Paowang">
+				<person blog="http://www.wangpei.net/" flickr="lookoo">Wangpei</person>
+				<person blog="http://www.golao.com/">Laogao</person>
+				<person blog="http://www.zhangyining.net/" flickr="yining">Yining</person>
+				<person blog="http://blog.sina.com.cn/m/hecaitou/">Hecaitou</person>
+				<person blog="http://www.royalshi.com/">Royal</person>
 			</group>
 			<group sort="Taiwan">
 				<person blog="http://blog.vista.tw/" flickr="vista">Vista</person>

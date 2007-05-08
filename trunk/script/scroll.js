@@ -1,6 +1,8 @@
 ﻿//*
 // @code from http://ma.la/
 // @author ma.la <timpo@ma.la>
+var idle=true;
+var after;
 var watchScroll = function(){
 	//try{
 		if (document.documentElement && document.documentElement.scrollTop) {
@@ -22,9 +24,12 @@ var watchScroll = function(){
 };
 // rewrite as jquery mode
 var requestMore = function(){
-	var after = $($(".post:last .date").html()).attr("href").replace("http://localhost","").substring(1,12);
-	idle = false;
-	tranform("/more?after="+after,"/styles/posts.xsl",".content");
+	if (idle)
+	{
+		after = $($(".post:last .date").html()).attr("href").replace("http://woooh.com","").substring(1,12);
+		tranform("/more?after="+after,"/styles/posts.xsl",".content");
+		idle = false;
+	}
 }
 // @code form http://blog.csdn.net/cubit/archive/2006/07/27/987049.aspx
 // @author 冰河の泥鱼 2006/07/27
@@ -35,18 +40,19 @@ var tranform =function (xmlurl,xslurl,target) {
 			var xml = m;
 			var xsl = s;
 			var html;
-			if(document.documentElement)
+			if(document.all)
+			{
+				html = xml.documentElement.transformNode(xsl);
+			}
+			else if(document.documentElement)
 			{
 				var xsltProcessor = new XSLTProcessor();
 					xsltProcessor.importStylesheet(xsl);
 				var oResultFragment = xsltProcessor.transformToFragment(xml,document);
 					html = oResultFragment;
 			}
-			else if(document.all)
-			{
-				html = xml.documentElement.transformNode(xsl);
-			}
 			$(target).append(html);
+			idle = true;
 		});
 	});
 }
@@ -54,5 +60,6 @@ var tranform =function (xmlurl,xslurl,target) {
 
 //smooth scorll
 $(function(){
-	watchScroll();
+	if (location.toString().length>20)
+		watchScroll();
 })
