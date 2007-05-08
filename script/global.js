@@ -1,4 +1,4 @@
-var reSizeImg = function(){
+﻿var reSizeImg = function(){
 	var Allimg=document.getElementsByTagName("img");
 	for (var i in Allimg) {
 		drawImage(Allimg[i]);
@@ -30,4 +30,22 @@ $(function(){
 	//*/
 	
 	reSizeImg();
+
+	//bind blogosphere event
+	var log_s = $(".blogosphere .contain ul:lt(4)");
+	var log_m = $(".blogosphere .contain ul:gt(4)");
+	var log_b = $(".blogosphere .more");
+	log_s.fadeIn();
+	log_b.toggle(
+		function(){
+			log_m.fadeIn("show",function(){
+				log_b.html("收起")
+			});
+		},
+		function(){
+			log_m.fadeOut("show",function(){
+				log_b.html("查看全部")
+			});
+		}
+	);
 })

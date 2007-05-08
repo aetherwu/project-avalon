@@ -27,14 +27,13 @@
 
 .main {float:left;width:500px;}
 	.main img {border:1px solid #292F34;padding:3px;margin:0 10px 10px 0;}
-	.main .post {background:url(/images/text.png) no-repeat right 45px;min-height:180px;}
-	.main .caption {padding-bottom:40px;text-align:center;position:relative;}
+	.main .caption {text-align:center;padding-bottom:15px;margin-bottom:15px;position:relative;border-bottom:1px solid #ccc;}
 		.main .caption h2 {font-size:26px;font-family:Georgia,"Times New Roman",serif;font-weight:normal;color:#fff;}
 		.main .caption a {color:#000;}
 		.main .caption a:hover {color:#666;text-decoration: underline;}
-	.main .contain {border-bottom:1px solid #e3e3e3;}
-	.main .foot {margin-top:5px;text-align:right;padding-right:5px;}
-		.main .foot a {color:#999;}
+	.main .contain {}
+	.main .foot {}
+		.main .foot a {color:#999;background:#e4e4e4;}
 		.main .foot a:hover {text-decoration: underline;}
 
 	.main .history {}
@@ -45,8 +44,8 @@
 		border-top:1px solid #2F3941;color:#777B80;
 	}
 		.infomations li {float:left;margin-right:15px;}
-	.time {margin-bottom:15px;color:#A8ADAD;text-indent:28px;font-family:'Lucida Grande',Tahoma,Verdana,sans-serif;}
-	.text,#editor .textarea {margin-bottom:20px;padding-right:15px;line-height:160%;font-size:14px;}
+	.time {padding-bottom:15px;color:#A8ADAD;text-indent:28px;font-family:'Lucida Grande',Tahoma,Verdana,sans-serif;}
+	.text,#editor .textarea {margin-bottom:10px;line-height:160%;font-size:14px;}
 		.text a {text-decoration: underline;}
 		.text a:hover {text-decoration: none;}
 		.text textarea {
@@ -55,13 +54,14 @@
 		}
 
 
-.side {float:right;width:240px;padding-top:45px;padding-bottom:80px;}
-	.side .box {background:url(/images/sidebar.png) no-repeat right 0;margin-bottom:30px;min-height:150px;}
+.side {float:right;width:250px;padding-bottom:80px;border-left:1px solid #e4e4e4;}
+	.side .box {}
 	.side .caption {
-		padding:20px 0 0 0;margin-bottom:12px;
+		margin-bottom:12px;
 		font-size:12px;color:#525B5C; padding-left:12px;
 	}
-	.side .contain { line-height:150%;padding:0 15px; }
+		.side .caption span {float:right;font-weight:normal;}
+	.side .contain { line-height:150%;padding:0 15px 15px 15px;border-bottom:1px solid #e4e4e4;color:#999;}
 	
 	.side .auther img {border:1px solid #ccc;padding:3px}
 
@@ -74,7 +74,7 @@
 	
 	.side .store img{margin-right:5px;border:1px solid #999;}
 
-	.side .blogosphere ul {margin-bottom:10px;}
+	.side .blogosphere ul {margin-bottom:10px;display:none;}
 	.side .blogosphere li {margin-left:25px;list-style:circle ;}
 	.side .blogosphere .sort {margin-left:0;list-style:none;}
 

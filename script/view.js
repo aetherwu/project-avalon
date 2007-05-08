@@ -24,8 +24,8 @@ $(function(){
 					if (home.length>0)
 						guest = "<a href="+home+">"+guest+"<\/a>";
 					$("<div class='box comment commentNew'><div class='inner'><div class='caption'><i>+<\/i>"+guest+"<br\/><span>just now<\/span><\/div><div class='contain'>"+message+"<\/div><\/div><\/div>").insertBefore(".commentGuild:last");
-					$("input, textarea").attr("disabled","");
-					$("#message").val();
+					$("input, textarea").removeAttr("disabled")
+					$("#message").val("");
 					$(".commentPost ul").fadeIn();
 				}
 			);

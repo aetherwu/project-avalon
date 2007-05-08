@@ -52,12 +52,15 @@
 
 		<div class="box">
 		<div>
-			<h2 class="caption">近日阅读</h2>
+			<h2 class="caption">
+				<span><a href="http://del.icio.us/blogif">更多</a></span>
+				近日阅读
+			</h2>
 			<div class="contain">
 				<div id="share"></div>
 				<script src="http://static.woooh.com/script/greader.js" type="text/javascript">
 				</script>
-				<script src="http://www.google.com/reader/public/javascript/user/12097899290454920167/label/webpick?n=10&amp;callback=GRC_p%28%7Bc:%27gray%27,t:%27%27,s:%27false%27%7D%29;new%20GRC" type="text/javascript">
+				<script src="http://www.google.com/reader/public/javascript/user/12097899290454920167/label/webpick?n=10&amp;callback=GRC_p%28%7Bc:%27-%27,t:%27%27,s:%27false%27%7D%29;new%20GRC" type="text/javascript">
 				</script>
 			</div>
 		</div>
@@ -103,7 +106,7 @@
 			<h2 class="caption">链接</h2>
 			<div class="contain">
 				<xsl:for-each select="group">
-					<ul>
+					<ul class="{@sort}">
 						<li class="sort"><xsl:value-of select="@sort"/></li>
 						<xsl:for-each select="person">
 						<li>
@@ -112,6 +115,7 @@
 						</xsl:for-each>
 					</ul>
 				</xsl:for-each>
+				<a href="javascript://" class="more">查看全部</a>
 			</div>
 		</div>
 		</div>
@@ -123,13 +127,18 @@
 				<h2 class="caption">浏览存档</h2>
 				<div class="contain">
 					<select id="archives">
+						<option value="/">选择存档月份</option>
 						<xsl:for-each select="month">
 							<option value="/{@address}"><xsl:value-of select="text()"/>(<xsl:value-of select="@count" />)</option>
 						</xsl:for-each>
 					</select>
 				</div>
 			</xsl:for-each>
+		</div>
+		</div>
 
+		<div class="box archives">
+		<div>
 			<h2 class="caption">订阅</h2>
 			<div class="contain">
 				<ul class="">
