@@ -39,15 +39,15 @@ namespace Avalon.Web {
 			string referHost = Request.UserHostAddress;
 			string Content = FormatCode.getBasicHTML(form.Get(0));
 
-			if(referHost!=null && (referHost=="127.0.0.1" || referHost=="222.66.106.194" || referHost=="58.35.92.163") ) {
+			//if(referHost!=null && (referHost=="127.0.0.1" || referHost=="222.66.106.194" || referHost=="58.35.92.163") ) {
 				PostInfo newPost = new PostInfo(0,Content,Convert.ToDateTime("1999-1-1"));
 				Post pst = new Post();
 				pst.Insert(newPost);
 
 				re.Text="done form "+ referHost;
-			}else{
-				re.Text="false form "+ referHost;
-			}		
+			//}else{
+			//	re.Text="false form "+ referHost;
+			//}		
 		}
 
 		protected void sayNew(NameValueCollection form)
