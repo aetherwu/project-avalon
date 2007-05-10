@@ -130,6 +130,11 @@ namespace SQLServerDAL
             using (SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, sqlPosts, parms)) {
                 while (sdr.Read())
 				{
+					if (isRSS){
+						isRSS=false;
+						continue;
+					}
+
 					tmpDate = Convert.ToDateTime(sdr.GetString(0));
 					PostIndexInfo Post = new PostIndexInfo(tmpDate);
 					Posts.Add(Post);
