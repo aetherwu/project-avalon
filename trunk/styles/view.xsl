@@ -15,8 +15,8 @@
 				<link type="text/css" href="/styles/view.css" rel="stylesheet" media="screen"/>
 				<link type="application/rss+xml" href="http://rss.woooh.com" rel="alternate" title="RSS 2.0"  />
 				<script type="text/javascript" src="http://static.woooh.com/script/lib/jquery.js"></script>
-				<script type="text/javascript" src="http://static.woooh.com/script/global.js"></script>
-				<script type="text/javascript" src="http://static.woooh.com/script/view.js"></script>
+				<script type="text/javascript" src="/global.js"></script>
+				<script type="text/javascript" src="/view.js"></script>
 			</head>
 			<body>
 				<div class="banner">
