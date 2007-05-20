@@ -21,9 +21,9 @@ var drawImage = function(ImgD){
 
 $(function(){
 
-	/*
+	//*
 	$(".text").each(function(){
-		$(this).oneclick(function(){
+		$(this).dblclick(function(){
 			$(this).html("<textarea class='textarea' style='background:transparent;border:none;width:"+$(this).width()+"px;height:"+$(this).height()+"px'>"+$(this).html()+"</textarea>").removeClass("text");
 		})
 	})

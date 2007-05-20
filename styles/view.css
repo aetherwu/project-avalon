@@ -15,9 +15,9 @@
 	.commentPost {border-bottom:none !important;}
 		.commentPost .inner {font-size:14px;}
 		.commentPost li {margin-bottom:10px;}
-		.commentPost .input {border:2px #292F33 solid;padding:3px;width:175px;}
+		.commentPost .input {border:1px #B9B99E solid;padding:3px;width:175px;}
 		.commentPost .inner textarea {
-			width:450px;height:180px;
+			width:500px;height:80px;
 			padding:3px;margin-top:5px;
 		}
 		.commentPost .submit {
@@ -30,7 +30,6 @@
 
 /* rewrite _global.css */
 .banner {
-	background-image:url(/images/logo_v.gif);
 }
 	.banner a {
 		position:relative;

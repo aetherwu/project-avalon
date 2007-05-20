@@ -36,7 +36,7 @@
 
 		<div class="box search">
 		<div>
-			<h2 class="caption">使用GoogleBlogger搜索</h2>
+			<h2 class="caption">搜索</h2>
 			<div class="contain">
 				<form action="http://www.google.com/blogsearch" method="get" target="_blank">
 					<input type="text" class="key" name="as_q" maxlength="50" value="" />
@@ -45,12 +45,12 @@
 					<input type="hidden" name="bl_url" value="woooh.com" />
 					<input type="hidden" name="scoring" value="d" />
 				</form>
-				搜索以后，你可以<b>订阅</b>你关注的更新：Email提醒，RSS源，或者是添加到你的Google自定义主页。
+				<a href="http://rss.woooh.com"><img alt="feedsky" src="http://static.woooh.com/images/feed/rss.gif"/></a>
 			</div>
 		</div>
 		</div>
 
-		<div class="box">
+		<div class="box share">
 		<div>
 			<h2 class="caption">
 				<span><a href="http://del.icio.us/blogif">更多</a></span>
@@ -136,22 +136,6 @@
 			</xsl:for-each>
 		</div>
 		</div>
-
-		<div class="box archives">
-		<div>
-			<h2 class="caption">订阅</h2>
-			<div class="contain">
-				<ul class="">
-					<li><a href="http://rss.woooh.com"><img alt="feedsky" src="http://static.woooh.com/images/feed/feed.png"/></a></li>
-					<li><a href="http://fusion.google.com/add?feedurl=http://rss.woooh.com">Google Reader</a></li>
-					<li><a href="http://www.bloglines.com/sub/http://rss.woooh.com">Bloglines</a></li>
-					<li><a href="http://add.my.yahoo.com/rss?url=http://rss.woooh.com">My Yahoo</a></li>
-					<li><a href="http://www.zhuaxia.com/add_channel.php?url=http://rss.woooh.com">抓虾</a></li>
-				</ul>
-			</div>
-		</div>
-		</div>
-
 
 	</div>
 	</xsl:template>

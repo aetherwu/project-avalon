@@ -1,51 +1,57 @@
 
 * {margin:0;padding:0;}
-	html {border-top:3px solid #2D393B;color:#525B5C;background:#EEEEEE;}
+	html {color:#595750;background:#FBFBF6;}
 	body {
 		font-size:12px;font-family:"Lucida Grande",Verdana,Arial,Helvetica,sans-serif,"ËÎÌו";
-		background:url(/images/bg.png) repeat-x;
+		background:url(/images/bg.jpg) repeat-x;
 	}
 	h1{font-family:"Times New Roman";font-size:18px;color:#fff;}
-	a {text-decoration: none;color:#314FA9;}
-	a:hover { color:#213571; }
+	a:link, a:visited {
+		color:#A0AC01;
+		text-decoration: none;
+	}
+	a:hover, a:active {
+		color:#738146;
+	}
 	li {list-style:none;}
 	img {border:none;}
 
 .banner {
-	height:148px;margin-bottom:40px;
-	background:#2D393B url(/images/logo.gif) no-repeat center 0;
+	height:170px;margin:0 auto ;width:760px;
+	background:url(/images/logo.png) no-repeat 0 40px;
 }
 .banner h1 i {display:none;}
 
 .frame {}
 	.wrapper {
 		clear:both;width:760px;margin:0 auto;padding-bottom:10px;
+		background:url(/images/dotx.gif) repeat-y 115px 0;
 	}
 	.main .box {margin-bottom:40px;}
-	.side .box {margin-bottom:20px;}
 	.innerbox {padding:10px;}
 
-.main {float:left;width:500px;}
+.main {float:left;width:520px;}
 	.main img {border:1px solid #292F34;padding:3px;margin:0 10px 10px 0;}
-	.main .caption {text-align:center;padding-bottom:15px;margin-bottom:15px;position:relative;border-bottom:1px solid #ccc;}
-		.main .caption h2 {font-size:26px;font-family:Georgia,"Times New Roman",serif;font-weight:normal;color:#fff;}
-		.main .caption a {color:#000;}
-		.main .caption a:hover {color:#666;text-decoration: underline;}
+	.main .caption {text-align:center;padding-bottom:15px;margin-bottom:15px;position:relative;}
+		.main .caption h2 {font-size:28px;font-family:Georgia,"Times New Roman",serif;font-weight:normal;color:#fff;}
+		.main .caption a {color:#7A7063;}
+		.main .caption a:hover {color:#91BC00;text-decoration: underline;}
 	.main .contain {}
-	.main .foot {}
-		.main .foot a {color:#999;background:#e4e4e4;}
-		.main .foot a:hover {text-decoration: underline;}
+	.main .foot {text-align:right;}
+		.main .foot a {color:#B9B99E;text-decoration: underline;}
 
 	.main .history {}
-		.main .history i {font-style:normal;}
+		.main .history i {font-style:normal;text-indent:2em;}
 
 	.infomations {
 		margin-top:15px;padding-top:8px;margin-bottom:18px;
 		border-top:1px solid #2F3941;color:#777B80;
 	}
 		.infomations li {float:left;margin-right:15px;}
-	.time {padding-bottom:15px;color:#A8ADAD;text-indent:28px;font-family:'Lucida Grande',Tahoma,Verdana,sans-serif;}
-	.text,#editor .textarea {margin-bottom:10px;line-height:160%;font-size:14px;}
+
+	.post {margin-right:10px;}
+	.time {padding-bottom:15px;color:#B9B99E;font-size:11px;font-style:italic;text-indent:2em;}
+	.text,#editor .textarea {margin-bottom:15px;line-height:21px;font-size:12px;}
 		.text a {text-decoration: underline;}
 		.text a:hover {text-decoration: none;}
 		.text textarea {
@@ -54,22 +60,28 @@
 		}
 
 
-.side {float:right;width:250px;padding-bottom:80px;border-left:1px solid #e4e4e4;}
-	.side .box {}
+.side {float:right;width:200px;}
+	.side .box {background:url(/images/doth.gif) repeat-x 0 0;padding:25px 0;}
 	.side .caption {
-		margin-bottom:12px;
-		font-size:12px;color:#525B5C; padding-left:12px;
+		font-size:12px;color:#525B5C;
+		margin-bottom:15px;
 	}
 		.side .caption span {float:right;font-weight:normal;}
-	.side .contain { line-height:150%;padding:0 15px 15px 15px;border-bottom:1px solid #e4e4e4;color:#999;}
+	.side .contain { line-height:150%;color:#837A6D;}
 	
 	.side .auther img {border:1px solid #ccc;padding:3px}
+	.side .share li {
+		line-height:180%;
+		padding-left:14px;
+		background:url(/images/bullet.gif) no-repeat 0 2px;
+	}
 
 	.side .recentComments a {text-decoration: underline;}
 	.side .recentComments li, .side .recentPosts li {margin:8px 0;background:none;padding-left:0;}
 
-	.side .search form {margin-bottom:10px;}
-		.side .search .key {padding:2px;margin-right:2px;width:120px;}
+	.side .search {padding-top:0;background:none;}
+	.side .search form {margin-bottom:20px;}
+		.side .search .key {padding:2px;margin-right:2px;width:120px;border:1px solid #B9B99E;}
 		.side .search .btn {padding:1px;}
 	
 	.side .store img{margin-right:5px;border:1px solid #999;}
@@ -81,8 +93,10 @@
 	.side #archives {padding:2px;background:#e3e3e3;}
 
 .about {
-	clear:both;padding:30px;text-align:center;color:#000;
-	background:url(/images/bottom.png) repeat-x;
+	clear:both;
+	padding:30px;margin:30px auto 0 auto;
+	text-align:center;color:#918862;
+	border-top:3px solid #ECECDE;
 }
 
 
