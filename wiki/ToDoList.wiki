@@ -4,10 +4,10 @@
 == 正在处理 ==
 
   * 还是用翻页吧。
-  * OpenID验证，客户端验证，对API验证；
+  * OpenID验证，~~客户端验证~~，对API验证；
   * 点击即编辑模式。
   * Del.icio.us/Flickr整合进入每天的日志，并且输出到Feed
-  * 指向Wiki以及搜索本站（GoogleBloggerSeach）
+
 
 == 等待处理的功能 ==
 
@@ -63,7 +63,9 @@
   * ~~BloggerOwner使用OpenID登录和主控。~~
 === 2007.04.26===
   * ~~历史上的今天（指向Wiki）~~
-
+  * ~~指向Wiki以及搜索本站（GoogleBloggerSeach）~~
+=== 2007.06.22 ===
+  * ~~Openid Login~~
 
 == 丢弃 ==
   * ~~兼容ZBlog升级，把"/post/id.html"重定向到新的页面，但是自定义链接的可能会失效，被放弃。~~ 因为没有对应的id和自定义url结尾使用，所以以前的页面将完全失效。
