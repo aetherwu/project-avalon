@@ -37,17 +37,17 @@ namespace Avalon.Web {
 		protected void postNew(NameValueCollection form)
 		{
 			string referHost = Request.UserHostAddress;
-			string Content = FormatCode.getBasicHTML(form.Get(0));
+			string Content = FormatCode.getBasicHTML(HttpContext.Current.Request["clip"];);
 
-			//if(referHost!=null && (referHost=="127.0.0.1" || referHost=="222.66.106.194" || referHost=="58.35.92.163") ) {
+			if (Session["OpenID_UserObject"]=="ok") {
 				PostInfo newPost = new PostInfo(0,Content,Convert.ToDateTime("1999-1-1"));
 				Post pst = new Post();
 				pst.Insert(newPost);
 
 				re.Text="done form "+ referHost;
-			//}else{
-			//	re.Text="false form "+ referHost;
-			//}		
+			}else{
+				re.Text="login failure.";
+			}		
 		}
 
 		protected void sayNew(NameValueCollection form)

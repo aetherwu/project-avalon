@@ -21,7 +21,7 @@
 			<![CDATA[ 
 				<asp:Repeater id="postInDay" runat="server"><ItemTemplate>
 				<br/>
-				<%# DataBinder.Eval(Container.DataItem,"PostTime","{0:HH:mm:ss}") %>
+				<div style="margin:10px 0;border:1px solid #efefef;background:#fafafa;padding:10px;">Ð´ÓÚ<%# DataBinder.Eval(Container.DataItem,"PostTime","{0:HH:mm:ss}") %></div>
 				<br/>
 				<%# Eval("Content") %>
 				<br/>
