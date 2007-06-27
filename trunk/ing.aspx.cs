@@ -9,7 +9,7 @@ namespace Avalon.Web {
 
 		protected void Page_Load(object sender, EventArgs e) {
 			if (Session["OpenID_UserObject"]!="ok") {
-				ing.Visible=false;
+				Response.Redirect("/login");
 			}
 		}
 
