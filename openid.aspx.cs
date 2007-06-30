@@ -34,8 +34,13 @@ namespace Avalon.Web {
 				if (openid.Validate()) {
 					//UserObject thisuser = openid.RetreiveUser();
 					//Authentication successful - Perform login here
+					//Session
 					Session["OpenID_UserObject"] = "ok";
-					Response.Redirect("/ing");
+					//Cookie
+					HttpCookie logindCookie = new HttpCookie("logind","1");
+					Response.Cookies.Add(logindCookie);
+					//Return
+					Response.Redirect("/");
 				} else {
 					// Authentication failure handled here
 					System.Web.HttpContext.Current.Trace.Write("LoginFailure",openid.GetError());
@@ -58,8 +63,15 @@ namespace Avalon.Web {
 		}
 
 		protected void Logout() {
-			Session["OpenID_UserObject"] = null;
 			// Handle user logout here
+			// Session
+			Session["OpenID_UserObject"] = null;
+			// Cookie
+				HttpCookie logindCookie = new HttpCookie("logind","0");
+				logindCookie.Expires = DateTime.Now.AddDays(-1);
+				Response.Cookies.Add(logindCookie);
+			// Return
+			Response.Redirect("/");
 		}
 
 	}

@@ -18,11 +18,7 @@
 		<input type="hidden" name="m" value="logout" />
 		<input type="submit" name="submit" value=" 退出 " />
 	</form>
-	<form action="/api" method="post" id="post">
-		<textarea name="clip"></textarea><br/>
-		<input type="hidden" name="m" value="new" />
-		<input type="submit" value=" 写好了 " />
-	</form>
+	<form action="/api" method="post" id="post"><textarea name="clip"></textarea><input type="hidden" name="m" value="new" /><input type="submit" value=" 写好了 " /></form>
 </div>
 </body>
 </html>

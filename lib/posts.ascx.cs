@@ -66,7 +66,7 @@ namespace Avalon.Web {
 			}
 		}
 
-		//bind the child repeater
+		//绑定内部Repeater控件
 		public void postList_ItemDataBound(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
 		{
 			Post d =new Post();
