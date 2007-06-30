@@ -20,7 +20,7 @@ var watchScroll = function(){
 		}
 	//}catch(e){}
 	var self = arguments.callee;
-	setTimeout(self,300);
+	setTimeout(self,1000);
 };
 // rewrite as jquery mode
 var requestMore = function(){
@@ -52,6 +52,7 @@ var tranform =function (xmlurl,xslurl,target) {
 					html = oResultFragment;
 			}
 			$(target).append(html);
+			$(target+" .box:last").slideDown();
 			idle = true;
 		});
 	});
@@ -60,6 +61,5 @@ var tranform =function (xmlurl,xslurl,target) {
 
 //smooth scorll
 $(function(){
-	if (location.toString().length>20)
-		watchScroll();
+	watchScroll();
 })

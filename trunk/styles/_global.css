@@ -30,7 +30,10 @@
 	.main .box {margin-bottom:40px;}
 	.innerbox {padding:10px;}
 
-.main {float:left;width:520px;}
+.main {
+	float:left;width:520px;padding-bottom:500px;
+	background:url(/images/ajax-loader.gif) no-repeat center bottom;
+}
 	.main img {border:1px solid #292F34;padding:3px;margin:0 10px 10px 0;}
 	.main .caption {text-align:center;padding-bottom:15px;margin-bottom:15px;position:relative;}
 		.main .caption h2 {font-size:28px;font-family:Georgia,"Times New Roman",serif;font-weight:normal;color:#fff;}

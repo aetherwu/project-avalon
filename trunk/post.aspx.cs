@@ -37,7 +37,7 @@ namespace Avalon.Web {
 		protected void postNew(NameValueCollection form)
 		{
 			string referHost = Request.UserHostAddress;
-			string Content = FormatCode.getBasicHTML(HttpContext.Current.Request["clip"];);
+			string Content = FormatCode.getBasicHTML(HttpContext.Current.Request["clip"]);
 
 			if (Session["OpenID_UserObject"]=="ok") {
 				PostInfo newPost = new PostInfo(0,Content,Convert.ToDateTime("1999-1-1"));

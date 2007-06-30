@@ -14,13 +14,18 @@ namespace Avalon.Web {
 			int year = WebComponents.CleanString.GetInt(HttpContext.Current.Request["year"]);
 			int month = WebComponents.CleanString.GetInt(HttpContext.Current.Request["month"]);
 			string keywords = HttpContext.Current.Request["key"];
-			
-			posts.Year=year;
-			posts.Month=month;
 
-			if (year==0||month==0)
+			if (year==0||month==0) {
+				//首页输出
 				posts.Limit=3;
-
+			}else{
+				//按月存档输出
+				postToday.Visible=false;
+				posts.Year=year;
+				posts.Month=month;
+			}
+			//按关键字输出
+			//***未处理***
 		}
 
 	}

@@ -17,6 +17,8 @@ namespace SQLServerDAL
 		private int i;
 		private DateTime tmpDate;
 
+
+		//新的Clip
 		private const string PARM_Content = "@Content";
 		private const string SQL_ADD = "INSERT INTO blog_Post VALUES(@Content, GETDATE())";
 
@@ -47,12 +49,77 @@ namespace SQLServerDAL
 
 		}
 
+
+		//取得按组聚合的日期，这组索引会调用GetOneDay()绑定每日的数据。
+		//
+		//1、取得某天的日志。
+		//2、取得一天/某天以前的日志。
+		//3、取得经过Keyword全文搜索过滤以后的数据（未实现）。
+		private const string PARM_keyword = "@keyword";
+		private const string PARM_page = "@page";
+		private const string PARM_after = "@after";
+		private const string SQL_SELECT_PostS_Start = "SELECT CONVERT(char(10), log_PostTime, 21) AS PostTime FROM [blog_Post] ";
+		private const string SQL_SELECT_PostS_Begin = "Where [log_PostTime] < @after ";
+		private const string SQL_SELECT_PostS_Year = "AND YEAR(log_PostTime) = @year ";
+		private const string SQL_SELECT_PostS_Month = "AND MONTH(log_PostTime) = @month ";
+		private const string SQL_SELECT_PostS_Day = "AND DAY(log_PostTime) = @day ";
+		private const string SQL_SELECT_PostS_End = "GROUP BY CONVERT(char(10), log_PostTime, 21) ORDER BY PostTime DESC";
+
+		public IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS, int limit, DateTime after) {
+			
+			if (limit==0)
+				limit=3;
+			if (after==Convert.ToDateTime("0001-1-1 0:00:00"))
+			{
+				DateTime dt = DateTime.Now.Date;
+				after = dt;
+			}
+
+			IList<PostIndexInfo> Posts = new List<PostIndexInfo>();
+			
+			SqlParameter[] parms = new SqlParameter[4];
+				parms[0] = new SqlParameter(PARM_year, SqlDbType.BigInt, 4);
+				parms[1] = new SqlParameter(PARM_month, SqlDbType.BigInt, 2);
+				parms[2] = new SqlParameter(PARM_day, SqlDbType.BigInt, 2);
+				parms[3] = new SqlParameter(PARM_after, SqlDbType.DateTime);
+				parms[0].Value = year;
+				parms[2].Value = day;
+				parms[1].Value = month;
+				parms[3].Value = after;
+
+			StringBuilder sql = new StringBuilder(SQL_SELECT_PostS_Start);
+				sql.Append(SQL_SELECT_PostS_Begin);
+			if (year!=0)
+				sql.Append(SQL_SELECT_PostS_Year);
+			if (month!=0)
+				sql.Append(SQL_SELECT_PostS_Month);
+			if (day!=0)
+				sql.Append(SQL_SELECT_PostS_Day);
+
+			sql.Append(SQL_SELECT_PostS_End);
+            string sqlPosts = sql.ToString();
+
+            //Execute
+			i=0;
+            using (SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, sqlPosts, parms)) {
+                while (sdr.Read())
+				{
+					PostIndexInfo Post = new PostIndexInfo(Convert.ToDateTime(sdr.GetString(0)));
+					Posts.Add(Post);
+					i++;
+					if (i>=limit)
+						break;
+                }
+            }
+			return Posts;
+		}
+
+		//单日的日志内容
+		//
+		//带有参数的日志，通常在日志列表绑定的时候调用，输出旧新排序的数据，看上去符合正常的时间数据。
 		private const string PARM_year = "@year";
 		private const string PARM_month = "@month";
 		private const string PARM_day = "@day";
-
-		//Posts in single day
-		//
 		private const string SQL_GET_DAY = "SELECT * FROM [blog_Post] Where YEAR(log_PostTime) = @year AND MONTH(log_PostTime) = @month AND DAY(log_PostTime) = @day ORDER BY [log_ID] ASC";
 
 		public IList<PostInfo> GetOneDay(int year,int month,int day)
@@ -77,102 +144,69 @@ namespace SQLServerDAL
                 }
 			}
 			return Posts;
-		} 
+		}
 
-		//a list of Posts
+		//取得日志序列索引，这些索引会再次调用GetOneDay()取得并绑定每日日志。
 		//
-		private const string PARM_keyword = "@keyword";
-		private const string PARM_page = "@page";
-		private const string PARM_after = "@after";
-		private const string SQL_SELECT_PostS_Start = "SELECT CONVERT(char(10), log_PostTime, 21) AS PostTime FROM [blog_Post] ";
-		private const string SQL_SELECT_PostS_Begin = "Where [log_PostTime] < @after ";
-		private const string SQL_SELECT_PostS_Year = "AND YEAR(log_PostTime) = @year ";
-		private const string SQL_SELECT_PostS_Month = "AND MONTH(log_PostTime) = @month ";
-		private const string SQL_SELECT_PostS_Day = "AND DAY(log_PostTime) = @day ";
-		private const string SQL_SELECT_PostS_End = "GROUP BY CONVERT(char(10), log_PostTime, 21) ORDER BY PostTime DESC";
-
-		public IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS, int limit, DateTime after) {
+		//没有参数的GetDays，将返回今日。
+		private const string SQL_SELECT_TODAY = "SELECT CONVERT(char(10), log_PostTime, 21) AS PostTime FROM [blog_Post] Where  YEAR(log_PostTime) = @year  AND MONTH(log_PostTime) = @month AND DAY(log_PostTime) = @day GROUP BY CONVERT(char(10), log_PostTime, 21) ORDER BY PostTime DESC";
+		public IList<PostIndexInfo> GetDays() {
 			
-			if (limit==0)
-				limit=3;
-			if (after==Convert.ToDateTime("0001-1-1 0:00:00"))
-			{
-				DateTime dt = DateTime.Now;
-				after = dt;
-			}
-
 			IList<PostIndexInfo> Posts = new List<PostIndexInfo>();
 			
-			SqlParameter[] parms = new SqlParameter[4];
+			DateTime dt = DateTime.Now;
+			SqlParameter[] parms = new SqlParameter[3];
 				parms[0] = new SqlParameter(PARM_year, SqlDbType.BigInt, 4);
-				parms[0].Value = year;
 				parms[1] = new SqlParameter(PARM_month, SqlDbType.BigInt, 2);
-				parms[1].Value = month;
 				parms[2] = new SqlParameter(PARM_day, SqlDbType.BigInt, 2);
-				parms[2].Value = day;
-				parms[3] = new SqlParameter(PARM_after, SqlDbType.DateTime);
-				parms[3].Value = after;
-
-			StringBuilder sql = new StringBuilder(SQL_SELECT_PostS_Start);
-				sql.Append(SQL_SELECT_PostS_Begin);
-			if (year!=0)
-				sql.Append(SQL_SELECT_PostS_Year);
-			if (month!=0)
-				sql.Append(SQL_SELECT_PostS_Month);
-			if (day!=0)
-				sql.Append(SQL_SELECT_PostS_Day);
-
-			sql.Append(SQL_SELECT_PostS_End);
-            string sqlPosts = sql.ToString();
+				parms[0].Value = dt.Year;
+				parms[1].Value = dt.Month;
+				parms[2].Value = dt.Day;
+			System.Web.HttpContext.Current.Trace.Write("DO","GET TODAY");
 
             //Execute
-			i=0;
-            using (SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, sqlPosts, parms)) {
+            using (SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, SQL_SELECT_TODAY, parms)) {
                 while (sdr.Read())
 				{
-					if (isRSS){
-						isRSS=false;
-						continue;
-					}
-
-					tmpDate = Convert.ToDateTime(sdr.GetString(0));
-					PostIndexInfo Post = new PostIndexInfo(tmpDate);
+					PostIndexInfo Post = new PostIndexInfo(Convert.ToDateTime(sdr.GetString(0)));
 					Posts.Add(Post);
-					i++;
-					if (i>=limit)
-						break;
                 }
             }
 			return Posts;
 		}
 
-
+		//单日的日志内容
 		//
-		//Related Posts
-		//
-		private const string SQL_SELECT_PostS_RECENT = "SELECT TOP 5 * FROM [blog_Post] ORDER BY [log_ID] DESC";
+		//没有参数的GetOneDay，将返回当天数据，并且按照新旧顺序排序
+		private const string SQL_GET_TODAY = "SELECT * FROM [blog_Post] Where YEAR(log_PostTime) = @year AND MONTH(log_PostTime) = @month AND DAY(log_PostTime) = @day ORDER BY [log_ID] DESC";
+		public IList<PostInfo> GetOneDay()
+		{ 
+            IList<PostInfo> Posts = new List<PostInfo>();
 
-        public IList<PostInfo> GetRecentPost() {
-
-            IList<PostInfo> RecentPost = new List<PostInfo>();
+			DateTime dt = DateTime.Now;
+			SqlParameter[] parms = new SqlParameter[3];
+				parms[0] = new SqlParameter(PARM_year, SqlDbType.BigInt, 4);
+				parms[1] = new SqlParameter(PARM_month, SqlDbType.BigInt, 2);
+				parms[2] = new SqlParameter(PARM_day, SqlDbType.BigInt, 2);
+				parms[0].Value = dt.Year;
+				parms[1].Value = dt.Month;
+				parms[2].Value = dt.Day;
+			System.Web.HttpContext.Current.Trace.Write("DO","BIND TODAY");
 
             //Execute
-            using (SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, SQL_SELECT_PostS_RECENT)) {
+			using(SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, SQL_GET_TODAY, parms))
+			{
                 while (sdr.Read())
 				{
-					tmpStr = System.Text.RegularExpressions.Regex.Replace(sdr.GetString(1),"<[^>]+>","");
-					if (tmpStr.Length>34)
-						tmpStr = tmpStr.Substring(0,34) + "...";
-					
-                    PostInfo Post = new PostInfo(sdr.GetInt32(0), tmpStr ,sdr.GetDateTime(2));
-                    RecentPost.Add(Post);
+                    PostInfo Post = new PostInfo(sdr.GetInt32(0), FormatCode.getBreak(sdr.GetString(1)), sdr.GetDateTime(2) );
+                    Posts.Add(Post);
                 }
-            }
-            return RecentPost;
-        }
+			}
+			return Posts;
+		}
 
+		//分月存档数据的索引
 		//
-		//Archives
 		//
 		private const string SQL_SELECT_ARCHIVES = "SELECT CONVERT(char(7), log_PostTime, 21),COUNT(CONVERT(char(7), log_PostTime, 21)) FROM [blog_Post] GROUP BY CONVERT(char(7), log_PostTime, 21) ORDER BY CONVERT(char(7), log_PostTime, 21) DESC";
 

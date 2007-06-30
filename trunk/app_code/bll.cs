@@ -16,23 +16,27 @@ namespace BLL
 			dal.Insert(newPost);
 		}
 
-		public IList<PostInfo> GetOneDay(int year,int month,int day)
-		{
-			IPost dal = DALFactory.Post.Create();
-			return dal.GetOneDay(year, month, day);
-		}
-
-		public IList<PostInfo> GetRecentPost()
-		{
-			IPost dal = DALFactory.Post.Create();
-			return dal.GetRecentPost();
-		}
-
 		public IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS,int limit,DateTime after)
 		{
 			IPost dal = DALFactory.Post.Create();
 			return dal.GetDays(year,month,day,page,keywords,isRSS,limit,after);
 		}
+			public IList<PostInfo> GetOneDay(int year,int month,int day)
+			{
+				IPost dal = DALFactory.Post.Create();
+				return dal.GetOneDay(year, month, day);
+			}
+
+		public IList<PostIndexInfo> GetDays()
+		{
+			IPost dal = DALFactory.Post.Create();
+			return dal.GetDays();
+		}
+			public IList<PostInfo> GetOneDay()
+			{
+				IPost dal = DALFactory.Post.Create();
+				return dal.GetOneDay();
+			}
 
 		public IList<ArchiveIndexInfo> GetArchives()
 		{
