@@ -6,8 +6,6 @@
 	<include:posts id="posts" runat="server" />
 	<include:comments id="comments" runat="server" />
 	<include:refers id="refers" runat="server" />
-	<relative>
-		<include:list id="recentPosts" Name="×î½üÐ´µÄ" runat="server" />
-	</relative>
+	<relative/>
 	<!-- #Include File="lib/about.xml" -->
 </avalon>

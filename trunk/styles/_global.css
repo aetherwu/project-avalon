@@ -31,8 +31,7 @@
 	.innerbox {padding:10px;}
 
 .main {
-	float:left;width:520px;padding-bottom:500px;
-	background:url(/images/ajax-loader.gif) no-repeat center bottom;
+	float:left;width:520px;
 }
 	.main img {border:1px solid #292F34;padding:3px;margin:0 10px 10px 0;}
 	.main .caption {text-align:center;padding-bottom:15px;margin-bottom:15px;position:relative;}
@@ -54,12 +53,12 @@
 
 	.post {margin-right:10px;}
 	.time {padding-bottom:15px;color:#B9B99E;font-size:11px;font-style:italic;text-indent:2em;}
-	.text,#editor .textarea {margin-bottom:15px;line-height:21px;font-size:12px;}
+	.text,#editor .textarea {margin-bottom:15px;line-height:180%;font-size:12px;}
 		.text a {text-decoration: underline;}
 		.text a:hover {text-decoration: none;}
 		.text textarea {
-			border:1px solid #4a4a4a;background:#656B70;margin:5px auto;
-			width:95%;overflow:auto;
+			background:transparent;border:none;color:#000;
+			width:100%;overflow:auto;line-height:180%;
 		}
 
 

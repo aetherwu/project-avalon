@@ -57,12 +57,18 @@ jQuery.cookie = function (name, value, options) {
 
 $(function(){
 
+		
 	//*
-	$(".text").each(function(){
-		$(this).dblclick(function(){
-			$(this).html("<textarea class='textarea' style='background:transparent;border:none;width:"+$(this).width()+"px;height:"+$(this).height()+"px'>"+$(this).html()+"</textarea>").removeClass("text");
+	if ($.cookie("logind")==1)
+	{
+		$(".text").each(function(){
+			$(this).dblclick(function(){
+				var ihtml = $(this).html();
+					ihtml = ihtml.replace(/<br>/g,"\n");
+				$(this).html("<textarea class='textarea' style='height:"+$(this).height()+"px'>"+ihtml+"</textarea>").unbind("dblclick");
+			})
 		})
-	})
+	}
 	//*/
 	
 	reSizeImg();
