@@ -15,7 +15,7 @@
 				<xsl:choose>
 					<xsl:when test="./@type!=''">
 						<div class="time">Now</div>
-						<div id="ing"><a href="javascript://" class="needLogin" title="你需要登录以后才能编写"><i>登录</i></a></div>
+						<div id="ing" class="text"><a href="javascript://" class="needLogin" title="你需要登录以后才能编写"><i>登录</i></a></div>
 						<form action="/openid" method="post" id="formLogin">
 							<input type="hidden" name="m" value="login" id="m" />
 							<input type="hidden" name="opid" value="woooh.com" />
