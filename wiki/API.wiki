@@ -11,9 +11,6 @@
   * ls
   * delete
 
-安全：
-目前，Avalon的指令仅支持从V2EX所在服务器和所在域发来的请求。
-
 = 指令和参数 =
 
 == 添加新内容的指令 ==
@@ -29,7 +26,10 @@
 HTTP方法：POST
 
 范例（使用POST）：
-http://localhost/api?m=new&Content=测试
+http://localhost/api
+m=new
+clip=测试
+key=KEYSTRING
 
 == 罗列最近记录的指令 ==
 
