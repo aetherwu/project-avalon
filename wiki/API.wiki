@@ -18,7 +18,10 @@
 命令：new
 
 所需参数： 
-  * string Content，不超过2000个汉字
+
+  * string m，唯一值new
+  * string clip，不超过2000个汉字
+  * string key，约定API-KEY
 
 返回：
   * 成功的空响应
