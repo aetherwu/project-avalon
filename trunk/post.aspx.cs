@@ -38,16 +38,27 @@ namespace Avalon.Web {
 		{
 			string referHost = Request.UserHostAddress;
 			string Content = FormatCode.getBasicHTML(HttpContext.Current.Request["clip"]);
+			string APIKey = HttpContext.Current.Request["key"];
 
-			if (Session["OpenID_UserObject"]=="ok") {
+			if (APIKey=="")
+			{
+				Content = HttpUtility.UrlDecode(Content);
 				PostInfo newPost = new PostInfo(0,Content,Convert.ToDateTime("1999-1-1"));
 				Post pst = new Post();
 				pst.Insert(newPost);
-
-				re.Text="done form "+ referHost;
+				re.Text="1";
 			}else{
-				re.Text="login failure.";
-			}		
+				if (Session["OpenID_UserObject"]=="ok") {
+					PostInfo newPost = new PostInfo(0,Content,Convert.ToDateTime("1999-1-1"));
+					Post pst = new Post();
+					pst.Insert(newPost);
+
+					re.Text="2";
+				}else{
+					re.Text="-1";
+				}
+			}
+	
 		}
 
 		protected void sayNew(NameValueCollection form)

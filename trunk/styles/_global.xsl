@@ -23,11 +23,11 @@
 		Powered By <xsl:value-of select="project"/>_<xsl:value-of select="version"/><br/>
 		Theme From <xsl:value-of select="theme"/><br/>
 		Last Release In <xsl:value-of select="release"/><br/>
-		<!-- <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+		<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			_uacct = "UA-59911-1";
 			urchinTracker();
-		</script> -->
+		</script>
 	</div>
 	</xsl:template>
 
@@ -46,6 +46,8 @@
 					<input type="hidden" name="scoring" value="d" />
 				</form>
 				<a href="http://rss.woooh.com"><img alt="feedsky" src="http://static.woooh.com/images/feed/rss.gif"/></a>
+
+				<a href="http://labs.v2ex.com" target="_blank"><img src="http://static.woooh.com/images/labs.jpg"  style="margin-top:15px"/></a>
 			</div>
 		</div>
 		</div>
@@ -58,10 +60,10 @@
 			</h2>
 			<div class="contain">
 				<div id="share"></div>
-				<!-- <script src="http://static.woooh.com/script/greader.js" type="text/javascript">
+				<script src="http://static.woooh.com/script/greader.js" type="text/javascript">
 				</script>
 				<script src="http://www.google.com/reader/public/javascript/user/12097899290454920167/label/webpick?n=10&amp;callback=GRC_p%28%7Bc:%27-%27,t:%27%27,s:%27false%27%7D%29;new%20GRC" type="text/javascript">
-				</script> -->
+				</script>
 			</div>
 		</div>
 		</div>
