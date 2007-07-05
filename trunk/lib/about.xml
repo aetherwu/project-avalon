@@ -3,7 +3,7 @@
 		<contact>admin.ae at gmail.com</contact>
 		<project>Avalon</project>
 		<version>Greeting</version>
-		<release>$Id$</release>
+		<release>$Rev$</release>
 		<note>Born in Starbucks</note>
 		<base>PetShop4.0</base>
 		<theme>bigcartel.com</theme>
