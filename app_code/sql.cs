@@ -20,15 +20,28 @@ namespace SQLServerDAL
 
 		//ÐÂµÄClip
 		private const string PARM_Content = "@Content";
-		private const string SQL_ADD = "INSERT INTO blog_Post VALUES(@Content, GETDATE())";
+		private const string PARM_PostTime = "@PostTime";
+		private const string SQL_ADD = "INSERT INTO blog_Post VALUES(@Content, @PostTime)";
 
 		public void Insert(PostInfo newPost) {
 
-            SqlCommand cmd = new SqlCommand();
+			if (newPost.PostTime == Convert.ToDateTime("1999-1-1")) {
+				DateTime dt = DateTime.Now.Date;
+				tmpDate = dt;
+			} else {
+				tmpDate = newPost.PostTime;
+			}
+			System.Web.HttpContext.Current.Trace.Write("createTime", tmpDate.ToString() );
+
+			SqlCommand cmd = new SqlCommand();
 
 			SqlParameter parmContent =  new SqlParameter(PARM_Content, SqlDbType.NText);
 				parmContent.Value = newPost.Content;
 					cmd.Parameters.Add(parmContent);
+
+			SqlParameter parmPostTime =  new SqlParameter(PARM_PostTime, SqlDbType.DateTime);
+				parmPostTime.Value = tmpDate;
+					cmd.Parameters.Add(parmPostTime);
 
             //Open a connection
             using (SqlConnection conn = new SqlConnection(SqlHelper.CONN_STR)) {
@@ -40,6 +53,43 @@ namespace SQLServerDAL
                 cmd.Connection = conn;
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = SQL_ADD;
+
+                //Execute the query
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+
+            }
+
+		}
+
+		//ÐÞ¸Äclip
+		private const string SQL_EDIT = "UPDATE [blog_Post] SET [log_Content]=@Content WHERE [log_PostTime]=@PostTime";
+
+		public void Update(PostInfo existdPost) {
+
+            SqlCommand cmd = new SqlCommand();
+
+			SqlParameter parmContent =  new SqlParameter(PARM_Content, SqlDbType.NText);
+				parmContent.Value = existdPost.Content;
+					cmd.Parameters.Add(parmContent);
+
+			SqlParameter parmPostTime =  new SqlParameter(PARM_PostTime, SqlDbType.DateTime);
+				parmPostTime.Value = existdPost.PostTime;
+					cmd.Parameters.Add(parmPostTime);
+
+				System.Web.HttpContext.Current.Trace.Write("logTime",existdPost.PostTime.ToString() );
+				System.Web.HttpContext.Current.Trace.Write("logTime",SQL_EDIT );
+
+            //Open a connection
+            using (SqlConnection conn = new SqlConnection(SqlHelper.CONN_STR)) {
+
+                // Open the connection
+                conn.Open();
+
+                //Set up the command
+                cmd.Connection = conn;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = SQL_EDIT;
 
                 //Execute the query
                 cmd.ExecuteNonQuery();
@@ -162,7 +212,7 @@ namespace SQLServerDAL
 				parms[0].Value = dt.Year;
 				parms[1].Value = dt.Month;
 				parms[2].Value = dt.Day;
-			System.Web.HttpContext.Current.Trace.Write("DO","GET TODAY");
+				System.Web.HttpContext.Current.Trace.Write("DO","GET TODAY");
 
             //Execute
             using (SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, SQL_SELECT_TODAY, parms)) {
@@ -191,7 +241,7 @@ namespace SQLServerDAL
 				parms[0].Value = dt.Year;
 				parms[1].Value = dt.Month;
 				parms[2].Value = dt.Day;
-			System.Web.HttpContext.Current.Trace.Write("DO","BIND TODAY");
+				System.Web.HttpContext.Current.Trace.Write("DO","BIND TODAY");
 
             //Execute
 			using(SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, SQL_GET_TODAY, parms))

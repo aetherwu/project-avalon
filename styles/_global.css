@@ -24,14 +24,14 @@
 
 .frame {}
 	.wrapper {
-		clear:both;width:760px;margin:0 auto;padding-bottom:10px;
-		background:url(/images/dotx.gif) repeat-y 115px 0;
+		clear:both;width:850px;margin:0 auto;padding-bottom:10px;
+		background:url(/images/dotx.gif) repeat-y 205px 0;
 	}
 	.main .box {margin-bottom:40px;}
 	.innerbox {padding:10px;}
 
 .main {
-	float:left;width:520px;
+	float:left;width:620px;
 }
 	.main img {border:1px solid #292F34;padding:3px;margin:0 10px 10px 0;}
 	.main .caption {text-align:center;padding-bottom:15px;margin-bottom:15px;position:relative;}
@@ -53,12 +53,12 @@
 
 	.post {margin-right:10px;}
 	.time {padding-bottom:15px;color:#B9B99E;font-size:11px;font-style:italic;text-indent:2em;}
-	.text,#editor .textarea {margin-bottom:15px;line-height:180%;font-size:12px;}
+	.text,#editor .textarea {margin-bottom:15px;line-height:25px;font-size:14px;}
 		.text a {text-decoration: underline;}
 		.text a:hover {text-decoration: none;}
 		.text textarea {
-			background:transparent;border:none;color:#000;
-			width:100%;overflow:auto;line-height:180%;
+			background:url(/images/bg.gif);border:none;color:#595750;
+			width:100%;overflow:hidden;line-height:25px;padding:0;font-size:14px;
 		}
 
 
