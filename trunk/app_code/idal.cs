@@ -8,6 +8,7 @@ namespace IDAL
 	public interface IPost
 	{
 		void Insert(PostInfo newPost);
+		void Update(PostInfo existdPost);
 		IList<PostIndexInfo> GetDays();
 			IList<PostInfo> GetOneDay();
 		IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS,int limit,DateTime after);

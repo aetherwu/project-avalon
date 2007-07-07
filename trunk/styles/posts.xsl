@@ -15,17 +15,22 @@
 				<xsl:choose>
 					<xsl:when test="./@type!=''">
 						<div class="time">Now</div>
-						<div id="ing" class="text"><a href="javascript://" class="needLogin" title="你需要登录以后才能编写"><i>登录</i></a></div>
-						<form action="/openid" method="post" id="formLogin">
-							<input type="hidden" name="m" value="login" id="m" />
-							<input type="hidden" name="opid" value="woooh.com" />
-						</form>
-						<script type="text/javascript">if($.cookie("logind")==1){switchIng()}else{bindLogin()}</script>
+						<div id="" class="text ing needLogin fix"></div>
+						<script type="text/javascript">
+						$.get("/openid?m=check",function(e){
+							if(e==1){
+								switchIng();
+								$.cookie("logind",1);
+							}else{
+								bindLogin();
+							}
+						});
+						</script>
 					</xsl:when>
 				</xsl:choose>
 				<xsl:for-each select="clip">
 					<div class="time"><xsl:value-of select="time" /></div>
-					<div class="text"><xsl:apply-templates select="text"/></div>
+					<div class="text" id="{../date/@address} {time}"><xsl:apply-templates select="text"/></div>
 				</xsl:for-each>
 			</div>
 			<div class="foot">

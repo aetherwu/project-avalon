@@ -128,12 +128,11 @@
 			<xsl:for-each select="archives">
 				<h2 class="caption">浏览存档</h2>
 				<div class="contain">
-					<select id="archives">
-						<option value="/">选择存档月份</option>
-						<xsl:for-each select="month">
-							<option value="/{@address}"><xsl:value-of select="text()"/>(<xsl:value-of select="@count" />)</option>
-						</xsl:for-each>
-					</select>
+					<ul>
+					<xsl:for-each select="month">
+						<li><a href="/{@address}"><xsl:value-of select="text()"/>(<xsl:value-of select="@count" />)</a></li>
+					</xsl:for-each>
+					</ul>
 				</div>
 			</xsl:for-each>
 		</div>

@@ -23,8 +23,16 @@ namespace Avalon.Web {
 			switch (method)
 			{
 			case "new":
-				postNew(form);
+				im(form);
 				break;
+
+			case "post":
+				post(form);
+				break;
+			case "update":
+				update(form);
+				break;
+
 			case "say":
 				sayNew(form);
 				break;
@@ -34,31 +42,57 @@ namespace Avalon.Web {
 
 		}
 
-		protected void postNew(NameValueCollection form)
+		protected void im(NameValueCollection form)
 		{
-			string referHost = Request.UserHostAddress;
 			string Content = FormatCode.getBasicHTML(HttpContext.Current.Request["clip"]);
 			string APIKey = HttpContext.Current.Request["key"];
 
 			if (APIKey=="")
 			{
+				//密码验证通过，从IM发来的请求
+				//解码
 				Content = HttpUtility.UrlDecode(Content);
 				PostInfo newPost = new PostInfo(0,Content,Convert.ToDateTime("1999-1-1"));
 				Post pst = new Post();
 				pst.Insert(newPost);
+				re.Text="writed from im";
+			}
+		}
+
+		protected void post(NameValueCollection form)
+		{
+			string Content = FormatCode.getBasicHTML(HttpContext.Current.Request["clip"]);
+			string PostTime = HttpContext.Current.Request["time"];
+
+			if (Session["OpenID_UserObject"]=="ok") {
+				//new
+				System.Web.HttpContext.Current.Trace.Write("getpostTime",PostTime );
+				PostInfo newPost = new PostInfo(0,Content,Convert.ToDateTime(PostTime));
+				Post pst = new Post();
+				pst.Insert(newPost);
+				re.Text="0";
+			}else{
+				re.Text="login failure now";
+			}
+		}
+
+
+		protected void update(NameValueCollection form)
+		{
+			string Content = FormatCode.getBasicHTML(HttpContext.Current.Request["clip"]);
+			string PostTime = HttpContext.Current.Request["time"];
+
+			if (Session["OpenID_UserObject"]=="ok") {
+				//update
+				//PostTime exsample: 2007-7-4 12:06:20
+				System.Web.HttpContext.Current.Trace.Write("getexistTime",PostTime );
+				PostInfo existdPost = new PostInfo(0,Content,Convert.ToDateTime(PostTime));
+				Post pst = new Post();
+				pst.Update(existdPost);
 				re.Text="1";
 			}else{
-				if (Session["OpenID_UserObject"]=="ok") {
-					PostInfo newPost = new PostInfo(0,Content,Convert.ToDateTime("1999-1-1"));
-					Post pst = new Post();
-					pst.Insert(newPost);
-
-					re.Text="2";
-				}else{
-					re.Text="-1";
-				}
+				re.Text="login failure now";
 			}
-	
 		}
 
 		protected void sayNew(NameValueCollection form)

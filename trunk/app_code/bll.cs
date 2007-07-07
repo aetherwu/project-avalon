@@ -16,6 +16,11 @@ namespace BLL
 			dal.Insert(newPost);
 		}
 
+		public void Update(PostInfo existdPost) {
+			IPost dal = DALFactory.Post.Create();
+			dal.Update(existdPost);
+		}
+
 		public IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS,int limit,DateTime after)
 		{
 			IPost dal = DALFactory.Post.Create();

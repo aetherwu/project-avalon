@@ -26,6 +26,9 @@ namespace Avalon.Web {
 			case "logout":
 				Logout();
 				break;
+			case "check":
+				Check();
+				break;
 			}
 
 			if (Request.QueryString["openid.mode"] == "id_res") {
@@ -36,9 +39,6 @@ namespace Avalon.Web {
 					//Authentication successful - Perform login here
 					//Session
 					Session["OpenID_UserObject"] = "ok";
-					//Cookie
-					HttpCookie logindCookie = new HttpCookie("logind","1");
-					Response.Cookies.Add(logindCookie);
 					//Return
 					Response.Redirect("/");
 				} else {
@@ -55,6 +55,14 @@ namespace Avalon.Web {
 
 		}
 
+		protected void Check() {
+			if (Session["OpenID_UserObject"] == "ok") {
+				status.Text="1";
+			}else{
+				status.Text="0";
+			}
+		}
+
 		protected void Login(NameValueCollection form) {
 			OpenIDConsumer openid = new OpenIDConsumer();
 			openid.Identity = HttpContext.Current.Request["opid"];
@@ -66,10 +74,6 @@ namespace Avalon.Web {
 			// Handle user logout here
 			// Session
 			Session["OpenID_UserObject"] = null;
-			// Cookie
-				HttpCookie logindCookie = new HttpCookie("logind","0");
-				logindCookie.Expires = DateTime.Now.AddDays(-1);
-				Response.Cookies.Add(logindCookie);
 			// Return
 			Response.Redirect("/");
 		}

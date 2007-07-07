@@ -10,16 +10,8 @@
 	.today .date {display:none;}
 	.today .contain {background:#F1F1E1;margin:0;padding:0 20px;}
 	.today .foot {background:url(/images/today_bottom.gif) 0 bottom;padding:10px 15px;}
-	.needLogin {
-		display:block;height:24px;width:160px;margin:0 0 10px 2em;
-		background:url(/images/login.gif) no-repeat;
-	}
-		.needLogin i{display:none;}
-		.chickToWrite {
-			display:block;height:24px;width:160px;margin:0 0 10px 2em;
-			background:url(/images/write.gif) no-repeat;
-		}
-			.chickToWrite i{display:none;}
-	.today #ing form {margin-bottom:15px;}
 
-	#formWrite {display:none;}
+.ing {min-height:25px;}
+	.needLogin {background:url(/images/login.gif) no-repeat 2em 0;cursor: pointer;}
+	.chickToWrite {background:url(/images/write.gif) no-repeat 2em 0;}
+	.ing form {margin-bottom:15px;}
