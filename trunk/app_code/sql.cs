@@ -26,7 +26,7 @@ namespace SQLServerDAL
 		public void Insert(PostInfo newPost) {
 
 			if (newPost.PostTime == Convert.ToDateTime("1999-1-1")) {
-				DateTime dt = DateTime.Now.Date;
+				DateTime dt = DateTime.Now;
 				tmpDate = dt;
 			} else {
 				tmpDate = newPost.PostTime;
