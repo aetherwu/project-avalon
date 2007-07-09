@@ -110,7 +110,7 @@ var saveAuto = function(){
 					} else {
 						$.cookie(cookiename +"_s",parseInt(status)+1);
 					}
-					if (status>=3) {
+					if (status>5) {
 						o.parent().html( clip.replace(/\n/g,"<br />") ).fadeIn().bindEditor();
 						$.cookie(cookiename ,"");
 						$.cookie(cookiename +"_s",0);
@@ -139,7 +139,7 @@ var saveAuto = function(){
 	
 	//repeater
 	var self = arguments.callee;
-	setTimeout(self,2000);
+	setTimeout(self,5000);
 	/*
 	NOTE TODO:
 	分段式储存，把新增的字缓存在Cookie or flash里面防止丢失，这样可以适当延长储存时间，减轻消耗；
@@ -157,13 +157,15 @@ jQuery.fn.bindEditor = function() {
 	});
 	$(this).keyup(function(e){
 		var itext = $(this).find("textarea")[0];
-		if( e.keyCode==13 )
-		{
-			itext.style.height=itext.scrollHeight+'px';
-		}else if(e.keyCode==8 || e.keyCode==46){
-			if (itext.scrollHeight-25!=0)
-			{
-				itext.style.height= (itext.scrollHeight-25 ) +'px';
+		if( e.keyCode==13 || e.keyCode==8 || e.keyCode==46){
+			itext.style.posHeight = itext.scrollHeight ;
+			//$("input.key").val(parseInt(itext.style.height)-25 +"-"+ itext.scrollHeight)
+			if (itext.scrollHeight-25!=0) {
+				if ( parseInt(itext.style.height)-25 < itext.scrollHeight ) {
+					itext.style.height = itext.scrollHeight+'px';
+				} else {
+					itext.style.height = (itext.scrollHeight-25 ) +'px';				
+				}
 			}
 		}
 	});
@@ -171,13 +173,11 @@ jQuery.fn.bindEditor = function() {
 
 $(function(){
 		
-	//*
-	if ($.cookie("logind")==1)
-	{
+	//bind editor mode
+	if (owner) {
 		$(".text").bindEditor();
 		saveAuto();
 	}
-	//*/
 
 	//bind blogosphere event
 	var log_s = $(".blogosphere .contain ul:lt(4)");

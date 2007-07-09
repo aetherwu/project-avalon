@@ -17,10 +17,11 @@
 						<div class="time">Now</div>
 						<div id="" class="text ing needLogin fix"></div>
 						<script type="text/javascript">
+						var owner=false;
 						$.get("/openid?m=check",function(e){
 							if(e==1){
 								switchIng();
-								$.cookie("logind",1);
+								owner = true;
 							}else{
 								bindLogin();
 							}

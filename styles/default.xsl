@@ -12,12 +12,12 @@
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 				<meta http-equiv="Content-Language" content="zh-cn" />
 				<title><xsl:value-of select="name"/></title>
-				<link type="text/css" href="/styles/default.css" rel="stylesheet" media="screen"/>
+				<link type="text/css" href="http://static.woooh.com/styles/default.css" rel="stylesheet" media="screen"/>
 				<link type="application/rss+xml" href="http://rss.woooh.com" rel="alternate" title="RSS 2.0"  />
-				<script type="text/javascript" src="/script/lib/jquery.js"></script>
+				<script type="text/javascript" src="http://static.woooh.com/script/lib/jquery.js"></script>
 				<script type="text/javascript" src="/script/global.js"></script>
-				<script type="text/javascript" src="/script/scroll.js"></script>
-				<script type="text/javascript" src="/script/default.js"></script>
+				<script type="text/javascript" src="http://static.woooh.com/script/scroll.js"></script>
+				<script type="text/javascript" src="http://static.woooh.com/script/default.js"></script>
 			</head>
 			<body>
 				<div class="banner">
