@@ -37,6 +37,7 @@ namespace Avalon.Web {
 				sayNew(form);
 				break;
 			case "delete":
+				delete(form);
 				break;
 			}
 
@@ -52,6 +53,7 @@ namespace Avalon.Web {
 				//密码验证通过，从IM发来的请求
 				//解码
 				Content = HttpUtility.UrlDecode(Content);
+				Content = Content +"　<span class='gtalk'>by v2ex.ing from gtalk</span>";
 				PostInfo newPost = new PostInfo(0,Content,Convert.ToDateTime("1999-1-1"));
 				Post pst = new Post();
 				pst.Insert(newPost);
@@ -89,6 +91,22 @@ namespace Avalon.Web {
 				PostInfo existdPost = new PostInfo(0,Content,Convert.ToDateTime(PostTime));
 				Post pst = new Post();
 				pst.Update(existdPost);
+				re.Text="1";
+			}else{
+				re.Text="login failure now";
+			}
+		}
+
+		protected void delete(NameValueCollection form)
+		{
+			string PostTime = HttpContext.Current.Request["time"];
+
+			if (Session["OpenID_UserObject"]=="ok") {
+				//delete
+				//PostTime exsample: 2007-7-4 12:06:20
+				PostInfo existdPost = new PostInfo(0,"",Convert.ToDateTime(PostTime));
+				Post pst = new Post();
+				pst.Delete(existdPost);
 				re.Text="1";
 			}else{
 				re.Text="login failure now";

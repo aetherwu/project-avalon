@@ -58,9 +58,12 @@
 		.text a:hover {text-decoration: none;}
 		.text textarea {
 			background:url(/images/bg.gif);border:none;color:#595750;
-			width:100%;overflow:hidden;line-height:25px;padding:0;font-size:14px;
+			overflow:hidden;line-height:25px;padding:0;font-size:14px;width:100%;
 		}
+		.gtalk {font-size:10px !important;font-family:verdana;color:#B9B99E !important;}
 
+	.deleteBtn{color:#efefef !important;font-style:normal;}
+	.deleteBtn:hover{color:#000 !important;}
 
 .side {float:right;width:200px;}
 	.side .box {background:url(/images/doth.gif) repeat-x 0 0;padding:25px 0;}
