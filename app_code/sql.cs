@@ -21,7 +21,7 @@ namespace SQLServerDAL
 		//新的Clip
 		private const string PARM_Content = "@Content";
 		private const string PARM_PostTime = "@PostTime";
-		private const string SQL_ADD = "INSERT INTO blog_Post VALUES(@Content, @PostTime)";
+		private const string SQL_ADD = "INSERT INTO blog_Post VALUES(@Content, CONVERT(datetime,@PostTime,120))";
 
 		public void Insert(PostInfo newPost) {
 
@@ -78,7 +78,7 @@ namespace SQLServerDAL
 					cmd.Parameters.Add(parmPostTime);
 
 				System.Web.HttpContext.Current.Trace.Write("logTime",existdPost.PostTime.ToString() );
-				System.Web.HttpContext.Current.Trace.Write("logTime",SQL_EDIT );
+				System.Web.HttpContext.Current.Trace.Write("EDIT CMD",SQL_EDIT );
 
             //Open a connection
             using (SqlConnection conn = new SqlConnection(SqlHelper.CONN_STR)) {
@@ -99,6 +99,38 @@ namespace SQLServerDAL
 
 		}
 
+		//修改clip
+		private const string SQL_DELETE = "DELETE FROM [blog_Post] WHERE [log_PostTime]=@PostTime";
+
+		public void Delete(PostInfo existdPost) {
+
+            SqlCommand cmd = new SqlCommand();
+
+			SqlParameter parmPostTime =  new SqlParameter(PARM_PostTime, SqlDbType.DateTime);
+				parmPostTime.Value = existdPost.PostTime;
+					cmd.Parameters.Add(parmPostTime);
+
+				System.Web.HttpContext.Current.Trace.Write("PostTime",existdPost.PostTime.ToString() );
+				System.Web.HttpContext.Current.Trace.Write("DELETE CMD",SQL_DELETE );
+
+            //Open a connection
+            using (SqlConnection conn = new SqlConnection(SqlHelper.CONN_STR)) {
+
+                // Open the connection
+                conn.Open();
+
+                //Set up the command
+                cmd.Connection = conn;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = SQL_DELETE;
+
+                //Execute the query
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+
+            }
+
+		}
 
 		//取得按组聚合的日期，这组索引会调用GetOneDay()绑定每日的数据。
 		//

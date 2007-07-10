@@ -34,6 +34,22 @@
     }
 }
 
+var saveDelete = function(logtime){
+	$.post(
+		"/api",
+		{
+			"m": "delete",
+			"time": logtime,
+		},
+		function(msg){
+			if (msg!=1) {
+				alert(msg);
+			} else {
+				return true;
+			}
+		}
+	);
+}
 var saveNew = function(nowtime, content){
 	content = content.replace(/\n/g,"<br />");
 	$.post(
@@ -110,7 +126,7 @@ var saveAuto = function(){
 					} else {
 						$.cookie(cookiename +"_s",parseInt(status)+1);
 					}
-					if (status>5) {
+					if (status>10) {
 						o.parent().html( clip.replace(/\n/g,"<br />") ).fadeIn().bindEditor();
 						$.cookie(cookiename ,"");
 						$.cookie(cookiename +"_s",0);
@@ -139,7 +155,7 @@ var saveAuto = function(){
 	
 	//repeater
 	var self = arguments.callee;
-	setTimeout(self,5000);
+	setTimeout(self,3000);
 	/*
 	NOTE TODO:
 	分段式储存，把新增的字缓存在Cookie or flash里面防止丢失，这样可以适当延长储存时间，减轻消耗；
@@ -153,22 +169,37 @@ jQuery.fn.bindEditor = function() {
 		var ihtml = $(this).html();
 			ihtml = ihtml.replace(/<br>/g,"\n");
 			ihtml = ihtml.replace(/<BR>/g,"\n");
-		$(this).html("<textarea class='textarea' style='height:"+$(this).height()+"px'>"+ihtml+"</textarea>").unbind("dblclick");
+		$(this).html("<textarea class='textarea' style='height:" +$(this).height()+ "px'>"+ihtml+"</textarea>").unbind("dblclick");
 	});
 	$(this).keyup(function(e){
-		var itext = $(this).find("textarea")[0];
-		if( e.keyCode==13 || e.keyCode==8 || e.keyCode==46){
-			itext.style.posHeight = itext.scrollHeight ;
-			//$("input.key").val(parseInt(itext.style.height)-25 +"-"+ itext.scrollHeight)
-			if (itext.scrollHeight-25!=0) {
-				if ( parseInt(itext.style.height)-25 < itext.scrollHeight ) {
-					itext.style.height = itext.scrollHeight+'px';
-				} else {
-					itext.style.height = (itext.scrollHeight-25 ) +'px';				
-				}
-			}
-		}
+		$(this).find("textarea").bind("keyup",ResizeTextarea);
 	});
+}
+
+/*
+thanks @nukq:
+http://bbs.blueidea.com/thread-2756414-1-1.html
+*/
+var agt = navigator.userAgent.toLowerCase();
+var is_op = (agt.indexOf("opera") != -1);
+var is_ie = (agt.indexOf("msie") != -1) && document.all && !is_op;
+var ResizeTextarea = function(){
+	var o = $(this);
+	var a = o[0];
+		row = o.height()/25-2;
+    var b=a.value.split("\n");
+    var c=is_ie?1:0;
+    c+=b.length;
+    var d=82;
+    for(var e=0;e<b.length;e++){
+        if(b[e].length>=d){
+            c+=Math.ceil(b[e].length/d)
+        }
+    }
+    c=Math.max(c,row);
+    if(c!=a.rows){
+		o.css("height",(c+1)*25+"px");
+    }
 }
 
 $(function(){
@@ -176,6 +207,14 @@ $(function(){
 	//bind editor mode
 	if (owner) {
 		$(".text").bindEditor();
+		$(".time:gt(0)").append(" <a href='javascript://' class='deleteBtn'>删除</a>");
+		$(".deleteBtn").click(function(){
+			var logtime = $(this).parent().next().attr("id").replace(/\//g,"-");
+			if (confirm("确认删除？")) {
+				saveDelete(logtime);
+				$(this).parent().fadeOut().next().fadeOut();
+			}
+		});
 		saveAuto();
 	}
 
