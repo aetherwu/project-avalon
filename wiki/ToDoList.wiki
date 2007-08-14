@@ -1,20 +1,15 @@
 ﻿#labels Featured,Phase-Design,Phase-Implementation
-
 #准备做的事情
 
 == 正在处理 ==
 
-  * 即时书写模式
-    # ~~点击即开启，输入即书写，自动保存，自动更新，前台用户亦可见。~~
-    # 前台显示今日部分采用Ajax异步更新，用户看起来就像是有一支看不见的笔正在书写。
-
-  * Del.icio.us/Flickr整合进入每天的日志，并且输出到Feed
+  * Del.icio.us/Flickr/Twitter..整合进入每天的日志，并且输出到Feed[MiniFeed like facebook?]
+  * 相关：~~最近更新的~~ 前几日的，后几日的/内容最相关的
+  * Archives Update：类似WordPress的层次分类，显示多少天，~~多少clip（已完成）~~。
 
 == 等待处理的功能 ==
 
   * Tag for Clip, and aggregate to day/month/year/whole.
-  * 相关：~~最近更新的~~ 前几日的，后几日的/内容最相关的
-  * Archives Update：类似WordPress的层次分类，显示多少天，~~多少clip（已完成）~~。
 
 == 较独立的功能 ==
 
