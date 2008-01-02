@@ -20,12 +20,21 @@ namespace DALFactory
 		}
 	}
 
-	public class Refer
+	public class Source
 	{
-		public static IDAL.IRefer Create()
+		public static IDAL.ISource Create()
 		{
-			return new SQLServerDAL.Refer();
+			return new SQLServerDAL.Source();
 		}
 	}
+
+	public class Clip
+	{
+		public static IDAL.IClip Create()
+		{
+			return new SQLServerDAL.Clip();
+		}
+	}
+
 
 }

@@ -1,119 +1,147 @@
 using System;
 
+//以数据库为基础构建程序中所需要传递和调用的数据模型
 namespace Model
 {
+
+	//日志索引，因为日志里面还包含一个列表
 	public class PostIndexInfo
 	{
-		private DateTime _PostTime;
+		private DateTime postTime;
 
 		public PostIndexInfo(DateTime postTime)
 		{
-			this._PostTime = postTime;
+			this.postTime = postTime;
 		}
 
-		public DateTime PostTime { get	{ return _PostTime; } }
+		public DateTime PostTime { get	{ return postTime; } }
 	}
 
+	//单个日志
 	public class PostInfo
 	{
-		private int _ID;
-		private string _Content;
-		private DateTime _PostTime;
+		private int id;
+		private string content;
+		private DateTime postTime;
 
 		public PostInfo(int id, string content, DateTime postTime)
 		{
-			this._ID = id;
-			this._Content = content;
-			this._PostTime = postTime;
+			this.id = id;
+			this.content = content;
+			this.postTime = postTime;
 		}
 
-		public int ID { get	{ return _ID; } }
-		public string Content { get	{ return _Content; } }
-		public DateTime PostTime { get	{ return _PostTime; } }
+		public int ID { get	{ return id; } }
+		public string Content { get	{ return content; } }
+		public DateTime PostTime { get	{ return postTime; } }
 
 	}
 
+	//评论
 	public class CommentInfo
 	{
-		private int _ID;
-		private DateTime _LogTime;
-		private string _Content;
-		private DateTime _PostTime;
-		private string _Author;
-		private string _Homepage;
-		private string _IP;
+		private int id;
+		private DateTime logTime;
+		private string content;
+		private DateTime postTime;
+		private string author;
+		private string homepage;
+		private string ip;
 
 		public CommentInfo(int id, DateTime logTime, string author, string content,string homepage, DateTime postTime,  string ip)
 		{
-			this._ID = id;
-			this._LogTime = logTime;
-			this._Content = content;
-			this._PostTime = postTime;
-			this._Author = author;
-			this._Homepage = homepage;
-			this._IP = ip;
+			this.id = id;
+			this.logTime = logTime;
+			this.content = content;
+			this.postTime = postTime;
+			this.author = author;
+			this.homepage = homepage;
+			this.ip = ip;
 		}
 
-		public int ID { get	{ return _ID; } }
-		public DateTime LogTime { get	{ return _LogTime; } }
-		public string Author { get	{ return _Author; } }
-		public string Content { get	{ return _Content; } }
-		public string Homepage { get	{ return _Homepage; } }
-		public DateTime PostTime { get	{ return _PostTime; } }
-		public string IP { get	{ return _IP; } }
+		public int ID { get	{ return id; } }
+		public DateTime LogTime { get	{ return logTime; } }
+		public string Content { get	{ return content; } }
+		public string Author { get	{ return author; } }
+		public string Homepage { get	{ return homepage; } }
+		public DateTime PostTime { get	{ return postTime; } }
+		public string IP { get	{ return ip; } }
 
 	}
 
-	public class ReferIndexInfo
-	{
-		private string _urlrefer;
-		private int _count;
-
-		public ReferIndexInfo(string urlRefer, int count)
-		{
-			this._urlrefer = urlRefer;
-			this._count = count;
-		}
-
-		public string UrlRefer { get	{ return _urlrefer; } }
-		public int Count { get	{ return _count; } }
-	}
-
-	public class ReferInfo
-	{
-		private int _ID;
-		private DateTime _logTime;
-		private string _urlrefer;
-		private DateTime _requestDate;
-
-		public ReferInfo(int id, DateTime logTime, string urlRefer, DateTime requestDate)
-		{
-			this._ID = id;
-			this._urlrefer = urlRefer;
-			this._requestDate = requestDate;
-			this._logTime = logTime;
-		}
-
-		public int ID { get	{ return _ID; } }
-		public DateTime LogTime { get	{ return _logTime; } }
-		public string UrlRefer { get	{ return _urlrefer; } }
-		public DateTime RequestDate { get	{ return _requestDate; } }
-	}
-
-
+	//按月存档的列表
 	public class ArchiveIndexInfo
 	{
-		private DateTime _month;
-		private int _count;
+		private DateTime month;
+		private int count;
 
 		public ArchiveIndexInfo(DateTime month, int count)
 		{
-			this._month = month;
-			this._count = count;
+			this.month = month;
+			this.count = count;
 		}
 
-		public DateTime Month { get	{ return _month; } }
-		public int Count { get	{ return _count; } }
+		public DateTime Month { get	{ return month; } }
+		public int Count { get	{ return count; } }
+	}
+
+	//实时日志（LiveStream）的源数据
+	public class SourceInfo
+	{
+		private int id;
+		private string owner; //所有者
+		private string type; //所在应用
+		private string site; //详细位置
+		private string source; //Feed/XML等任何协议的 URL
+		private DateTime lastUpdate; 
+		private int timeZone; //时区
+		private int updateHit;
+
+		public SourceInfo(int id, string owner, string type, string site, string source, DateTime lastUpdate, int timeZone, int updateHit)
+		{
+			this.id = id;
+			this.owner = owner;
+			this.type = type;
+			this.site = site;
+			this.source = source;
+			this.lastUpdate = lastUpdate;
+			this.timeZone = timeZone;
+			this.updateHit = updateHit;
+		}
+
+		public int ID { get	{ return id; } set { id = value; } }
+		public string Type { get	{ return type; } set { type = value; } }
+		public string Owner { get	{ return owner; } set { owner = value; } }
+		public string Site { get	{ return site; } set { site = value; } }
+		public string Source { get	{ return source; } set { source = value; } }
+		public DateTime LastUpdate { get	{ return lastUpdate; } set { lastUpdate = value; } }
+		public int TimeZone { get	{ return timeZone; } set { timeZone = value; } }
+		public int UpdateHit { get	{ return updateHit; } set { updateHit = value; } }
+	}
+
+	//实时日志
+	public class ClipInfo
+	{
+		private int id;
+		private int sourceID; //对应Source源中的ID
+		private string content;
+		private string link;
+		private DateTime postTime; 
+
+		public ClipInfo(int id, int sourceID, string content, string link, DateTime postTime)
+		{
+			this.id = id;
+			this.sourceID = sourceID;
+			this.content = content;
+			this.link = link;
+			this.postTime = postTime;
+		}
+
+		public int ID { get	{ return id; } set { id = value; } }
+		public int SourceID { get { return sourceID; } set { sourceID = value; } }
+		public string Content { get	{ return content; } set { content = value; } }
+		public string Link { get	{ return link; } set { link = value; } }
+		public DateTime PostTime { get	{ return postTime; } set { postTime = value; } }
 	}
 
 }

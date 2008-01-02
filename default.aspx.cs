@@ -17,7 +17,7 @@ namespace Avalon.Web {
 
 			if (year==0||month==0) {
 				//首页输出
-				posts.Limit=3;
+				posts.Limit=6;
 			}else{
 				//按月存档输出
 				postToday.Visible=false;

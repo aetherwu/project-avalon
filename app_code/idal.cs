@@ -11,9 +11,9 @@ namespace IDAL
 		void Update(PostInfo existdPost);
 		void Delete(PostInfo existdPost);
 		IList<PostIndexInfo> GetDays();
-			IList<PostInfo> GetOneDay();
+		IList<PostInfo> GetOneDay();
 		IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS,int limit,DateTime after);
-			IList<PostInfo> GetOneDay(int year,int month,int day);
+		IList<PostInfo> GetOneDay(int year,int month,int day);
 		IList<ArchiveIndexInfo> GetArchives();
 	}
 
@@ -24,10 +24,15 @@ namespace IDAL
 		IList<CommentInfo> GetRecentComment();
 	}
 
-	public interface IRefer
+	public interface ISource
 	{
-		void Insert(ReferInfo newRefer);
-		IList<ReferIndexInfo> GetRefersByLog(DateTime logTime);
+		void Update(SourceInfo source);
+		SourceInfo GetOneSource();
+	}
+
+	public interface IClip
+	{
+		void Update(ClipInfo clip);
 	}
 
 }

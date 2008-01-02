@@ -17,8 +17,7 @@
 						<div class="time">Now</div>
 						<div id="" class="text ing needLogin fix"></div>
 						<script type="text/javascript">
-						var owner=false;
-						$.get("/openid?m=check",function(e){
+						$.get("/openid",{"m":"check"},function(e){
 							if(e==1){
 								switchIng();
 								owner = true;
@@ -34,17 +33,7 @@
 					<div class="text" id="{../date/@address} {time}"><xsl:apply-templates select="text"/></div>
 				</xsl:for-each>
 			</div>
-			<div class="foot">
-				<span class="history">
-				<xsl:for-each select="date">
-					<xsl:element name="a">
-						<xsl:attribute name="href">http://door.woooh.com/index.php?q=uggc%3A%2F%2Fmu.jvxvcrqvn.bet%2Fjvxv%2F<xsl:value-of select="substring(@address,6,2)" />%25R6%259P%2588<xsl:value-of select="substring(@address,9,2)" />%25R6%2597%25N5</xsl:attribute>
-						<xsl:attribute name="target">_blank</xsl:attribute>
-						历史上的<xsl:choose><xsl:when test="../@type!=''">今天</xsl:when><xsl:otherwise><xsl:value-of select="substring(text(),6,10)"/></xsl:otherwise></xsl:choose>
-					</xsl:element>
-				</xsl:for-each>
-				</span>
-			</div>
+			<div class="foot"></div>
 		</div>
 		</div>
 		</xsl:for-each>

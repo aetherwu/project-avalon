@@ -39,7 +39,7 @@ var saveDelete = function(logtime){
 		"/api",
 		{
 			"m": "delete",
-			"time": logtime,
+			"time": logtime
 		},
 		function(msg){
 			if (msg!=1) {
@@ -50,6 +50,7 @@ var saveDelete = function(logtime){
 		}
 	);
 }
+
 var saveNew = function(nowtime, content){
 	content = content.replace(/\n/g,"<br />");
 	$.post(
@@ -80,7 +81,7 @@ var saveUpdate = function(logtime,content){
 		}
 	);
 }
-//*//
+
 var saveAuto = function(){
 
 	//save
@@ -156,13 +157,7 @@ var saveAuto = function(){
 	//repeater
 	var self = arguments.callee;
 	setTimeout(self,3000);
-	/*
-	NOTE TODO:
-	分段式储存，把新增的字缓存在Cookie or flash里面防止丢失，这样可以适当延长储存时间，减轻消耗；
-	同时也保证了所有数据不会丢失。
-	*/
 }
-//*/
 
 jQuery.fn.bindEditor = function() {
 	$(this).dblclick(function(){
@@ -172,10 +167,23 @@ jQuery.fn.bindEditor = function() {
 		$(this).html("<textarea class='textarea' style='height:" +$(this).height()+ "px'>"+ihtml+"</textarea>").unbind("dblclick");
 	});
 	$(this).keyup(function(e){
-		$(this).find("textarea").bind("keyup",ResizeTextarea);
+		var d = $(this);
+		var t = $(this).find("textarea");
+		t.bind("keyup",ResizeTextarea);
+		if (e.keyCode==27)
+			d.html( t.val().replace(/\n/g,"<br />") ).bindEditor();
 	});
 }
-
+bindDelete = function() {
+	$(".time:gt(0)").append(" <a href='javascript://' class='deleteBtn'>删除</a>");
+	$(".deleteBtn").click(function(){
+		var logtime = $(this).parent().next().attr("id").replace(/\//g,"-");
+		if (confirm("确认删除？")) {
+			saveDelete(logtime);
+			$(this).parent().fadeOut().next().fadeOut().bindEditor();
+		}
+	});
+}
 /*
 thanks @nukq:
 http://bbs.blueidea.com/thread-2756414-1-1.html
@@ -203,37 +211,12 @@ var ResizeTextarea = function(){
 }
 
 $(function(){
-		
-	//bind editor mode
-	if (owner) {
-		$(".text").bindEditor();
-		$(".time:gt(0)").append(" <a href='javascript://' class='deleteBtn'>删除</a>");
-		$(".deleteBtn").click(function(){
-			var logtime = $(this).parent().next().attr("id").replace(/\//g,"-");
-			if (confirm("确认删除？")) {
-				saveDelete(logtime);
-				$(this).parent().fadeOut().next().fadeOut();
-			}
-		});
+	if (typeof(owner) != "undefined" && owner==true) {
+		//bind editor
+		$(".text").bindEditor()
+		bindDelete();
+		//start watching
 		saveAuto();
 	}
-
-	//bind blogosphere event
-	var log_s = $(".blogosphere .contain ul:lt(4)");
-	var log_m = $(".blogosphere .contain ul:gt(4)");
-	var log_b = $(".blogosphere .more");
-	log_s.fadeIn();
-	log_b.toggle(
-		function(){
-			log_m.fadeIn("show",function(){
-				log_b.html("收起")
-			});
-		},
-		function(){
-			log_m.fadeOut("show",function(){
-				log_b.html("查看全部")
-			});
-		}
-	);
 
 });
