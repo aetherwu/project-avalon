@@ -46,6 +46,7 @@
 					<input type="hidden" name="scoring" value="d" />
 				</form>
 				<a href="http://rss.woooh.com"><img alt="feedsky" src="http://static.woooh.com/images/feed/rss.gif"/></a>
+				<img src="http://www.feedsky.com/feed/blogif/sc/orange.gif" />
 
 				<a href="http://labs.v2ex.com" target="_blank"><img src="http://static.woooh.com/images/labs.jpg"  style="margin-top:15px"/></a>
 			</div>

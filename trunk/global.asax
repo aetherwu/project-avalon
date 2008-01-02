@@ -1,0 +1,1 @@
+<%@ Application Inherits="Avalon.Web._global" %>

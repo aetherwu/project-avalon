@@ -20,10 +20,9 @@
 			<content:encoded>
 			<![CDATA[ 
 				<asp:Repeater id="postInDay" runat="server"><ItemTemplate>
-				<br/>
-				<div style="margin:10px 0;border:1px solid #efefef;background:#fafafa;padding:10px;">ะดำฺ<%# DataBinder.Eval(Container.DataItem,"PostTime","{0:HH:mm:ss}") %></div>
-				<br/>
+				<div style="margin:10px 0;color:#999;border:1px solid #efefef;background:#fafafa;padding:10px;">ะดำฺ<%# DataBinder.Eval(Container.DataItem,"PostTime","{0:HH:mm:ss}") %></div>
 				<%# Eval("Content") %>
+				<br/>
 				<br/>
 				</ItemTemplate></asp:Repeater>
 				<br/>

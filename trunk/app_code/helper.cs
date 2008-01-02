@@ -41,6 +41,7 @@ namespace SQLServerDAL
         public static int ExecuteNonQuery(string connectionString, CommandType cmdType, string cmdText, params SqlParameter[] commandParameters) {
 
             SqlCommand cmd = new SqlCommand();
+			System.Web.HttpContext.Current.Trace.Write("cmdText", cmdText.ToString());
 
             using (SqlConnection conn = new SqlConnection(connectionString)) {
                 PrepareCommand(cmd, conn, null, cmdType, cmdText, commandParameters);

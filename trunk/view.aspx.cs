@@ -27,25 +27,6 @@ namespace Avalon.Web {
 
 			logTime = Convert.ToDateTime(Utility.FormatCode.GetFormatDay(year,month,day));
 			comments.LogTime = logTime;
-			refers.LogTime = logTime;
-
-			try
-			{
-				string refer = Request.UrlReferrer.ToString();
-				if (refer!=null && refer!="")
-				{
-					if (refer.IndexOf("localhost")>0 || refer.IndexOf("woooh")>0)
-					{
-					}else{
-						ReferInfo newRefer = new ReferInfo(0,logTime, refer, Convert.ToDateTime("1999-1-1"));
-						Refer rf = new Refer();
-						rf.Insert(newRefer);
-					}
-				}
-			}
-			catch (Exception msg)
-			{
-			}
 
 		}
 	}

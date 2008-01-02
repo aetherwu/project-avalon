@@ -62,7 +62,8 @@ namespace SQLServerDAL
 
 		}
 
-		//修改clip
+		//更新Post
+		//TODO:需要改写成更新所有字段普遍适用的方法
 		private const string SQL_EDIT = "UPDATE [blog_Post] SET [log_Content]=@Content WHERE [log_PostTime]=@PostTime";
 
 		public void Update(PostInfo existdPost) {
@@ -413,27 +414,57 @@ namespace SQLServerDAL
         }
 	}
 
-	public class Refer:IRefer
+	public class Source:ISource
 	{
 
-		//
-		//New Trackback
-		//
-		private const string PARM_Refer = "@Refer";
-		private const string PARM_LogTime = "@LogTime";
-		private const string SQL_REFER = "INSERT INTO [blog_Refer] VALUES( @LogTime, @Refer, GETDATE())";
+		private const string PARM_id = "@id";
+		private const string PARM_owner = "@owner";
+		private const string PARM_type = "@type";
+		private const string PARM_site = "@site";
+		private const string PARM_source = "@source";
+		private const string PARM_lastUpdate = "@lastUpdate";
+		private const string PARM_tomezone = "@tomezone";
+		private const string PARM_updateHit = "@updateHit";
 
-		public void Insert(ReferInfo newRefer) {
+		private const string SQL_ADD = "INSERT INTO [live_Source] VALUES(@owner,@type, @site, @source, CONVERT(datetime,@lastUpdate,120), @tomezone, @updateHit)";
+
+		private const string SQL_UPDATE = "UPDATE [live_Source] SET [owner]=@owner,[type]=@type, [site]=@site,[source]=@source,[lastUpdate]=@lastUpdate,[tomezone]=@tomezone,[updateHit]=@updateHit WHERE [s_ID]=@id";
+
+		public void Update(SourceInfo source) {
 
             SqlCommand cmd = new SqlCommand();
 
-			SqlParameter parmRefer =  new SqlParameter(PARM_Refer, SqlDbType.NChar);
-				parmRefer.Value = newRefer.UrlRefer;
-					cmd.Parameters.Add(parmRefer);
+			SqlParameter parmID =  new SqlParameter(PARM_id, SqlDbType.BigInt);
+				parmID.Value = source.ID;
+					cmd.Parameters.Add(parmID);
 
-			SqlParameter parmLogTime =  new SqlParameter(PARM_LogTime, SqlDbType.DateTime);
-				parmLogTime.Value = newRefer.LogTime;
-					cmd.Parameters.Add(parmLogTime);
+			SqlParameter parmOwner =  new SqlParameter(PARM_owner, SqlDbType.NChar);
+				parmOwner.Value = source.Owner;
+					cmd.Parameters.Add(parmOwner);
+
+			SqlParameter parmType =  new SqlParameter(PARM_type, SqlDbType.NChar);
+				parmType.Value = source.Type;
+					cmd.Parameters.Add(parmType);
+
+			SqlParameter parmSite =  new SqlParameter(PARM_site, SqlDbType.NChar);
+				parmSite.Value = source.Site;
+					cmd.Parameters.Add(parmSite);
+
+			SqlParameter parmSource =  new SqlParameter(PARM_source, SqlDbType.NChar);
+				parmSource.Value = source.Source;
+					cmd.Parameters.Add(parmSource);
+
+			SqlParameter parmLastUpdate =  new SqlParameter(PARM_lastUpdate, SqlDbType.DateTime);
+				parmLastUpdate.Value = source.LastUpdate;
+					cmd.Parameters.Add(parmLastUpdate);
+
+			SqlParameter parmTimeZone =  new SqlParameter(PARM_tomezone, SqlDbType.BigInt);
+				parmTimeZone.Value = source.TimeZone;
+					cmd.Parameters.Add(parmTimeZone);
+
+			SqlParameter parmUpdateHit =  new SqlParameter(PARM_updateHit, SqlDbType.BigInt);
+				parmUpdateHit.Value = source.UpdateHit;
+					cmd.Parameters.Add(parmUpdateHit);
 
             //Open a connection
             using (SqlConnection conn = new SqlConnection(SqlHelper.CONN_STR)) {
@@ -444,41 +475,102 @@ namespace SQLServerDAL
                 //Set up the command
                 cmd.Connection = conn;
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = SQL_REFER;
+
+				if(source.ID==0){
+					cmd.CommandText = SQL_ADD;
+				}else{
+					cmd.CommandText = SQL_UPDATE;
+				}
 
                 //Execute the query
                 cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
+
             }
+
 		}
 
-		//
-		//List Refer By Log
-		//
-		private const string PARM_logTime = "@logTime";
-		private const string SQL_SELECT_REFERS = "SELECT re_URL,COUNT(re_URL) AS re_Count FROM [blog_Refer] Where CONVERT(char(10), log_PostTime, 21) = @logTime GROUP BY [re_URL]";
-
-		public IList<ReferIndexInfo> GetRefersByLog(DateTime logTime)
+		//获取一个需要更新的Source源，规则是updateHit数值最小的那个，更新以后其值加1
+		private const string SQL_SELECT_NEXT = "SELECT TOP 1 * FROM [live_Source] ORDER BY [updateHit] ASC";
+		public SourceInfo GetOneSource()
 		{ 
-			ReferIndexInfo rf = null;
-            IList<ReferIndexInfo> RefersByLog = new List<ReferIndexInfo>();
-
-			SqlParameter parm = new SqlParameter(PARM_logTime, SqlDbType.DateTime);
-			parm.Value = logTime;
-
-			using(SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, SQL_SELECT_REFERS, parm))
+			SourceInfo src = null;
+			//获取源
+			using(SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, SQL_SELECT_NEXT))
 			{
                 while (sdr.Read())
 				{
-					rf = new ReferIndexInfo(FormatCode.getEscape(sdr.GetString(0)), sdr.GetInt32(1));
-                    RefersByLog.Add(rf);
+					src = new SourceInfo(sdr.GetInt32(0), sdr.GetString(1), sdr.GetString(2), sdr.GetString(3), sdr.GetString(4) , sdr.GetDateTime(5), sdr.GetInt32(6), sdr.GetInt32(7));
 				}
 			}
-			return RefersByLog;
+			return src;
 		}
 
+	}
+
+	public class Clip:IClip
+	{
+
+		private const string PARM_ID = "@id";
+		private const string PARM_SourceID = "@sourceID";
+		private const string PARM_Content = "@content";
+		private const string PARM_Link = "@link";
+		private const string PARM_PostTime = "@postTime";
+
+		private const string SQL_ADD = "INSERT INTO [live_Clip] VALUES(@sourceID, @content, @link, CONVERT(datetime,@postTime,120))";
+		private const string SQL_UPDATE = "UPDATE [live_Clip] SET [sourceID]=@sourceID, [content]=@content, [link]=@link, [postTime]=CONVERT(datetime,@postTime,120)) WHERE [c_ID]=@id";
+
+		public void Update(ClipInfo clip) {
+
+			SqlCommand cmd = new SqlCommand();
+
+			SqlParameter parmID =  new SqlParameter(PARM_ID, SqlDbType.BigInt);
+				parmID.Value = clip.ID;
+					cmd.Parameters.Add(parmID);
+
+			SqlParameter parmSourceID =  new SqlParameter(PARM_SourceID, SqlDbType.NChar);
+				parmSourceID.Value = clip.SourceID;
+					cmd.Parameters.Add(parmSourceID);
+
+			SqlParameter parmContent =  new SqlParameter(PARM_Content, SqlDbType.NText);
+				parmContent.Value = clip.Content;
+					cmd.Parameters.Add(parmContent);
+
+			SqlParameter parmLink =  new SqlParameter(PARM_Link, SqlDbType.NChar);
+				parmLink.Value = clip.Link;
+					cmd.Parameters.Add(parmLink);
+
+			SqlParameter parmPostTime =  new SqlParameter(PARM_PostTime, SqlDbType.DateTime);
+				parmPostTime.Value = clip.PostTime;
+					cmd.Parameters.Add(parmPostTime);
+
+            //Open a connection
+            using (SqlConnection conn = new SqlConnection(SqlHelper.CONN_STR)) {
+
+                // Open the connection
+                conn.Open();
+
+                //Set up the command
+                cmd.Connection = conn;
+                cmd.CommandType = CommandType.Text;
+				if(clip.ID==0){
+					cmd.CommandText = SQL_ADD;
+				}else{
+					System.Web.HttpContext.Current.Trace.Write("Item", clip.Content.ToString()  );
+					System.Web.HttpContext.Current.Trace.Write("PostTime", clip.PostTime.ToString() );
+					cmd.CommandText = SQL_UPDATE;
+				}
+
+                //Execute the query
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+
+            }
+
+		}
 
 	}
+
 
 }
 
