@@ -55,8 +55,7 @@ namespace Utility
 					break;
 
 				default:
-					str = title +"<br />"+ desc;
-					return str;
+                    return title;
 					break;
 			}
 		}
