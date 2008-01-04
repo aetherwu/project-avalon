@@ -1,6 +1,6 @@
 using System;
 
-using RSS;
+using Rss;
 using Model;
 using BLL;
 using Utility;
@@ -21,36 +21,41 @@ namespace Live
 			Source src = new Source();
 			sc = src.GetOneSource();
 			
-			rssFeed feed = new rssFeed(sc.Source,sc.LastUpdate);
-			feed.read();
+			RssFeed feed = RssFeed.Read(sc.Source);
+            RssChannel channel = (RssChannel)feed.Channels[0];
+            RssItemCollection items = (RssItemCollection)channel.Items;
+            DateTime lastUpdate = channel.Items.LatestPubDate();
 
 			//if modified
-			if (sc.LastUpdate != feed.LastModified) {
+            if (sc.LastUpdate != lastUpdate)
+            {
 				//foreach items
-				foreach (rssItem item in feed.Channel.Items) {
-					//if items pudate > feed's last modify time
-					//give up the else
-					if(Convert.ToDateTime(item.PubDate) > sc.LastUpdate) {
-						//save one new item into database
-						Clip clip = new Clip();
-						//对不同Feed的Item，例如Twitter、Del.icio.us、Flickr，需要处理成理想的格式然后才能入库。
-						content = Fliter.getContent(sc.Type, item.Title, item.Description ,item.Link.ToString());
-						ClipInfo cp = new ClipInfo(
-							0,
-							sc.ID,
-							content,
-							item.Link.ToString(),
-							Convert.ToDateTime(item.PubDate)
-						);
-						clip.Update(cp);
-					}
-				}
+                for (int i = 0; i < channel.Items.Count-1; i++)
+                {
+                    //if items pudate > feed's last modify time
+                    //give up the else
+                    if (channel.Items[i].PubDate > sc.LastUpdate)
+                    {
+                        //save one new item into database
+                        Clip clip = new Clip();
+                        //对不同Feed的Item，例如Twitter、Del.icio.us、Flickr，需要处理成理想的格式然后才能入库。
+                        content = Fliter.getContent(sc.Type, channel.Items[i].Title, channel.Items[i].Description, channel.Items[i].Link.ToString());
+                        ClipInfo cp = new ClipInfo(
+                            0,
+                            sc.ID,
+                            content,
+                            channel.Items[i].Link.ToString(),
+                            channel.Items[i].PubDate
+                        );
+                        clip.Update(cp);
+                    }
+                }
 				//updated the last modify time of Feed
-				sc.LastUpdate=feed.Channels[0].LastBuildDate;
-				//源的updateHit加1
-				sc.UpdateHit++;
-				src.Update(sc);
+                sc.LastUpdate = lastUpdate;
 			}
+			//源的updateHit加1，不管是否更新过HIT都要加1
+			sc.UpdateHit++;
+			src.Update(sc);
 		}
 	}
 }

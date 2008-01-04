@@ -14,23 +14,19 @@ namespace Avalon.Web {
 		void Application_Start(object sender, EventArgs e)
 		{
 			// 在应用程序启动时运行的代码
-			Timer timer = new Timer(10000);
+			Timer timer = new Timer(600000);
 			timer.Elapsed += new ElapsedEventHandler(this.OnTimedEvent);
 
 			//AutoReset 属性为 true 时，每隔指定时间循环一次；
 			//如果为 false，则只执行一次。
 			timer.AutoReset = true;
 			timer.Enabled = true;
+            timer.Start();
 		}
 
 		protected void OnTimedEvent(object sender, ElapsedEventArgs e) {
-			//*
-			try {
-				Runer runer = new Runer();
-				runer.loadRSS();
-			}catch(Exception ex){
-			}
-			//*/
+			Runer runer = new Runer();
+			runer.loadRSS();
 		}
 
 		void Application_End(object sender, EventArgs e) {}
