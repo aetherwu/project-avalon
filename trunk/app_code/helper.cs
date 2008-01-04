@@ -73,7 +73,6 @@ namespace SQLServerDAL
 			try
 			{
 				PrepareCommand(cmd, conn, null, cmdType, cmdText, cmdParms);
-				System.Web.HttpContext.Current.Trace.Write("cmdText", cmdText.ToString());
 
 				SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 				cmd.Parameters.Clear();
