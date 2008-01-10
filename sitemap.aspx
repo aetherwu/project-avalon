@@ -15,7 +15,7 @@
 		<changefreq>never</changefreq>
 	</url>
 	</ItemTemplate></asp:Repeater>
-	<asp:Repeater id="postList" runat="server"><ItemTemplate><url>
+	<asp:Repeater id="clipList" runat="server"><ItemTemplate><url>
 		<loc>http://woooh.com/<%# DataBinder.Eval(Container.DataItem,"PostTime","{0:yyyy\\/MM\\/dd}") %></loc>
 		<changefreq>never</changefreq>
 	</url>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <xsl:output method="html" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" encoding="utf-8"/>
 
@@ -15,8 +15,8 @@
 				<link type="text/css" href="http://static.woooh.com/styles/view.css" rel="stylesheet" media="screen"/>
 				<link type="application/rss+xml" href="http://rss.woooh.com" rel="alternate" title="RSS 2.0"  />
 				<script type="text/javascript" src="http://static.woooh.com/script/lib/jquery.js"></script>
-				<script type="text/javascript" src="http://static.woooh.com/global.js"></script>
-				<script type="text/javascript" src="http://static.woooh.com/view.js"></script>
+				<script type="text/javascript" src="http://static.woooh.com/script/global.js"></script>
+				<script type="text/javascript" src="http://static.woooh.com/script/view.js"></script>
 			</head>
 			<body>
 				<div class="banner">
@@ -92,31 +92,6 @@
 			</ul>
 		</div>
 		</div>
-	</div>
-	</xsl:template>
-
-	<!-- Comments Templates-->
-	<xsl:template match="refers">
-	<div class="refers">
-		<xsl:choose>
-			<xsl:when test="count(refer)>0">
-				<div class="commentGuild"><xsl:value-of select="count(refer)" />个引用地址</div>
-			</xsl:when>
-		</xsl:choose>
-		<xsl:for-each select="refer">
-		<div class="box refer">
-		<div class="inner">
-			<div class="contain">
-				[<xsl:apply-templates select="@count"/>] 
-				<xsl:element name="a">
-					<xsl:attribute name="href"><xsl:value-of select="text()" /></xsl:attribute>
-					<xsl:attribute name="target">new</xsl:attribute>
-					<xsl:apply-templates select="text()"/>
-				</xsl:element>
-			</div>
-		</div>
-		</div>
-		</xsl:for-each>
 	</div>
 	</xsl:template>
 

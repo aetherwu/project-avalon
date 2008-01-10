@@ -3,7 +3,6 @@
 	html {color:#595750;background:#FBFBF6;}
 	body {
 		font-size:12px;font-family:"Lucida Grande",Verdana,Arial,Helvetica,sans-serif,"ËÎÌו";
-		background:url(/images/bg.jpg) repeat-x;
 	}
 	h1{font-family:"Times New Roman";font-size:18px;color:#fff;}
 	a:link, a:visited {
@@ -17,8 +16,8 @@
 	img {border:none;}
 
 .banner {
-	height:170px;margin:0 auto ;width:760px;
-	background:url(/images/logo.png) no-repeat 0 40px;
+	height:150px;margin:0 auto;width:350px;
+	background:url(/images/logo.gif) no-repeat 0 0;
 }
 .banner h1 i {display:none;}
 
@@ -51,9 +50,22 @@
 	}
 		.infomations li {float:left;margin-right:15px;}
 
-	.post {margin-right:10px;}
-	.time {padding-bottom:15px;color:#B9B99E;font-size:11px;font-style:italic;text-indent:2em;}
-	.text,#editor .textarea {margin-bottom:15px;line-height:25px;font-size:14px;}
+	.post {margin:0 10px 0 0;}
+
+	.time {padding:10px 0 10px 30px;color:#B9B99E;font-size:11px;font-style:italic;}
+		.source0 {background:url(/images/app.gif) no-repeat 0 -153px;}
+		.source1 {background:url(/images/app.gif) no-repeat 0 8px;}
+		.source2 {background:url(/images/app.gif) no-repeat 0 -97px;}
+		.source3 {background:url(/images/app.gif) no-repeat 0 -45px;}
+		.source4 {background:url(/images/app.gif) no-repeat 0 -207px;}
+		.source6 {background:url(/images/app.gif) no-repeat 0 -207px;}
+		.source5 {background:url(/images/app.gif) no-repeat 0 -283px;}
+		.post .goto {
+			border:none;
+			padding:0;margin:4px 0 0 5px;
+		}
+
+	.text,#editor .textarea {margin-bottom:20px;line-height:25px;font-size:14px;}
 		.text a {text-decoration: underline;}
 		.text a:hover {text-decoration: none;}
 		.text textarea {
@@ -84,8 +96,10 @@
 	.side .recentComments a {text-decoration: underline;}
 	.side .recentComments li, .side .recentPosts li {margin:8px 0;background:none;padding-left:0;}
 
-	.side .search {padding-top:0;background:none;}
-	.side .search form {margin-bottom:20px;}
+	.side .rss {background:none;padding:0 0 10px 0;}
+
+	.side .search {}
+	.side .search form {}
 		.side .search .key {padding:2px;margin-right:2px;width:120px;border:1px solid #B9B99E;}
 		.side .search .btn {padding:1px;}
 	

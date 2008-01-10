@@ -11,8 +11,8 @@ namespace Avalon.Web {
 	public partial class _sitmap : System.Web.UI.Page　
 	{
 
-		private IList<PostIndexInfo> lst;
-		private IList<ArchiveIndexInfo> ar;
+		private IList<ClipIndexInfo> clips;
+		private IList<ArchiveIndexInfo> archives;
 
 		private int _year;
 		private int _month;
@@ -25,19 +25,19 @@ namespace Avalon.Web {
 	　　protected void Page_Load(object sender, EventArgs e)　
 		{
 			
-			Post c = new Post();
-			lst = c.GetDays(_year,_month,_day,_page,_keyword,true,9999,_begin);
+			Clip clip = new Clip();
+            clips = clip.GetDays(_year, _month, _day, _page, _keyword, true, 9999, _begin);
+			archives = clip.GetArchives();
 
-			if (lst != null) {
-                postList.DataSource = lst;
-                postList.DataBind();
+            if (clips != null)
+            {
+                clipList.DataSource = clips;
+                clipList.DataBind();
 			}
 
-			Post p = new Post();
-			ar = p.GetArchives();
 
-			if (ar != null) {
-                monthList.DataSource = ar;
+			if (archives != null) {
+                monthList.DataSource = archives;
                 monthList.DataBind();
 			}
 

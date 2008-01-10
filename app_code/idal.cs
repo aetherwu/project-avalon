@@ -5,15 +5,14 @@ using Model;
 
 namespace IDAL
 {
-	public interface IPost
+	public interface IClip
 	{
-		void Insert(PostInfo newPost);
-		void Update(PostInfo existdPost);
-		void Delete(PostInfo existdPost);
-		IList<PostIndexInfo> GetDays();
-		IList<PostInfo> GetOneDay();
-		IList<PostIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS,int limit,DateTime after);
-		IList<PostInfo> GetOneDay(int year,int month,int day);
+		void Update(ClipInfo existdClip);
+		void Delete(ClipInfo existdClip);
+		IList<ClipIndexInfo> GetDays();
+		IList<ClipInfo> GetOneDay();
+		IList<ClipIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS,int limit,DateTime after);
+		IList<ClipInfo> GetOneDay(int year,int month,int day);
 		IList<ArchiveIndexInfo> GetArchives();
 	}
 
@@ -28,11 +27,6 @@ namespace IDAL
 	{
 		void Update(SourceInfo source);
 		SourceInfo GetOneSource();
-	}
-
-	public interface IClip
-	{
-		void Update(ClipInfo clip);
 	}
 
 }

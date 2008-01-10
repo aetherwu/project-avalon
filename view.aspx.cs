@@ -21,9 +21,9 @@ namespace Avalon.Web {
 			int month = WebComponents.CleanString.GetInt(HttpContext.Current.Request["month"]);
 			int day = WebComponents.CleanString.GetInt(HttpContext.Current.Request["day"]);
 
-			posts.Year=year;
-			posts.Month=month;
-			posts.Day=day;
+			clips.Year=year;
+			clips.Month=month;
+			clips.Day=day;
 
 			logTime = Convert.ToDateTime(Utility.FormatCode.GetFormatDay(year,month,day));
 			comments.LogTime = logTime;

@@ -14,7 +14,7 @@ namespace Avalon.Web {
 
         public void Page_Load(object sender, EventArgs e) {
 
-			Post p = new Post();
+			Clip p = new Clip();
 			ar = p.GetArchives();
 
 			if (ar != null) {

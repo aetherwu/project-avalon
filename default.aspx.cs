@@ -17,12 +17,12 @@ namespace Avalon.Web {
 
 			if (year==0||month==0) {
 				//首页输出
-				posts.Limit=6;
+				clips.Limit=3;
 			}else{
 				//按月存档输出
-				postToday.Visible=false;
-				posts.Year=year;
-				posts.Month=month;
+				clipToday.Visible=false;
+				clips.Year=year;
+				clips.Month=month;
 			}
 			//按关键字输出
 			//***未处理***

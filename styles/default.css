@@ -5,13 +5,13 @@
 	background:url(/images/ajax-loader.gif) no-repeat center bottom;
 }
 
-.today {}
+.today {background:#F1F1E1;border:1px solid #E1E3CD;}
 	.today .caption {background:url(/images/today_top.gif);margin:0;height:50px;}
 	.today .date {display:none;}
 	.today .contain {background:#F1F1E1;margin:0;padding:0 20px;}
-	.today .foot {background:url(/images/today_bottom.gif) 0 bottom;padding:10px 15px;}
+	.today .foot {padding:5px 15px;}
 
-.ing {min-height:25px;}
-	.needLogin {background:url(/images/login.gif) no-repeat 2em 0;cursor: pointer;}
+.ing {min-height:25px;padding:11px;margin-bottom:0;* margin-bottom:20px;}
+	.needLogin {background:url(/images/login.gif) no-repeat 0 0;}
 	.chickToWrite {background:url(/images/write.gif) no-repeat 2em 0;}
 	.ing form {margin-bottom:15px;}

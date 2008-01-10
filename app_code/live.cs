@@ -14,6 +14,7 @@ namespace Live
 
 		private SourceInfo sc;
 		private string content;
+		private DateTime localtime;
 		public void loadRSS()
 		{
 			Avalon.Web._global.i++;
@@ -40,12 +41,17 @@ namespace Live
                         Clip clip = new Clip();
                         //对不同Feed的Item，例如Twitter、Del.icio.us、Flickr，需要处理成理想的格式然后才能入库。
                         content = Fliter.getContent(sc.Type, channel.Items[i].Title, channel.Items[i].Description, channel.Items[i].Link.ToString());
+						if(sc.TimeZone!=0) {
+							localtime = channel.Items[i].PubDate.AddHours(sc.TimeZone);
+						}else{
+							localtime = channel.Items[i].PubDate;
+						}
                         ClipInfo cp = new ClipInfo(
                             0,
-                            sc.ID,
                             content,
-                            channel.Items[i].Link.ToString(),
-                            channel.Items[i].PubDate
+                            localtime,
+                            sc.ID,
+                            channel.Items[i].Link.ToString()
                         );
                         clip.Update(cp);
                     }
