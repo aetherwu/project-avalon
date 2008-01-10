@@ -50,8 +50,29 @@ namespace Utility
 
 					uri = matches[0].Value;
 					pic = matches[1].Value;
+
+					pic = pic.Replace("spic","lpic");
 					str = "<a href='"+ uri +"' target='_blank'><img src='"+ pic +"' alt='"+ title +"' /></a>";
 					return str;
+					break;
+                case "tudou":
+                    rx = new Regex(@"(http(s)?://)?([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                    matches = rx.Matches(desc);
+
+                    uri = matches[2].Value;
+                    pic = matches[1].Value;
+                    str = "<a href='" + link + "' title='" + title + "' target='_blank'>" + title + "</a><br /><a href='" + link + "' target='_blank'><img src='" + pic + "' alt='" + title + "' /></a>";
+                    return str;
+                    break;
+                case "gshare":
+                    str = "<a href='" + link + "' title='" + title + "' target='_blank'>" + title + "</a>";
+                    return str;
+                    break;
+                case "doubancmt":
+                    title = title.Substring(0, title.IndexOf(" ("));
+                    desc = desc.Substring(desc.IndexOf("\n\n") + 3, desc.Length - desc.IndexOf("\n\n") - 3);
+                    str = "<a href='" + link + "' title='" + title + "' target='_blank'>" + title + "</a><br />" + desc;
+                    return str;
 					break;
 
 				default:
@@ -66,6 +87,7 @@ namespace Utility
 		public static string getBreak(string str)
 		{
             str = str.Replace("\r\n", "<br />");
+            str = str.Replace("&", "&amp;");
             return str;
         }
 

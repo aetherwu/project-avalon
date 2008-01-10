@@ -14,7 +14,8 @@ namespace Avalon.Web {
 		void Application_Start(object sender, EventArgs e)
 		{
 			// 在应用程序启动时运行的代码
-			Timer timer = new Timer(600000);
+            //Timer timer = new Timer(30000);
+            Timer timer = new Timer(30000000);
 			timer.Elapsed += new ElapsedEventHandler(this.OnTimedEvent);
 
 			//AutoReset 属性为 true 时，每隔指定时间循环一次；

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Web;   
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
@@ -8,10 +8,10 @@ using BLL;
 
 namespace Avalon.Web {
 
-	public partial class _rss : System.Web.UI.Page　
+	public partial class _rss : System.Web.UI.Page
 	{
 
-		private IList<PostIndexInfo> lst;
+		private IList<ClipIndexInfo> lst;
 
 		private int _year;
 		private int _month;
@@ -21,42 +21,36 @@ namespace Avalon.Web {
 		private DateTime _begin;
 		private DateTime now;
 
-	　　protected void Page_Load(object sender, EventArgs e)　
+	protected void Page_Load(object sender, EventArgs e)
 		{
 			
-			Post c = new Post();
-			lst = c.GetDays(_year,_month,_day,_page,_keyword,true,10,_begin);
+			Clip c = new Clip();
+			lst = c.GetDays(_year,_month,_day,_page,_keyword,true,5,_begin);
 
 			if (lst != null) {
-                postList.DataSource = lst;
-                postList.DataBind();
+                clipList.DataSource = lst;
+                clipList.DataBind();
 			}
 
 		}
 
 		//bind the child repeater
-		public void postList_ItemDataBound(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
+		public void clipList_ItemDataBound(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
 		{
-			Post d =new Post();
+			Clip d =new Clip();
 			 if(e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType==ListItemType.SelectedItem)
 			{
 				//find data in parent source
-				PostIndexInfo clips = (PostIndexInfo)e.Item.DataItem; 
+				ClipIndexInfo clips = (ClipIndexInfo)e.Item.DataItem; 
 
-				//format and get the params
-				/*/
-				int year = 2007;
-				int month = 2;
-				int day = 6;
-				/*/
 				int year =  Convert.ToInt32( clips.PostTime.ToString("yyyy") );
-				int month = Convert.ToInt32( clips.PostTime.ToString("MM") );
-				int day = Convert.ToInt32( clips.PostTime.ToString("dd") );
+                int month = Convert.ToInt32(clips.PostTime.ToString("MM"));
+                int day = Convert.ToInt32(clips.PostTime.ToString("dd"));
 				//*/
 
-				Repeater postInDay = (Repeater)e.Item.FindControl("postInDay");
-				postInDay.DataSource = d.GetOneDay(year, month, day);
-				postInDay.DataBind();
+				Repeater clipInDay = (Repeater)e.Item.FindControl("clipInDay");
+				clipInDay.DataSource = d.GetOneDay(year, month, day);
+				clipInDay.DataBind();
 			} 
 		}
 

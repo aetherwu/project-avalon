@@ -1,7 +1,5 @@
 @import url("_global.css");
 
-	.main .refer {margin-bottom:5px;}
-
 .comments{}
 	.comment { padding-top:10px; }
 	.main .comment {margin-bottom:0;}
@@ -33,6 +31,6 @@
 }
 	.banner a {
 		position:relative;
-		width:800px;height:150px;margin:0 auto;
+		width:350px;height:150px;margin:0 auto;
 		display:block;
 	}

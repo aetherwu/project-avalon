@@ -4,7 +4,7 @@
 	<!-- Single Article Templates-->
 	<xsl:template match="posts">	
 		<xsl:for-each select="post">
-		<div class="box post {@type}">
+		<div class="box post {@type} fix">
 		<div>
 			<div class="caption">
 				<xsl:for-each select="date">
@@ -14,26 +14,21 @@
 			<div class="contain fix">
 				<xsl:choose>
 					<xsl:when test="./@type!=''">
-						<div class="time">Now</div>
-						<div id="" class="text ing needLogin fix"></div>
-						<script type="text/javascript">
-						$.get("/openid",{"m":"check"},function(e){
-							if(e==1){
-								switchIng();
-								owner = true;
-							}else{
-								bindLogin();
-							}
-						});
-						</script>
+						<div class="text ing needLogin"></div>
 					</xsl:when>
 				</xsl:choose>
-				<xsl:for-each select="clip">
-					<div class="time"><xsl:value-of select="time" /></div>
-					<div class="text" id="{../date/@address} {time}"><xsl:apply-templates select="text"/></div>
-				</xsl:for-each>
+					<xsl:for-each select="clip">
+						<div class="time source{source}">
+							<xsl:value-of select="time" />
+							<xsl:choose>
+								<xsl:when test="source[.='2']"><a href="{link}" target="_blank"><img src="http://static.woooh.com/images/goto.gif" class="goto" /></a></xsl:when>
+							</xsl:choose>
+						</div>
+						<div class="text" id="{../date/@address} {time}">
+							<xsl:apply-templates select="text"/>
+						</div>
+					</xsl:for-each>
 			</div>
-			<div class="foot"></div>
 		</div>
 		</div>
 		</xsl:for-each>

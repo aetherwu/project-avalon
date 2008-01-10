@@ -12,15 +12,15 @@
 	<generator>http://code.google.com/p/blogif/</generator>
 	<language>zh-cn</language>
 
-		<asp:Repeater id="postList" OnItemDataBound="postList_ItemDataBound" runat="server"><ItemTemplate><item>
+		<asp:Repeater id="clipList" OnItemDataBound="clipList_ItemDataBound" runat="server"><ItemTemplate><item>
 			<title><%# DataBinder.Eval(Container.DataItem,"PostTime","{0:D}") %></title>
 			<link>http://woooh.com/<%# DataBinder.Eval(Container.DataItem,"PostTime","{0:yyyy\\/MM\\/dd}") %></link>
 			<pubDate><%# DataBinder.Eval(Container.DataItem,"PostTime","{0:r}") %></pubDate>
 			<guid isPermaLink="true">http://woooh.com/<%# DataBinder.Eval(Container.DataItem,"PostTime","{0:yyyy\\/MM\\/dd}") %></guid>
 			<content:encoded>
 			<![CDATA[ 
-				<asp:Repeater id="postInDay" runat="server"><ItemTemplate>
-				<div style="margin:10px 0;color:#999;border:1px solid #efefef;background:#fafafa;padding:10px;">Ð´ÓÚ<%# DataBinder.Eval(Container.DataItem,"PostTime","{0:HH:mm:ss}") %></div>
+				<asp:Repeater id="clipInDay" runat="server"><ItemTemplate>
+				<div style="margin:10px 0;color:#999;border:1px solid #efefef;background:#fafafa;padding:10px;"><%# DataBinder.Eval(Container.DataItem,"PostTime","{0:HH:mm:ss}") %></div>
 				<%# Eval("Content") %>
 				<br/>
 				<br/>

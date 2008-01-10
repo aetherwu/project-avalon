@@ -10,31 +10,31 @@ namespace Avalon.Web {
 
     public partial class _today : System.Web.UI.UserControl {
 
-		private IList<PostIndexInfo> lst;
+		private IList<ClipIndexInfo> clips;
 
 		public void Page_Load(object sender, EventArgs e)　
 		{
-			Post c = new Post();
-			lst = c.GetDays();
+			Clip c = new Clip();
+			clips = c.GetDays();
 
-			if (lst != null) {
-                postToday.DataSource = lst;
-                postToday.DataBind();
+			if (clips != null) {
+                clipToday.DataSource = clips;
+                clipToday.DataBind();
 			}
 		}
 
 		//绑定内部Repeater控件
-		public void postList_ItemDataBound(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
+		public void clipList_ItemDataBound(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
 		{
-			Post d =new Post();
+			Clip d =new Clip();
 			if(e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType==ListItemType.SelectedItem)
 			{
 				//find data in parent source
-				PostIndexInfo clips = (PostIndexInfo)e.Item.DataItem; 
+				ClipIndexInfo clips = (ClipIndexInfo)e.Item.DataItem; 
 
-				Repeater postInDay = (Repeater)e.Item.FindControl("postInDay");
-				postInDay.DataSource = d.GetOneDay();
-				postInDay.DataBind();
+				Repeater clipInDay = (Repeater)e.Item.FindControl("clipInDay");
+				clipInDay.DataSource = d.GetOneDay();
+				clipInDay.DataBind();
 			} 
 		}
     }

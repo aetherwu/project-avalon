@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" >
 
 <!-- Global Styles -->
@@ -34,6 +34,14 @@
 	<xsl:template match="relative">
 	<div class="side">
 
+		<div class="box rss">
+		<div>
+			<div class="caption">
+			<a href="http://rss.woooh.com"><img alt="feedsky" src="http://static.woooh.com/images/feed/rss.gif"/></a>
+			</div>
+		</div>
+		</div>
+
 		<div class="box search">
 		<div>
 			<h2 class="caption">搜索</h2>
@@ -45,46 +53,9 @@
 					<input type="hidden" name="bl_url" value="woooh.com" />
 					<input type="hidden" name="scoring" value="d" />
 				</form>
-				<a href="http://rss.woooh.com"><img alt="feedsky" src="http://static.woooh.com/images/feed/rss.gif"/></a>
-				<img src="http://www.feedsky.com/feed/blogif/sc/orange.gif" />
-
-				<a href="http://labs.v2ex.com" target="_blank"><img src="http://static.woooh.com/images/labs.jpg"  style="margin-top:15px"/></a>
 			</div>
 		</div>
 		</div>
-
-		<div class="box share">
-		<div>
-			<h2 class="caption">
-				<span><a href="http://del.icio.us/blogif">更多</a></span>
-				近日阅读
-			</h2>
-			<div class="contain">
-				<div id="share"></div>
-				<script src="http://static.woooh.com/script/greader.js" type="text/javascript">
-				</script>
-				<script src="http://www.google.com/reader/public/javascript/user/12097899290454920167/label/webpick?n=10&amp;callback=GRC_p%28%7Bc:%27-%27,t:%27%27,s:%27false%27%7D%29;new%20GRC" type="text/javascript">
-				</script>
-			</div>
-		</div>
-		</div>
-
-		<xsl:for-each select="recentPosts">
-		<div class="box recentPosts">
-		<div>
-			<h2 class="caption">最近记录</h2>
-			<div class="contain">
-				<ul class="">
-					<xsl:for-each select="summary">
-						<li>
-							 <xsl:value-of select="text()" /> (<a href="/{@address}"><xsl:value-of select="@postTime"/></a>)
-						</li>
-					</xsl:for-each>
-				</ul>
-			</div>
-		</div>
-		</div>
-		</xsl:for-each>
 
 		<xsl:for-each select="recentComments">
 		<div class="box">

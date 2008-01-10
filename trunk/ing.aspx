@@ -1,4 +1,4 @@
-ï»¿<%@ Page Language="C#" CodeFile="ing.aspx.cs" Inherits="Avalon.Web._ing" %>
+<%@ Page Language="C#" CodeFile="ing.aspx.cs" Inherits="Avalon.Web._ing" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -16,9 +16,9 @@
 <div id="ing" runat="server">
 	<form action="/openid" method="post" id="logout">
 		<input type="hidden" name="m" value="logout" />
-		<input type="submit" name="submit" value=" é€€å‡º " />
+		<input type="submit" name="submit" value=" ÍË³ö " />
 	</form>
-	<form action="/api" method="post" id="post"><textarea name="clip"></textarea><input type="hidden" name="m" value="new" /><input type="submit" value=" å†™å¥½äº† " /></form>
+	<form action="/api" method="post" id="post"><textarea name="clip"></textarea><input type="hidden" name="m" value="post" /><input type="submit" value=" Ð´ºÃÁË " /></form>
 </div>
 </body>
 </html>
