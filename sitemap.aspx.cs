@@ -26,7 +26,7 @@ namespace Avalon.Web {
 		{
 			
 			Clip clip = new Clip();
-            clips = clip.GetDays(_year, _month, _day, _page, _keyword, true, 9999, _begin);
+            clips = clip.GetDays(_year, _month, _day, _page, _keyword, 1, 9999, _begin, 1);
 			archives = clip.GetArchives();
 
             if (clips != null)

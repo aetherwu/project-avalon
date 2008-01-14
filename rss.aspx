@@ -20,12 +20,11 @@
 			<content:encoded>
 			<![CDATA[ 
 				<asp:Repeater id="clipInDay" runat="server"><ItemTemplate>
-				<div style="margin:10px 0;color:#999;border:1px solid #efefef;background:#fafafa;padding:10px;"><%# DataBinder.Eval(Container.DataItem,"PostTime","{0:HH:mm:ss}") %></div>
+				<h5><%# DataBinder.Eval(Container.DataItem,"PostTime","{0:HH:mm:ss}") %> <%# Eval("SourceDoing") %> £º</h5>
+				<p>
 				<%# Eval("Content") %>
-				<br/>
-				<br/>
+				</p>
 				</ItemTemplate></asp:Repeater>
-				<br/>
 			]]>
 			</content:encoded>
 		</item>

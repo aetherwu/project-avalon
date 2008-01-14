@@ -6,7 +6,7 @@
 		.comment .inner { padding-bottom:10px; }
 		.comment .caption {background:none;text-align:left;padding:5px 0;margin-bottom:0;font-weight:bold;}
 			.comment .caption span {color:#777B80;font-weight:normal;font-family:Arial;font-size:9px;}
-			.comment .caption i {float:right;font-size:22px;color:#999;font-family:"Times New Roman";}
+			.comment .caption i {float:right;margin-right:20px;font-size:22px;color:#999;font-family:"Times New Roman";}
 		.comment .contain {padding:5px 0;line-height:150%;margin:0;border:none;}
 	.commentGuild {color:#666;margin-top:35px;margin-bottom:10px;font-weight:bold;}
 
@@ -15,7 +15,7 @@
 		.commentPost li {margin-bottom:10px;}
 		.commentPost .input {border:1px #B9B99E solid;padding:3px;width:175px;}
 		.commentPost .inner textarea {
-			width:500px;height:80px;
+			width:80%;height:80px;
 			padding:3px;margin-top:5px;
 		}
 		.commentPost .submit {

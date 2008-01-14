@@ -51,7 +51,7 @@ namespace Avalon.Web {
 			if (APIKey=="")
 			{
 				content = HttpUtility.UrlDecode(content);
-				ClipInfo newClip = new ClipInfo(0,content,Convert.ToDateTime("1999-1-1"),0,"");
+                ClipInfo newClip = new ClipInfo(0, content, Convert.ToDateTime("1999-1-1"),"", "avalon",1);
 				Clip clip = new Clip();
 				clip.Update(newClip);
 				re.Text="writed from im";
@@ -63,7 +63,7 @@ namespace Avalon.Web {
 			string content = FormatCode.getBasicHTML(HttpContext.Current.Request["clip"]);
 
 			if (Session["OpenID_UserObject"]=="ok") {
-				ClipInfo newClip = new ClipInfo(0,content,Convert.ToDateTime("1999-1-1"),0,"");
+                ClipInfo newClip = new ClipInfo(0, content, Convert.ToDateTime("1999-1-1"), "", "avalon", 1);
 				Clip clip = new Clip();
 				clip.Update(newClip);
 				re.Text="0";
@@ -77,11 +77,12 @@ namespace Avalon.Web {
 			string content = FormatCode.getBasicHTML(HttpContext.Current.Request["clip"]);
 			string postTime = HttpContext.Current.Request["time"];
 
-			if (Session["OpenID_UserObject"]=="ok") {
+            if (Session["OpenID_UserObject"] == "ok")
+            {
 				//update
 				//postTime exsample: 2007-7-4 12:06:20
 				System.Web.HttpContext.Current.Trace.Write("getexistTime",postTime );
-				ClipInfo existdClip = new ClipInfo(0,content,Convert.ToDateTime(postTime),0,"");
+                ClipInfo existdClip = new ClipInfo(0, content, Convert.ToDateTime(postTime), "", "avalon", 1);
 				Clip clip = new Clip();
 				clip.Update(existdClip);
 				re.Text="1";
@@ -94,10 +95,11 @@ namespace Avalon.Web {
 		{
 			string postTime = HttpContext.Current.Request["time"];
 
-			if (Session["OpenID_UserObject"]=="ok") {
+            if (Session["OpenID_UserObject"] == "ok")
+            {
 				//delete
 				//postTime exsample: 2007-7-4 12:06:20
-				ClipInfo existdClip = new ClipInfo(0,"",Convert.ToDateTime("1999-1-1"),0,"");
+                ClipInfo existdClip = new ClipInfo(0, "", Convert.ToDateTime(postTime), "", "avalon", 1);
 				Clip clip = new Clip();
 				clip.Delete(existdClip);
 				re.Text="1";

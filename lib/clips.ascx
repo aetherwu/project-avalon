@@ -3,7 +3,9 @@
 			<date address="<%# DataBinder.Eval(Container.DataItem,"PostTime","{0:yyyy\\/MM\\/dd}") %>"><%# DataBinder.Eval(Container.DataItem,"PostTime","{0:D}") %></date>
 			<asp:Repeater id="clipInDay" runat="server"><ItemTemplate><clip>
 				<time><%# DataBinder.Eval(Container.DataItem,"PostTime","{0:HH:mm:ss}") %></time>
-				<source><%# Eval("sourceID") %></source>
+				<source><%# Eval("SourceType") %></source>
+				<owner><%# Eval("SourceOwner") %></owner>
+				<site><%# Eval("SourceLink") %></site>
 				<link><%# Eval("Link") %></link>
 				<text><%# Eval("Content") %></text>
 			</clip>
@@ -11,3 +13,4 @@
 		</post>
 		</ItemTemplate></asp:Repeater>
 	</posts>
+	<!--another friends list-->

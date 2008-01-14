@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Specialized;
 
 using ExtremeSwank.Authentication.OpenID;
+using ExtremeSwank.Authentication.OpenID.Plugins.Extensions;
 using WebComponents;
 
 namespace Avalon.Web {
@@ -31,32 +32,38 @@ namespace Avalon.Web {
 				break;
 			}
 
-			if (Request.QueryString["openid.mode"] == "id_res") {
-				OpenIDConsumer openid = new OpenIDConsumer();
-				openid.Identity = (string)Session["OpenID_Login"];
-				if (openid.Validate()) {
-					//UserObject thisuser = openid.RetreiveUser();
-					//Authentication successful - Perform login here
-					//Session
-					Session["OpenID_UserObject"] = "ok";
-					//Return
-					Response.Redirect("/");
-				} else {
-					// Authentication failure handled here
-					System.Web.HttpContext.Current.Trace.Write("LoginFailure",openid.GetError());
-					Response.Redirect("/login?failure="+openid.GetError());
-				}
-			}
-
-			if (Request.QueryString["openid.mode"] == "cancel") {
-				 // User has cancelled authentication - handle here
-				 Response.Redirect("/error");
-			}
+            if (!IsPostBack)
+            {
+                OpenIDConsumer openid = new OpenIDConsumer();
+                switch (openid.RequestedMode)
+                {
+                    case RequestedMode.IdResolution:
+                        openid.Identity = (string)Session["OpenID_Login"];
+                        if (openid.Validate())
+                        {
+                            Session["OpenID_UserObject"] = openid.RetrieveUser();
+                            // Authentication successful - Perform login here
+                            Response.Redirect("/");
+                        }
+                        else
+                        {
+                            // Authentication failure handled here
+                            System.Web.HttpContext.Current.Trace.Write("LoginFailure", openid.GetError());
+                            Response.Redirect("/login?failure=" + openid.GetError());
+                        }
+                        break;
+                    case RequestedMode.CancelledByUser:
+                        // User has cancelled authentication - handle here
+                        Response.Redirect("/error");
+                        break;
+                }
+            }
 
 		}
 
 		protected void Check() {
-			if (Session["OpenID_UserObject"] == "ok") {
+            if (Session["OpenID_UserObject"]!="")
+            {
 				status.Text="1";
 			}else{
 				status.Text="0";
@@ -65,8 +72,13 @@ namespace Avalon.Web {
 
 		protected void Login(NameValueCollection form) {
 			OpenIDConsumer openid = new OpenIDConsumer();
-			openid.Identity = HttpContext.Current.Request["opid"];
-			Session["OpenID_Login"] = openid.Identity;
+            openid.Identity = HttpContext.Current.Request["opid"];
+
+            SimpleRegistration sr = new SimpleRegistration(openid);
+            sr.RequiredFields = "nickname,email";
+            sr.OptionalFields = "gender";
+
+            Session["OpenID_Identity"] = openid.Identity;
 			openid.BeginAuth();
 		}
 

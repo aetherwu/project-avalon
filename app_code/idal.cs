@@ -11,8 +11,8 @@ namespace IDAL
 		void Delete(ClipInfo existdClip);
 		IList<ClipIndexInfo> GetDays();
 		IList<ClipInfo> GetOneDay();
-		IList<ClipIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS,int limit,DateTime after);
-		IList<ClipInfo> GetOneDay(int year,int month,int day);
+		IList<ClipIndexInfo> GetDays(int year,int month,int day,int page,string keywords,int getType,int limit,DateTime after,int personID);
+		IList<ClipInfo> GetOneDay(int year,int month,int day,int personID,int getType);
 		IList<ArchiveIndexInfo> GetArchives();
 	}
 

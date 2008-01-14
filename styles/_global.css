@@ -23,14 +23,14 @@
 
 .frame {}
 	.wrapper {
-		clear:both;width:850px;margin:0 auto;padding-bottom:10px;
-		background:url(/images/dotx.gif) repeat-y 205px 0;
+		clear:both;margin:0 auto;padding:0 20px;
 	}
-	.main .box {margin-bottom:40px;}
+	.main .box {margin-bottom:30px;}
 	.innerbox {padding:10px;}
 
 .main {
-	float:left;width:620px;
+	float:left;width:38%;margin-right:20px;
+	background:url(/images/dotx.gif) repeat-y right 0;
 }
 	.main img {border:1px solid #292F34;padding:3px;margin:0 10px 10px 0;}
 	.main .caption {text-align:center;padding-bottom:15px;margin-bottom:15px;position:relative;}
@@ -50,22 +50,39 @@
 	}
 		.infomations li {float:left;margin-right:15px;}
 
-	.post {margin:0 10px 0 0;}
+	.post {margin:0 20px 0 0;}
 
-	.time {padding:10px 0 10px 30px;color:#B9B99E;font-size:11px;font-style:italic;}
-		.source0 {background:url(/images/app.gif) no-repeat 0 -153px;}
-		.source1 {background:url(/images/app.gif) no-repeat 0 8px;}
-		.source2 {background:url(/images/app.gif) no-repeat 0 -97px;}
-		.source3 {background:url(/images/app.gif) no-repeat 0 -45px;}
-		.source4 {background:url(/images/app.gif) no-repeat 0 -207px;}
-		.source6 {background:url(/images/app.gif) no-repeat 0 -207px;}
-		.source5 {background:url(/images/app.gif) no-repeat 0 -283px;}
-		.post .goto {
-			border:none;
-			padding:0;margin:4px 0 0 5px;
-		}
+	.time {
+		padding:10px 0 0 30px;margin-bottom:5px;color:#B9B99E;
+		font-family:Georgia;font-size:12px;font-style:italic;position:relative;
+	}
+	.source {
+		position:absolute;top:31px;left:0;* left:-30px;
+		display:block;width:25px;height:25px;
+	}
+	.goto {
+		position:absolute;top:10px;left:80px;* left:55px;
+		padding:0;
+	}
+	.goto img { border:0; }
+		.flickr {background:url(/images/app.gif) no-repeat 0 2px;}
+		.twitter {background:url(/images/app.gif) no-repeat 0 -97px;}
+		.delicious {background:url(/images/app.gif) no-repeat 0 -54px;}
+		.avalon {background:url(/images/app.gif) no-repeat 0 -153px;}
+		.doubancmt {background:url(/images/app.gif) no-repeat 0 -207px;}
+		.douban {background:url(/images/app.gif) no-repeat 0 -207px;}
+		.gshare {background:url(/images/app.gif) no-repeat 0 -283px;}
 
-	.text,#editor .textarea {margin-bottom:20px;line-height:25px;font-size:14px;}
+		.flickr:hover {background-position:  -40px 2px;}
+		.twitter:hover {background-position:  -40px -97px;}
+		.delicious:hover {background-position:  -40px -54px;}
+		.avalon:hover {background-position:  -40px -153px;}
+		.doubancmt:hover {background-position:  -40px -207px;}
+		.douban:hover {background-position:  -40px -207px;}
+		.gshare:hover {background-position:  -40px -283px;}
+
+
+	.text,#editor .textarea {margin-bottom:10px;line-height:25px;font-size:14px;padding-left:30px;}
 		.text a {text-decoration: underline;}
 		.text a:hover {text-decoration: none;}
 		.text textarea {
@@ -74,11 +91,13 @@
 		}
 		.gtalk {font-size:10px !important;font-family:verdana;color:#B9B99E !important;}
 
-	.deleteBtn{color:#efefef !important;font-style:normal;}
+	.deleteBtn{color:#ccc !important;font-style:normal;margin-left:30px;}
 	.deleteBtn:hover{color:#000 !important;}
 
-.side {float:right;width:200px;}
-	.side .box {background:url(/images/doth.gif) repeat-x 0 0;padding:25px 0;}
+.side {
+	float:left;width:20%;
+	}
+	.side .box {background:url(/images/doth.gif) repeat-x 0 0;padding:25px 0 25px 20px;}
 	.side .caption {
 		font-size:12px;color:#525B5C;
 		margin-bottom:15px;
@@ -96,7 +115,7 @@
 	.side .recentComments a {text-decoration: underline;}
 	.side .recentComments li, .side .recentPosts li {margin:8px 0;background:none;padding-left:0;}
 
-	.side .rss {background:none;padding:0 0 10px 0;}
+	.side .rss {background:none;padding:0 0 0 20px;}
 
 	.side .search {}
 	.side .search form {}
@@ -133,3 +152,7 @@
 	.fix {display: block;}
 	/* End hide from IE-mac */
 
+.huh {
+	background:url(/images/huh.gif) no-repeat center 0;
+	height:400px;
+}

@@ -19,16 +19,17 @@ namespace SQLServerDAL
 
 
 		private const string PARM_ID = "@id";
-		private const string PARM_SourceID = "@sourceID";
+        private const string PARM_SourceType = "@sourceType";
+        private const string PARM_Person = "@person";
 		private const string PARM_Content = "@content";
 		private const string PARM_Link = "@link";
 		private const string PARM_PostTime = "@postTime";
 
-		private const string SQL_ADD = "INSERT INTO [live_Clip] VALUES(@content, CONVERT(datetime,@postTime,120), @sourceID,  @link)";
+		private const string SQL_ADD = "INSERT INTO [live_Clip] VALUES(@content, CONVERT(datetime,@postTime,120), @link, @sourceType, @person)";
 
-		private const string SQL_UPDATE = "UPDATE [live_Clip] SET [sourceID]=@sourceID, [content]=@content, [link]=@link, [postTime]=CONVERT(datetime,@postTime,120)) WHERE [c_ID]=@id";
+		private const string SQL_UPDATE = "UPDATE [live_Clip] SET [sourceType]=@sourceType, [content]=@content, [link]=@link, [postTime]=CONVERT(datetime,@postTime,120)) WHERE [c_ID]=@id";
 
-		private const string SQL_UPDATE_BYDATE = "UPDATE [live_Clip] SET [sourceID]=@sourceID, [content]=@content, [link]=@link, [postTime]=CONVERT(datetime,@postTime,120)) WHERE [postTime]=@postTime";
+		private const string SQL_UPDATE_BYDATE = "UPDATE [live_Clip] SET [sourceType]=@sourceType, [content]=@content, [link]=@link, [postTime]=CONVERT(datetime,@postTime,120)) WHERE [postTime]=@postTime";
 
 		public void Update(ClipInfo clip) {
 
@@ -43,23 +44,27 @@ namespace SQLServerDAL
 
 			SqlParameter parmID =  new SqlParameter(PARM_ID, SqlDbType.BigInt);
 				parmID.Value = clip.ID;
-					cmd.Parameters.Add(parmID);
+                cmd.Parameters.Add(parmID);
 
-			SqlParameter parmSourceID =  new SqlParameter(PARM_SourceID, SqlDbType.BigInt);
-				parmSourceID.Value = clip.SourceID;
-					cmd.Parameters.Add(parmSourceID);
+            SqlParameter parmContent = new SqlParameter(PARM_Content, SqlDbType.NText);
+                parmContent.Value = clip.Content;
+                cmd.Parameters.Add(parmContent);
 
-			SqlParameter parmContent =  new SqlParameter(PARM_Content, SqlDbType.NText);
-				parmContent.Value = clip.Content;
-					cmd.Parameters.Add(parmContent);
+            SqlParameter parmPostTime = new SqlParameter(PARM_PostTime, SqlDbType.DateTime);
+                parmPostTime.Value = tmpDate;
+                cmd.Parameters.Add(parmPostTime);
 
 			SqlParameter parmLink =  new SqlParameter(PARM_Link, SqlDbType.NChar);
 				parmLink.Value = clip.Link;
-					cmd.Parameters.Add(parmLink);
+                cmd.Parameters.Add(parmLink);
 
-			SqlParameter parmPostTime =  new SqlParameter(PARM_PostTime, SqlDbType.DateTime);
-				parmPostTime.Value = tmpDate;
-					cmd.Parameters.Add(parmPostTime);
+            SqlParameter parmSourceType = new SqlParameter(PARM_SourceType, SqlDbType.NChar);
+                parmSourceType.Value = clip.SourceType;
+                cmd.Parameters.Add(parmSourceType);
+
+                SqlParameter parmPerson = new SqlParameter(PARM_Person, SqlDbType.BigInt);
+                parmPerson.Value = clip.SourceOwner;
+                cmd.Parameters.Add(parmPerson);
 
             //Open a connection
             using (SqlConnection conn = new SqlConnection(SqlHelper.CONN_STR)) {
@@ -122,18 +127,22 @@ namespace SQLServerDAL
 		//3、取得经过Keyword全文搜索过滤以后的数据（未实现）。
 		private const string PARM_keyword = "@keyword";
 		private const string PARM_page = "@page";
-		private const string PARM_after = "@after";
+        private const string PARM_after = "@after";
+        private const string PARM_person = "@person";
 		private const string SQL_SELECT_Clips_Start = "SELECT CONVERT(char(10), postTime, 21) AS PostTime FROM [live_Clip] ";
 		private const string SQL_SELECT_Clips_Begin = "Where [postTime] < @after ";
 		private const string SQL_SELECT_Clips_Year = "AND YEAR(postTime) = @year ";
 		private const string SQL_SELECT_Clips_Month = "AND MONTH(postTime) = @month ";
-		private const string SQL_SELECT_Clips_Day = "AND DAY(postTime) = @day ";
+        private const string SQL_SELECT_Clips_Day = "AND DAY(postTime) = @day ";
+        private const string SQL_SELECT_Clips_Person = "AND person = @person ";
+		private const string SQL_SELECT_Clips_Friend = "AND (person IN (SELECT watcher FROM live_friend AS f WHERE f.holder = @person)) ";
 		private const string SQL_SELECT_Clips_End = "GROUP BY CONVERT(char(10), postTime, 21) ORDER BY PostTime DESC";
 
-		public IList<ClipIndexInfo> GetDays(int year,int month,int day,int page,string keywords,bool isRSS, int limit, DateTime after) {
+        public IList<ClipIndexInfo> GetDays(int year, int month, int day, int page, string keywords, int getType, int limit, DateTime after, int personID)
+        {
 			
 			if (limit==0)
-				limit=3;
+				limit=1;
 			if (after==Convert.ToDateTime("0001-1-1 0:00:00"))
 			{
 				DateTime dt = DateTime.Now.Date;
@@ -142,15 +151,17 @@ namespace SQLServerDAL
 
 			IList<ClipIndexInfo> clips = new List<ClipIndexInfo>();
 			
-			SqlParameter[] parms = new SqlParameter[4];
+			SqlParameter[] parms = new SqlParameter[5];
 				parms[0] = new SqlParameter(PARM_year, SqlDbType.BigInt, 4);
 				parms[1] = new SqlParameter(PARM_month, SqlDbType.BigInt, 2);
 				parms[2] = new SqlParameter(PARM_day, SqlDbType.BigInt, 2);
-				parms[3] = new SqlParameter(PARM_after, SqlDbType.DateTime);
-				parms[0].Value = year;
+                parms[3] = new SqlParameter(PARM_after, SqlDbType.DateTime);
+                parms[4] = new SqlParameter(PARM_person, SqlDbType.BigInt);
+                parms[0].Value = year;
+                parms[1].Value = month;
 				parms[2].Value = day;
-				parms[1].Value = month;
-				parms[3].Value = after;
+                parms[3].Value = after;
+                parms[4].Value = personID;
 				System.Web.HttpContext.Current.Trace.Write("DO","Get history's clips' list");
 
 			StringBuilder sql = new StringBuilder(SQL_SELECT_Clips_Start);
@@ -160,7 +171,12 @@ namespace SQLServerDAL
 			if (month!=0)
 				sql.Append(SQL_SELECT_Clips_Month);
 			if (day!=0)
-				sql.Append(SQL_SELECT_Clips_Day);
+                sql.Append(SQL_SELECT_Clips_Day);
+            if (getType == 0 && personID != 0) {
+                sql.Append(SQL_SELECT_Clips_Person);
+			} else if (getType == 1 && personID != 0) {
+                sql.Append(SQL_SELECT_Clips_Friend);
+			}
 
 			sql.Append(SQL_SELECT_Clips_End);
             string sqlClips = sql.ToString();
@@ -186,27 +202,51 @@ namespace SQLServerDAL
 		private const string PARM_year = "@year";
 		private const string PARM_month = "@month";
 		private const string PARM_day = "@day";
-		private const string SQL_GET_DAY = "SELECT * FROM [live_Clip] Where YEAR(postTime) = @year AND MONTH(postTime) = @month AND DAY(postTime) = @day ORDER BY [postTime] ASC";
 
-		public IList<ClipInfo> GetOneDay(int year,int month,int day)
+        private const string SQL_GET_DAY_START = "SELECT a.c_ID, a.content, a.postTime, a.link, b.type, b.owner, b.site, b.doing FROM [live_Clip] a INNER JOIN [live_Source] b ON (a.sourceType = b.type) AND (a.person = b.owner) WHERE YEAR(a.postTime) = @year AND MONTH(a.postTime) = @month AND DAY(a.postTime) = @day ";
+		private const string SQL_GET_DAY_OWNER = "AND (a.person = @person) ";
+		private const string SQL_GET_DAY_FRIEND =  "AND (a.person IN (SELECT watcher FROM live_friend AS f WHERE f.holder = @person)) ";
+		private const string SQL_GET_DAY_END = "ORDER BY a.postTime ASC";
+
+		public IList<ClipInfo> GetOneDay(int year,int month,int day,int personID,int getType)
 		{ 
             IList<ClipInfo> clips = new List<ClipInfo>();
 
-			SqlParameter[] parms = new SqlParameter[3];
+			SqlParameter[] parms = new SqlParameter[4];
 				parms[0] = new SqlParameter(PARM_year, SqlDbType.BigInt, 4);
 				parms[1] = new SqlParameter(PARM_month, SqlDbType.BigInt, 2);
 				parms[2] = new SqlParameter(PARM_day, SqlDbType.BigInt, 2);
+				parms[3] = new SqlParameter(PARM_person, SqlDbType.BigInt, 2);
 				parms[0].Value = year;
 				parms[1].Value = month;
 				parms[2].Value = day;
+				parms[3].Value = personID;
 				System.Web.HttpContext.Current.Trace.Write("DO","Bind each clip in history list");
 
+			StringBuilder sqlday = new StringBuilder(SQL_GET_DAY_START);
+            if (getType == 0 && personID != 0) {
+                sqlday.Append(SQL_GET_DAY_OWNER);
+			} else if (getType == 1 && personID != 0) {
+                sqlday.Append(SQL_GET_DAY_FRIEND);
+			}
+            sqlday.Append(SQL_GET_DAY_END);
+            string sqlClips = sqlday.ToString();
+
             //Execute
-			using(SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, SQL_GET_DAY, parms))
+			using(SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, sqlClips, parms))
 			{
                 while (sdr.Read())
 				{
-                    ClipInfo clip = new ClipInfo(sdr.GetInt32(0), FormatCode.getBreak(sdr.GetString(1)), sdr.GetDateTime(2) ,sdr.GetInt32(3) , FormatCode.getBreak(sdr.GetString(4)));
+                    ClipInfo clip = new ClipInfo(
+						sdr.GetInt32(0),
+						FormatCode.getBreak(sdr.GetString(1)),
+						sdr.GetDateTime(2),
+						FormatCode.getBreak(sdr.GetString(3)),
+						sdr.GetString(4),
+                        sdr.GetInt32(5),
+						FormatCode.getBreak(sdr.GetString(6)),
+						sdr.GetString(7)
+					);
                     clips.Add(clip);
                 }
 			}
@@ -217,7 +257,7 @@ namespace SQLServerDAL
 		//
 		//没有参数的GetDays，将返回今日。
 		private const string SQL_SELECT_TODAY = "SELECT CONVERT(char(10), postTime, 21) AS PostTime FROM [live_Clip] Where  (YEAR(postTime) = @year) AND (MONTH(postTime) = @month) AND (DAY(postTime) = @day) GROUP BY CONVERT(char(10), postTime, 21) ORDER BY PostTime DESC";
-		public IList<ClipIndexInfo> GetDays() {
+        public IList<ClipIndexInfo> GetDays() {
 			
 			IList<ClipIndexInfo> clips = new List<ClipIndexInfo>();
 			
@@ -245,8 +285,8 @@ namespace SQLServerDAL
 		//单日的日志内容
 		//
 		//没有参数的GetOneDay，将返回当天数据，并且按照新旧顺序排序
-		private const string SQL_GET_TODAY = "SELECT * FROM [live_Clip] Where (YEAR(postTime) = @year) AND (MONTH(postTime) = @month) AND (DAY(postTime) = @day) ORDER BY [postTime] DESC";
-		public IList<ClipInfo> GetOneDay()
+        private const string SQL_GET_TODAY = "SELECT a.c_ID, a.content, a.postTime, a.link, b.type, b.owner, b.site, b.doing FROM [live_Clip] a INNER JOIN [live_Source] b ON a.sourceType = b.type WHERE YEAR(a.postTime) = @year AND MONTH(a.postTime) = @month AND DAY(a.postTime) = @day ORDER BY a.postTime DESC";
+        public IList<ClipInfo> GetOneDay()
 		{ 
             IList<ClipInfo> clips = new List<ClipInfo>();
 
@@ -265,8 +305,17 @@ namespace SQLServerDAL
 			{
                 while (sdr.Read())
 				{
-                    ClipInfo clip = new ClipInfo(sdr.GetInt32(0), FormatCode.getBreak(sdr.GetString(1)), sdr.GetDateTime(2) ,sdr.GetInt32(3) , FormatCode.getBreak(sdr.GetString(4)));
-                    clips.Add(clip);
+                    ClipInfo clip = new ClipInfo(
+						sdr.GetInt32(0),
+						FormatCode.getBreak(sdr.GetString(1)),
+						sdr.GetDateTime(2),
+						FormatCode.getBreak(sdr.GetString(3)),
+						sdr.GetString(4),
+                        sdr.GetInt32(5),
+						FormatCode.getBreak(sdr.GetString(6)),
+						sdr.GetString(7)
+					);
+					clips.Add(clip);
                 }
 			}
 			return clips;
@@ -484,7 +533,17 @@ namespace SQLServerDAL
 			{
                 while (sdr.Read())
 				{
-					src = new SourceInfo(sdr.GetInt32(0), sdr.GetString(1), sdr.GetString(2), sdr.GetString(3), sdr.GetString(4) , sdr.GetDateTime(5), sdr.GetInt32(6), sdr.GetInt32(7));
+					src = new SourceInfo(
+						sdr.GetInt32(0),
+                        sdr.GetInt32(1),
+						sdr.GetString(2),
+						sdr.GetString(3),
+						sdr.GetString(4),
+						sdr.GetDateTime(5),
+						sdr.GetInt32(6),
+						sdr.GetInt32(7),
+						sdr.GetString(8)
+					);
 				}
 			}
 			return src;
