@@ -21,6 +21,7 @@ namespace Live
 
 			Source src = new Source();
 			sc = src.GetOneSource();
+			if(sc.Type=="avalon") return;
 			
 			RssFeed feed = RssFeed.Read(sc.Source);
             RssChannel channel = (RssChannel)feed.Channels[0];
@@ -28,7 +29,7 @@ namespace Live
             DateTime lastUpdate = channel.Items.LatestPubDate();
 
 			//if modified
-            if (sc.LastUpdate != lastUpdate)
+            if (lastUpdate > sc.LastUpdate)
             {
 				//foreach items
                 for (int i = 0; i < channel.Items.Count-1; i++)
@@ -50,8 +51,9 @@ namespace Live
                             0,
                             content,
                             localtime,
-                            sc.ID,
-                            channel.Items[i].Link.ToString()
+                            channel.Items[i].Link.ToString(),
+							sc.Type,
+                            sc.Owner
                         );
                         clip.Update(cp);
                     }

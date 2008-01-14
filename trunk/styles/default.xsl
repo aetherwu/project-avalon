@@ -15,9 +15,8 @@
 				<link type="text/css" href="/styles/default.css" rel="stylesheet" media="screen"/>
 				<link type="application/rss+xml" href="http://rss.woooh.com" rel="alternate" title="RSS 2.0"  />
 				<script type="text/javascript" src="http://static.woooh.com/script/lib/jquery.js"></script>
-				<script type="text/javascript" src="http://static.woooh.com/script/global.js"></script>
-				<script type="text/javascript" src="http://static.woooh.com/script/scroll.js"></script>
-				<script type="text/javascript" src="http://static.woooh.com/script/default.js"></script>
+				<script type="text/javascript" src="/script/global.js"></script>
+				<script type="text/javascript" src="/script/default.js"></script>
 			</head>
 			<body>
 				<div class="banner">
@@ -27,9 +26,10 @@
 				<div class="frame fix">
 					<div class="wrapper fix">
 						<div class="main">
-							<div class="content">
-								<xsl:apply-templates select="posts" />
-							</div>
+							<xsl:apply-templates select="my" />
+						</div>
+						<div class="main">
+							<xsl:apply-templates select="friends" />
 						</div>
 						<xsl:apply-templates select="relative"/>
 					</div>

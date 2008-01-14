@@ -18,11 +18,12 @@
 					</xsl:when>
 				</xsl:choose>
 					<xsl:for-each select="clip">
-						<div class="time source{source}">
-							<xsl:value-of select="time" />
+						<div class="time">
+							<a href="{site}" class="source {source}" target="new"></a>
 							<xsl:choose>
-								<xsl:when test="source[.='2']"><a href="{link}" target="_blank"><img src="http://static.woooh.com/images/goto.gif" class="goto" /></a></xsl:when>
+								<xsl:when test="source[.='twitter']"><a href="{link}" class="goto" target="new"><img src="http://static.woooh.com/images/goto.gif" /></a></xsl:when>
 							</xsl:choose>
+							<xsl:value-of select="time" />
 						</div>
 						<div class="text" id="{../date/@address} {time}">
 							<xsl:apply-templates select="text"/>

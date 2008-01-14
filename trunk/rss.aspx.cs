@@ -25,7 +25,7 @@ namespace Avalon.Web {
 		{
 			
 			Clip c = new Clip();
-			lst = c.GetDays(_year,_month,_day,_page,_keyword,true,5,_begin);
+			lst = c.GetDays(_year,_month,_day,_page,_keyword,1,5,_begin,1);
 
 			if (lst != null) {
                 clipList.DataSource = lst;
@@ -49,7 +49,7 @@ namespace Avalon.Web {
 				//*/
 
 				Repeater clipInDay = (Repeater)e.Item.FindControl("clipInDay");
-				clipInDay.DataSource = d.GetOneDay(year, month, day);
+				clipInDay.DataSource = d.GetOneDay(year, month, day ,0);
 				clipInDay.DataBind();
 			} 
 		}

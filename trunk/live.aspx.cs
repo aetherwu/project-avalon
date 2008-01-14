@@ -3,6 +3,8 @@ using System.Web;
 using System.Web.UI.WebControls;
 
 using Live;
+using ExtremeSwank.Authentication.OpenID;
+using ExtremeSwank.Authentication.OpenID.Plugins.Extensions;
 
 namespace Avalon.Web {
 
@@ -10,9 +12,10 @@ namespace Avalon.Web {
 	{
 
 		protected void Page_Load(object sender, EventArgs e) {
-			//Runer runer = new Runer();
-			//runer.loadRSS();
-			time.Text = Avalon.Web._global.i.ToString();
+			Runer runer = new Runer();
+			runer.loadRSS();
+
+
 		}
 	}
 }

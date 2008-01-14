@@ -12,6 +12,12 @@ namespace Avalon.Web {
 
 		private IList<ClipIndexInfo> lst;
 
+        private int _personID;
+        public int PersonID
+        {
+            get { return _personID; }
+            set { this._personID = value; }
+        }
 		private int _year;
 		public int Year
 		{
@@ -29,12 +35,6 @@ namespace Avalon.Web {
 		{
 			get { return _day; }
 			set { this._day = value; }
-		}
-		private int _page;
-		public int Page
-		{
-			get { return _page; }
-			set { this._page = value; }
 		}
 		private string _keyword;
 		public string Keyword
@@ -54,11 +54,18 @@ namespace Avalon.Web {
 			get { return _after; }
 			set { this._after = value; }
 		}
+		private int _getType;
+		public int getType
+		{
+			get { return _getType; }
+			set { this._getType = value; }
+		}
+		private int _page;
 
 		public void Page_Load(object sender, EventArgs e)¡¡
 		{
 			Clip c = new Clip();
-			lst = c.GetDays(_year,_month,_day,_page,_keyword,false,_limit,_after);
+            lst = c.GetDays(_year, _month, _day, _page, _keyword, _getType, _limit, _after, _personID);
 
 			if (lst != null) {
                 clipList.DataSource = lst;
@@ -87,7 +94,7 @@ namespace Avalon.Web {
 				//*/
 
 				Repeater clipInDay = (Repeater)e.Item.FindControl("clipInDay");
-				clipInDay.DataSource = clip.GetOneDay(year, month, day);
+                clipInDay.DataSource = clip.GetOneDay(year, month, day, _personID,_getType);
 				clipInDay.DataBind();
 			} 
 		}

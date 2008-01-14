@@ -21,15 +21,16 @@ namespace Model
 	public class SourceInfo
 	{
 		private int id;
-		private string owner; //所有者
+		private int owner; //所有者
 		private string type; //所在应用
 		private string site; //详细位置
 		private string source; //Feed/XML等任何协议的 URL
 		private DateTime lastUpdate; 
 		private int timeZone; //时区
 		private int updateHit;
+		private string doing;
 
-		public SourceInfo(int id, string owner, string type, string site, string source, DateTime lastUpdate, int timeZone, int updateHit)
+        public SourceInfo(int id, int owner, string type, string site, string source, DateTime lastUpdate, int timeZone, int updateHit, string doing)
 		{
 			this.id = id;
 			this.owner = owner;
@@ -39,16 +40,18 @@ namespace Model
 			this.lastUpdate = lastUpdate;
 			this.timeZone = timeZone;
 			this.updateHit = updateHit;
+			this.doing = doing;
 		}
 
 		public int ID { get	{ return id; } set { id = value; } }
 		public string Type { get	{ return type; } set { type = value; } }
-		public string Owner { get	{ return owner; } set { owner = value; } }
+        public int Owner { get { return owner; } set { owner = value; } }
 		public string Site { get	{ return site; } set { site = value; } }
 		public string Source { get	{ return source; } set { source = value; } }
 		public DateTime LastUpdate { get	{ return lastUpdate; } set { lastUpdate = value; } }
 		public int TimeZone { get	{ return timeZone; } set { timeZone = value; } }
 		public int UpdateHit { get	{ return updateHit; } set { updateHit = value; } }
+		public string Doing { get	{ return doing; } set { doing = value; } }
 	}
 
 	//日志
@@ -57,23 +60,41 @@ namespace Model
 		private int id;
 		private string content;
 		private DateTime postTime; 
-		private int sourceID; //对应Source源中的ID
 		private string link;
+		private string sourceType; //对应Source源
+        private int sourceOwner;
+		private string sourceLink;
+		private string sourceDoing;
 
-		public ClipInfo(int id, string content, DateTime postTime, int sourceID, string link)
+        public ClipInfo(int id, string content, DateTime postTime, string link, string sourceType, int sourceOwner, string sourceLink, string sourceDoing)
 		{
 			this.id = id;
 			this.content = content;
 			this.postTime = postTime;
-			this.sourceID = sourceID;
 			this.link = link;
+			this.sourceType = sourceType;
+            this.sourceOwner = sourceOwner;
+			this.sourceLink = sourceLink;
+			this.sourceDoing = sourceDoing;
 		}
+        public ClipInfo(int id, string content, DateTime postTime, string link, string sourceType, int sourceOwner)
+        {
+            this.id = id;
+            this.content = content;
+            this.postTime = postTime;
+            this.link = link;
+            this.sourceType = sourceType;
+            this.sourceOwner = sourceOwner;
+        }
 
 		public int ID { get	{ return id; } set { id = value; } }
 		public string Content { get	{ return content; } set { content = value; } }
 		public DateTime PostTime { get	{ return postTime; } set { postTime = value; } }
-		public int SourceID { get { return sourceID; } set { sourceID = value; } }
 		public string Link { get	{ return link; } set { link = value; } }
+		public string SourceType { get	{ return sourceType; } set { sourceType = value; } }
+		public string SourceLink { get	{ return sourceLink; } set { sourceLink = value; } }
+        public string SourceDoing { get { return sourceDoing; } set { sourceDoing = value; } }
+        public int SourceOwner { get { return sourceOwner; } set { sourceOwner = value; } }
 	}
 
 	//评论
