@@ -4,6 +4,40 @@ using System;
 namespace Model
 {
 
+	//用户
+	public class PersonInfo
+	{
+		private int id;
+		private string openid;
+		private string name;
+		private string email;
+		private string website;
+		private string face;
+		private DateTime lastLogin;
+		private int loginHit;
+
+		public PersonInfo(int id, string openid, string name, string email, string website, string face, DateTime lastLogin,int loginHit)
+		{
+			this.id = id;
+			this.openid = openid;
+			this.name = name;
+			this.email = email;
+			this.website = website;
+			this.face = face;
+			this.lastLogin = lastLogin;
+			this.loginHit = loginHit;
+		}
+
+		public int ID { get	{ return id; } set { id = value; } }
+		public string OpendID { get	{ return openid; } set { openid = value; } }
+		public string Name { get	{ return name; } set { name = value; } }
+		public string Email { get	{ return email; } set { email = value; } }
+		public string Website { get	{ return website; } set { website = value; } }
+		public string Face { get	{ return face; } set { face = value; } }
+		public DateTime LastLogin { get	{ return lastLogin; } set { lastLogin = value; } }
+		public int LoginHit { get	{ return loginHit; } set { loginHit = value; } }
+	}
+
 	//日志索引，因为日志里面还包含一个列表
 	public class ClipIndexInfo
 	{
@@ -65,8 +99,9 @@ namespace Model
         private int sourceOwner;
 		private string sourceLink;
 		private string sourceDoing;
+		private string sourceName;
 
-        public ClipInfo(int id, string content, DateTime postTime, string link, string sourceType, int sourceOwner, string sourceLink, string sourceDoing)
+        public ClipInfo(int id, string content, DateTime postTime, string link, string sourceType, int sourceOwner, string sourceLink, string sourceDoing, string sourceName)
 		{
 			this.id = id;
 			this.content = content;
@@ -76,6 +111,7 @@ namespace Model
             this.sourceOwner = sourceOwner;
 			this.sourceLink = sourceLink;
 			this.sourceDoing = sourceDoing;
+			this.sourceName = sourceName;
 		}
         public ClipInfo(int id, string content, DateTime postTime, string link, string sourceType, int sourceOwner)
         {
@@ -95,6 +131,7 @@ namespace Model
 		public string SourceLink { get	{ return sourceLink; } set { sourceLink = value; } }
         public string SourceDoing { get { return sourceDoing; } set { sourceDoing = value; } }
         public int SourceOwner { get { return sourceOwner; } set { sourceOwner = value; } }
+        public string SourceName { get { return sourceName; } set { sourceName = value; } }
 	}
 
 	//评论

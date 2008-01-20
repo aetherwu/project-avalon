@@ -15,6 +15,7 @@ namespace Avalon.Web {
 			Runer runer = new Runer();
 			runer.loadRSS();
 
+            time.Text = "done";
 
 		}
 	}

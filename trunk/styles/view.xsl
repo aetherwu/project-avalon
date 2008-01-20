@@ -11,7 +11,7 @@
 			<head>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 				<meta http-equiv="Content-Language" content="zh-cn" />
-				<title><xsl:value-of select="posts/post/date"/> - <xsl:value-of select="name"/></title>
+				<title><xsl:value-of select="my/posts/post/date"/> - <xsl:value-of select="name"/></title>
 				<link type="text/css" href="http://static.woooh.com/styles/view.css" rel="stylesheet" media="screen"/>
 				<link type="application/rss+xml" href="http://rss.woooh.com" rel="alternate" title="RSS 2.0"  />
 				<script type="text/javascript" src="http://static.woooh.com/script/lib/jquery.js"></script>
@@ -25,12 +25,13 @@
 				</div>
 				<div class="frame fix">
 					<div class="wrapper fix">
-						<div class="main">
-							<xsl:apply-templates select="posts" />
-							<xsl:apply-templates select="refers" />
+						<div class="main my">
+							<xsl:apply-templates select="my/posts" />
 							<xsl:apply-templates select="comments" />
 						</div>
-						<xsl:apply-templates select="relative"/>
+						<div class="main friends">
+							<xsl:apply-templates select="friends/posts" />
+						</div>
 					</div>
 				</div>
 				<xsl:apply-templates select="about" />

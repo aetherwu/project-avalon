@@ -2,9 +2,14 @@
 <% Response.ContentType = "text/xml";%><?xml version="1.0" encoding="UTF-8" ?>
 <?xml-stylesheet href="/styles/view.xsl" type="text/xsl"?>
 <avalon>
-	<include:posts id="clips" runat="server" />
+	<my>
+		<person><txt:clr id="persona" runat="server"></txt:clr></person>
+		<include:posts id="clips" runat="server" />
+	</my>
+	<friends>
+		<include:posts id="clips_f" runat="server" />
+	</friends>
 	<include:comments id="comments" runat="server" />
-	<relative/>
 	<!-- #Include File="lib/navigation.xml" -->
 	<!-- #Include File="lib/about.xml" -->
 </avalon>

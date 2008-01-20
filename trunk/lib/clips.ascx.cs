@@ -12,12 +12,6 @@ namespace Avalon.Web {
 
 		private IList<ClipIndexInfo> lst;
 
-        private int _personID;
-        public int PersonID
-        {
-            get { return _personID; }
-            set { this._personID = value; }
-        }
 		private int _year;
 		public int Year
 		{
@@ -36,12 +30,6 @@ namespace Avalon.Web {
 			get { return _day; }
 			set { this._day = value; }
 		}
-		private string _keyword;
-		public string Keyword
-		{
-			get { return _keyword; }
-			set { this._keyword = value; }
-		}
 		private int _limit;
 		public int Limit
 		{
@@ -54,18 +42,37 @@ namespace Avalon.Web {
 			get { return _after; }
 			set { this._after = value; }
 		}
-		private int _getType;
-		public int getType
+		private bool _getFriend;
+		public bool GetFriend
 		{
-			get { return _getType; }
-			set { this._getType = value; }
+			get { return _getFriend; }
+			set { this._getFriend = value; }
 		}
-		private int _page;
+        private int _personID;
+        public int PersonID
+        {
+            get { return _personID; }
+            set { this._personID = value; }
+        }
+        private bool _getToday;
+        public bool GetToday
+        {
+            get { return _getToday; }
+            set { this._getToday = value; }
+        }
+		DateTime dt = DateTime.Now.Date;
 
 		public void Page_Load(object sender, EventArgs e)¡¡
 		{
 			Clip c = new Clip();
-            lst = c.GetDays(_year, _month, _day, _page, _keyword, _getType, _limit, _after, _personID);
+			if(_getToday){
+				_year =  dt.Year;
+				_month = dt.Month;
+                _day = dt.Day;
+			}else{
+			}
+
+			lst = c.GetDays(_year, _month, _day, _personID, _getFriend, _limit, _after);
 
 			if (lst != null) {
                 clipList.DataSource = lst;
@@ -81,21 +88,15 @@ namespace Avalon.Web {
 			{
 				//find data in parent source
 				ClipIndexInfo clips = (ClipIndexInfo)e.Item.DataItem; 
-
-				//format and get the params
-				/*/
-				int year = 2007;
-				int month = 2;
-				int day = 6;
-				/*/
+				
 				int year =  Convert.ToInt32( clips.PostTime.ToString("yyyy") );
 				int month = Convert.ToInt32( clips.PostTime.ToString("MM") );
 				int day = Convert.ToInt32( clips.PostTime.ToString("dd") );
-				//*/
-
 				Repeater clipInDay = (Repeater)e.Item.FindControl("clipInDay");
-                clipInDay.DataSource = clip.GetOneDay(year, month, day, _personID,_getType);
+				
+				clipInDay.DataSource = clip.GetOneDay(year, month, day, _personID, _getFriend, _getToday);
 				clipInDay.DataBind();
+
 			} 
 		}
 

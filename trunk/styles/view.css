@@ -1,6 +1,6 @@
 @import url("_global.css");
 
-.comments{}
+.comments{margin:20px;}
 	.comment { padding-top:10px; }
 	.main .comment {margin-bottom:0;}
 		.comment .inner { padding-bottom:10px; }

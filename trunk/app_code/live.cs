@@ -42,6 +42,9 @@ namespace Live
                         Clip clip = new Clip();
                         //对不同Feed的Item，例如Twitter、Del.icio.us、Flickr，需要处理成理想的格式然后才能入库。
                         content = Fliter.getContent(sc.Type, channel.Items[i].Title, channel.Items[i].Description, channel.Items[i].Link.ToString());
+						if(content.IndexOf("@")>=0 || content.IndexOf("[Live!]")>=0 || content.IndexOf("Looking at:")>=0 || content.IndexOf("Laughing at:")>=0 || content.IndexOf("Reading:")>=0 || content.IndexOf("At:")>=0 || content.IndexOf("[博]")>=0) {
+							continue;
+						}
 						if(sc.TimeZone!=0) {
 							localtime = channel.Items[i].PubDate.AddHours(sc.TimeZone);
 						}else{

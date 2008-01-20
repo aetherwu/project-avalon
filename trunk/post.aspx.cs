@@ -62,7 +62,7 @@ namespace Avalon.Web {
 		{
 			string content = FormatCode.getBasicHTML(HttpContext.Current.Request["clip"]);
 
-			if (Session["OpenID_UserObject"]=="ok") {
+			if (Session["OpenID_UserObject"] != null) {
                 ClipInfo newClip = new ClipInfo(0, content, Convert.ToDateTime("1999-1-1"), "", "avalon", 1);
 				Clip clip = new Clip();
 				clip.Update(newClip);
@@ -77,7 +77,7 @@ namespace Avalon.Web {
 			string content = FormatCode.getBasicHTML(HttpContext.Current.Request["clip"]);
 			string postTime = HttpContext.Current.Request["time"];
 
-            if (Session["OpenID_UserObject"] == "ok")
+            if (Session["OpenID_UserObject"] != null)
             {
 				//update
 				//postTime exsample: 2007-7-4 12:06:20
@@ -95,7 +95,7 @@ namespace Avalon.Web {
 		{
 			string postTime = HttpContext.Current.Request["time"];
 
-            if (Session["OpenID_UserObject"] == "ok")
+            if (Session["OpenID_UserObject"] != null)
             {
 				//delete
 				//postTime exsample: 2007-7-4 12:06:20
