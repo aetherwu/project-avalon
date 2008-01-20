@@ -13,6 +13,14 @@ namespace DALFactory
 		}
 	}
 
+	public class Person
+	{
+		public static IDAL.IPerson Create()
+		{
+			return new SQLServerDAL.Person();
+		}
+	}
+
 	public class Clip
 	{
 		public static IDAL.IClip Create()

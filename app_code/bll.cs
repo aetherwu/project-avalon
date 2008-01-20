@@ -26,31 +26,17 @@ namespace BLL
 		}
 
 		//获取指定带有查询条件的日志索引
-		public IList<ClipIndexInfo> GetDays(int year,int month,int day,int page,string keywords,int getType,int limit,DateTime after, int personID)
+		public IList<ClipIndexInfo> GetDays(int year, int month, int day, int personID, bool getFriend, int limit, DateTime after)
 		{
 			IClip dal = DALFactory.Clip.Create();
-            return dal.GetDays(year, month, day, page, keywords, getType, limit, after, personID);
+            return dal.GetDays(year, month, day, personID, getFriend, limit, after);
 		}
 
 		//获取指定某天的日志
-		public IList<ClipInfo> GetOneDay(int year,int month,int day, int personID,int getType)
+		public IList<ClipInfo> GetOneDay(int year, int month, int day, int personID, bool getFriend, bool getToday)
 		{
 			IClip dal = DALFactory.Clip.Create();
-			return dal.GetOneDay(year, month, day, personID,getType);
-		}
-
-		//获取一组默认的日志索引
-		public IList<ClipIndexInfo> GetDays()
-		{
-			IClip dal = DALFactory.Clip.Create();
-			return dal.GetDays();
-		}
-
-		//获取默认的一天日志
-		public IList<ClipInfo> GetOneDay()
-		{
-			IClip dal = DALFactory.Clip.Create();
-			return dal.GetOneDay();
+			return dal.GetOneDay(year, month, day, personID, getFriend, getToday);
 		}
 
 		//输出按月存档的列表
@@ -115,6 +101,22 @@ namespace BLL
 		{
 			ISource dal = DALFactory.Source.Create();
 			return dal.GetOneSource();
+		}
+	}
+
+	//
+	public class Person
+	{
+		public void Update(PersonInfo person)
+		{
+			IPerson dal = DALFactory.Person.Create();
+			dal.Update(person);
+		}
+
+		public PersonInfo GetPerson(string name)
+		{
+			IPerson dal = DALFactory.Person.Create();
+			return dal.GetPerson(name);
 		}
 	}
 

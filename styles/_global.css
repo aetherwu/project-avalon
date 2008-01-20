@@ -1,9 +1,10 @@
 
 * {margin:0;padding:0;}
-	html {color:#595750;background:#FBFBF6;}
-	body {
-		font-size:12px;font-family:"Lucida Grande",Verdana,Arial,Helvetica,sans-serif,"ËÎÌו";
+	html {
+		color:#595750;	
+		background:#FBFBF6 url(/images/dotx.gif) repeat-y center 0;
 	}
+	body { font-size:12px;font-family:Sim sun; }
 	h1{font-family:"Times New Roman";font-size:18px;color:#fff;}
 	a:link, a:visited {
 		color:#A0AC01;
@@ -17,124 +18,68 @@
 
 .banner {
 	height:150px;margin:0 auto;width:350px;
-	background:url(/images/logo.gif) no-repeat 0 0;
+	background:#FBFBF6 url(/images/logo.gif) no-repeat 0 0;
 }
 .banner h1 i {display:none;}
 
 .frame {}
 	.wrapper {
-		clear:both;margin:0 auto;padding:0 20px;
+		position:relative;
 	}
 	.main .box {margin-bottom:30px;}
 	.innerbox {padding:10px;}
 
-.main {
-	float:left;width:38%;margin-right:20px;
-	background:url(/images/dotx.gif) repeat-y right 0;
-}
-	.main img {border:1px solid #292F34;padding:3px;margin:0 10px 10px 0;}
+.main {width:50%;}
+	.my {position:absolute;}
+	.friends {float:right;}
+	.text img {border:1px solid #292F34;padding:3px;margin:0 10px 10px 0;}
 	.main .caption {text-align:center;padding-bottom:15px;margin-bottom:15px;position:relative;}
-		.main .caption h2 {font-size:28px;font-family:Georgia,"Times New Roman",serif;font-weight:normal;color:#fff;}
+		.main .caption h2 {font-size:28px;font-family:Georgia,"Times New Roman",serif;font-weight:normal;color:#ccc;}
 		.main .caption a {color:#7A7063;}
 		.main .caption a:hover {color:#91BC00;text-decoration: underline;}
-	.main .contain {}
-	.main .foot {text-align:right;}
-		.main .foot a {color:#B9B99E;text-decoration: underline;}
 
-	.main .history {}
-		.main .history i {font-style:normal;text-indent:2em;}
+	.post {margin:0 20px;}
 
-	.infomations {
-		margin-top:15px;padding-top:8px;margin-bottom:18px;
-		border-top:1px solid #2F3941;color:#777B80;
-	}
-		.infomations li {float:left;margin-right:15px;}
+	.face img {float:left;margin-top:10px;border:1px solid #000;padding:0;}
 
-	.post {margin:0 20px 0 0;}
-
-	.time {
-		padding:10px 0 0 30px;margin-bottom:5px;color:#B9B99E;
-		font-family:Georgia;font-size:12px;font-style:italic;position:relative;
-	}
-	.source {
-		position:absolute;top:31px;left:0;* left:-30px;
-		display:block;width:25px;height:25px;
-	}
-	.goto {
-		position:absolute;top:10px;left:80px;* left:55px;
-		padding:0;
-	}
-	.goto img { border:0; }
-		.flickr {background:url(/images/app.gif) no-repeat 0 2px;}
-		.twitter {background:url(/images/app.gif) no-repeat 0 -97px;}
-		.delicious {background:url(/images/app.gif) no-repeat 0 -54px;}
-		.avalon {background:url(/images/app.gif) no-repeat 0 -153px;}
-		.doubancmt {background:url(/images/app.gif) no-repeat 0 -207px;}
-		.douban {background:url(/images/app.gif) no-repeat 0 -207px;}
-		.gshare {background:url(/images/app.gif) no-repeat 0 -283px;}
-
-		.flickr:hover {background-position:  -40px 2px;}
-		.twitter:hover {background-position:  -40px -97px;}
-		.delicious:hover {background-position:  -40px -54px;}
-		.avalon:hover {background-position:  -40px -153px;}
-		.doubancmt:hover {background-position:  -40px -207px;}
-		.douban:hover {background-position:  -40px -207px;}
-		.gshare:hover {background-position:  -40px -283px;}
-
-
-	.text,#editor .textarea {margin-bottom:10px;line-height:25px;font-size:14px;padding-left:30px;}
+	.text {margin-bottom:25px;line-height:24px;font-size:14px;position:relative;}
 		.text a {text-decoration: underline;}
 		.text a:hover {text-decoration: none;}
-		.text textarea {
-			background:url(/images/bg.gif);border:none;color:#595750;
-			overflow:hidden;line-height:25px;padding:0;font-size:14px;width:100%;
+		.text p {margin-left:30px;}
+	.friends .text {margin-left:40px;}
+
+	.time {
+		padding:0 0 0 30px;color:#B9B99E;
+		font-family:Georgia;font-size:12px;font-style:italic;
+	}
+		.time span {color:#9BA578;margin-right:10px;}
+		.source {
+			position:absolute;left:0;top:24px;* top:19px;
+			display:block;width:25px;height:25px;
 		}
-		.gtalk {font-size:10px !important;font-family:verdana;color:#B9B99E !important;}
+			.flickr {background:url(/images/app.gif) no-repeat 0 2px;}
+			.twitter {background:url(/images/app.gif) no-repeat 0 -97px;}
+			.delicious {background:url(/images/app.gif) no-repeat 0 -54px;}
+			.avalon {background:url(/images/app.gif) no-repeat 0 -153px;}
+			.doubancmt {background:url(/images/app.gif) no-repeat 0 -207px;}
+			.douban {background:url(/images/app.gif) no-repeat 0 -207px;}
+			.gshare {background:url(/images/app.gif) no-repeat 0 -283px;}
 
-	.deleteBtn{color:#ccc !important;font-style:normal;margin-left:30px;}
-	.deleteBtn:hover{color:#000 !important;}
+			.flickr:hover {background-position:  -40px 2px;}
+			.twitter:hover {background-position:  -40px -97px;}
+			.delicious:hover {background-position:  -40px -54px;}
+			.avalon:hover {background-position:  -40px -153px;}
+			.doubancmt:hover {background-position:  -40px -207px;}
+			.douban:hover {background-position:  -40px -207px;}
+			.gshare:hover {background-position:  -40px -283px;}
+		.goto { padding:0; }
+			.goto img { border:0; }
 
-.side {
-	float:left;width:20%;
-	}
-	.side .box {background:url(/images/doth.gif) repeat-x 0 0;padding:25px 0 25px 20px;}
-	.side .caption {
-		font-size:12px;color:#525B5C;
-		margin-bottom:15px;
-	}
-		.side .caption span {float:right;font-weight:normal;}
-	.side .contain { line-height:150%;color:#837A6D;}
-	
-	.side .auther img {border:1px solid #ccc;padding:3px}
-	.side .share li {
-		line-height:180%;
-		padding-left:14px;
-		background:url(/images/bullet.gif) no-repeat 0 2px;
-	}
-
-	.side .recentComments a {text-decoration: underline;}
-	.side .recentComments li, .side .recentPosts li {margin:8px 0;background:none;padding-left:0;}
-
-	.side .rss {background:none;padding:0 0 0 20px;}
-
-	.side .search {}
-	.side .search form {}
-		.side .search .key {padding:2px;margin-right:2px;width:120px;border:1px solid #B9B99E;}
-		.side .search .btn {padding:1px;}
-	
-	.side .store img{margin-right:5px;border:1px solid #999;}
-
-	.side .blogosphere ul {margin-bottom:10px;}
-	.side .blogosphere li {margin-left:25px;list-style:circle ;}
-	.side .blogosphere .sort {margin-left:0;list-style:none;}
-
-	.side #archives {padding:2px;background:#e3e3e3;}
+	.deleteBtn{color:#ccc !important;font-style:normal;margin-left:10px;}
+		.deleteBtn:hover{color:#000 !important;}
 
 .about {
-	clear:both;
-	padding:30px;margin:30px auto 0 auto;
-	text-align:center;color:#918862;
-	border-top:3px solid #ECECDE;
+	padding:30px;color:#918862;
 }
 
 

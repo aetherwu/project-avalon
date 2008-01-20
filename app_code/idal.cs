@@ -9,10 +9,8 @@ namespace IDAL
 	{
 		void Update(ClipInfo existdClip);
 		void Delete(ClipInfo existdClip);
-		IList<ClipIndexInfo> GetDays();
-		IList<ClipInfo> GetOneDay();
-		IList<ClipIndexInfo> GetDays(int year,int month,int day,int page,string keywords,int getType,int limit,DateTime after,int personID);
-		IList<ClipInfo> GetOneDay(int year,int month,int day,int personID,int getType);
+		IList<ClipIndexInfo> GetDays(int year, int month, int day, int personID, bool getFriend, int limit, DateTime after);
+		IList<ClipInfo> GetOneDay(int year, int month, int day, int personID, bool getFriend, bool getToday);
 		IList<ArchiveIndexInfo> GetArchives();
 	}
 
@@ -27,6 +25,12 @@ namespace IDAL
 	{
 		void Update(SourceInfo source);
 		SourceInfo GetOneSource();
+	}
+
+	public interface IPerson
+	{
+		void Update(PersonInfo person);
+		PersonInfo GetPerson(string name);
 	}
 
 }
