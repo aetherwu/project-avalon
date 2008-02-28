@@ -30,49 +30,40 @@ namespace Avalon.Web {
 			get { return _day; }
 			set { this._day = value; }
 		}
+
 		private int _limit;
 		public int Limit
 		{
 			get { return _limit; }
 			set { this._limit = value; }
 		}
+
 		private DateTime _after;
 		public DateTime After
 		{
 			get { return _after; }
 			set { this._after = value; }
 		}
-		private bool _getFriend;
-		public bool GetFriend
-		{
-			get { return _getFriend; }
-			set { this._getFriend = value; }
-		}
+
         private int _personID;
         public int PersonID
         {
             get { return _personID; }
             set { this._personID = value; }
         }
-        private bool _getToday;
-        public bool GetToday
+
+        private bool _getPost;
+        public bool GetPost
         {
-            get { return _getToday; }
-            set { this._getToday = value; }
+            get { return _getPost; }
+            set { this._getPost = value; }
         }
-		DateTime dt = DateTime.Now.Date;
 
 		public void Page_Load(object sender, EventArgs e)¡¡
 		{
 			Clip c = new Clip();
-			if(_getToday){
-				_year =  dt.Year;
-				_month = dt.Month;
-                _day = dt.Day;
-			}else{
-			}
 
-			lst = c.GetDays(_year, _month, _day, _personID, _getFriend, _limit, _after);
+			lst = c.GetDays(_year, _month, _day, _personID, _limit, _after, _getPost);
 
 			if (lst != null) {
                 clipList.DataSource = lst;
@@ -94,12 +85,11 @@ namespace Avalon.Web {
 				int day = Convert.ToInt32( clips.PostTime.ToString("dd") );
 				Repeater clipInDay = (Repeater)e.Item.FindControl("clipInDay");
 				
-				clipInDay.DataSource = clip.GetOneDay(year, month, day, _personID, _getFriend, _getToday);
+				clipInDay.DataSource = clip.GetOneDay(year, month, day, _personID, _getPost);
 				clipInDay.DataBind();
 
 			} 
 		}
-
 
     }
 

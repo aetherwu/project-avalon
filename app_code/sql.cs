@@ -135,14 +135,15 @@ namespace SQLServerDAL
 		private const string SQL_SELECT_Clips_Month = "AND MONTH(postTime) = @month ";
         private const string SQL_SELECT_Clips_Day = "AND DAY(postTime) = @day ";
         private const string SQL_SELECT_Clips_Person = "AND person = @person ";
-		private const string SQL_SELECT_Clips_Friend = "AND (person IN (SELECT watcher FROM live_friend AS f WHERE f.holder = @person)) ";
+		private const string SQL_GET_POST = "AND (sourceType)='avalon' ";
+		private const string SQL_GET_LIVE = "AND (sourceType)<>'avalon' ";
 		private const string SQL_SELECT_Clips_End = "GROUP BY CONVERT(char(10), postTime, 21) ORDER BY PostTime DESC";
 
-        public IList<ClipIndexInfo> GetDays(int year, int month, int day, int personID, bool getFriend, int limit, DateTime after)
+        public IList<ClipIndexInfo> GetDays(int year, int month, int day, int personID, int limit, DateTime after, bool getPost)
         {
 			
 			if (limit==0)
-				limit=3;
+				limit=5;
 			if (after==Convert.ToDateTime("0001-1-1 0:00:00"))
 			{
 				DateTime dt = DateTime.Now;
@@ -173,9 +174,13 @@ namespace SQLServerDAL
 			if (day!=0)
                 sql.Append(SQL_SELECT_Clips_Day);
 
-            if (getFriend) {
-                sql.Append(SQL_SELECT_Clips_Friend);
-			} else {
+            if (getPost) {
+				sql.Append(SQL_GET_POST);
+			}else{
+				sql.Append(SQL_GET_LIVE);
+			}
+
+            if (personID!=0) {
                 sql.Append(SQL_SELECT_Clips_Person);
 			}
 
@@ -187,7 +192,25 @@ namespace SQLServerDAL
             using (SqlDataReader sdr = SqlHelper.ExecuteReader(SqlHelper.CONN_STR, CommandType.Text, sqlClips, parms)) {
                 while (sdr.Read())
 				{
-					ClipIndexInfo clip = new ClipIndexInfo(Convert.ToDateTime(sdr.GetString(0)));
+
+					DateTime dt = DateTime.Now;
+					System.TimeSpan st = dt.Subtract(Convert.ToDateTime(sdr.GetString(0)));
+					StringBuilder dtDiffer = new StringBuilder();
+					if(st.Days==0) {
+						dtDiffer.Append("今天");
+					}else if(st.Days==1){
+						dtDiffer.Append("昨天");
+					}else if(st.Days==2){
+						dtDiffer.Append("前天");
+					}else{
+						dtDiffer.Append(st.Days.ToString()+"天以前");
+					}
+					String dtDiff = dtDiffer.ToString();
+
+					ClipIndexInfo clip = new ClipIndexInfo(
+						Convert.ToDateTime(sdr.GetString(0)),
+						dtDiff
+					);
 					clips.Add(clip);
 					i++;
 					if (i>=limit)
@@ -204,13 +227,11 @@ namespace SQLServerDAL
 		private const string PARM_month = "@month";
 		private const string PARM_day = "@day";
 
-        private const string SQL_GET_DAY_START = "SELECT a.c_ID, a.content, a.postTime, a.link, b.type, b.owner, b.site, b.doing,c.name FROM [live_Clip] a, [live_Source] b,[live_Person] c WHERE (a.sourceType = b.type) AND (a.person = b.owner) AND (a.person=c.p_ID) AND YEAR(a.postTime) = @year AND MONTH(a.postTime) = @month AND DAY(a.postTime) = @day ";
+        private const string SQL_GET_DAY_START = "SELECT a.c_ID, a.content, a.postTime, a.link, b.type, b.owner, b.site, b.doing,c.name FROM [live_Clip] a, [live_Source] b,[live_Person] c WHERE (a.sourceType = b.type) AND (a.person = b.owner) AND (a.person=c.p_ID) AND YEAR(a.postTime) = @year AND MONTH(a.postTime) = @month AND DAY(a.postTime) = @day  ";
 		private const string SQL_GET_DAY_OWNER = "AND (a.person = @person) ";
-		private const string SQL_GET_DAY_FRIEND =  "AND (a.person IN (SELECT watcher FROM live_friend AS f WHERE f.holder = @person)) ";
-		private const string SQL_GET_DAY_END = "ORDER BY a.postTime ASC";
-		private const string SQL_GET_DAY_ENDD = "ORDER BY a.postTime DESC";
+		private const string SQL_GET_DAY_END = "ORDER BY a.postTime DESC";
 
-		public IList<ClipInfo> GetOneDay(int year, int month, int day, int personID, bool getFriend, bool getToday)
+		public IList<ClipInfo> GetOneDay(int year, int month, int day, int personID, bool getPost)
 		{ 
             IList<ClipInfo> clips = new List<ClipInfo>();
 
@@ -226,16 +247,15 @@ namespace SQLServerDAL
 				System.Web.HttpContext.Current.Trace.Write("DO","Bind each clip in history list");
 
 			StringBuilder sqlday = new StringBuilder(SQL_GET_DAY_START);
-            if (getFriend) {
-                sqlday.Append(SQL_GET_DAY_FRIEND);
-			} else {
-                sqlday.Append(SQL_GET_DAY_OWNER);
+            if (personID!=0) {
+				sqlday.Append(SQL_GET_DAY_OWNER);
 			}
-            if (getToday) {
-				sqlday.Append(SQL_GET_DAY_ENDD);
-			} else {
-				sqlday.Append(SQL_GET_DAY_END);
+            if (getPost) {
+				sqlday.Append(SQL_GET_POST);
+			}else{
+				sqlday.Append(SQL_GET_LIVE);
 			}
+			sqlday.Append(SQL_GET_DAY_END);
             string sqlClips = sqlday.ToString();
 
             //Execute

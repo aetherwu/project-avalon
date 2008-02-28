@@ -1,6 +1,8 @@
 using System;
+using System.IO;
+using System.Xml;
 
-using Rss;
+using RssToolkit.Rss;
 using Model;
 using BLL;
 using Utility;
@@ -8,13 +10,14 @@ using Utility;
 namespace Live
 {
 
-	//日志索引，因为日志里面还包含一个列表
+
 	public class Runer
 	{
 
 		private SourceInfo sc;
 		private string content;
-		private DateTime localtime;
+        private string outerXml;
+        private DateTime thisTime;
 		public void loadRSS()
 		{
 			Avalon.Web._global.i++;
@@ -22,51 +25,75 @@ namespace Live
 			Source src = new Source();
 			sc = src.GetOneSource();
 			if(sc.Type=="avalon") return;
-			
-			RssFeed feed = RssFeed.Read(sc.Source);
-            RssChannel channel = (RssChannel)feed.Channels[0];
-            RssItemCollection items = (RssItemCollection)channel.Items;
-            DateTime lastUpdate = channel.Items.LatestPubDate();
 
-			//if modified
-            if (lastUpdate > sc.LastUpdate)
+            //load can convert to rss 2.0
+            using (Stream actual = DownloadManager.GetFeed(sc.Source))
             {
-				//foreach items
-                for (int i = 0; i < channel.Items.Count-1; i++)
+                using (XmlTextReader reader = new XmlTextReader(actual))
                 {
-                    //if items pudate > feed's last modify time
-                    //give up the else
-                    if (channel.Items[i].PubDate > sc.LastUpdate)
+                    while (reader.Read())
                     {
-                        //save one new item into database
-                        Clip clip = new Clip();
-                        //对不同Feed的Item，例如Twitter、Del.icio.us、Flickr，需要处理成理想的格式然后才能入库。
-                        content = Fliter.getContent(sc.Type, channel.Items[i].Title, channel.Items[i].Description, channel.Items[i].Link.ToString());
-						if(content.IndexOf("@")>=0 || content.IndexOf("[Live!]")>=0 || content.IndexOf("Looking at:")>=0 || content.IndexOf("Laughing at:")>=0 || content.IndexOf("Reading:")>=0 || content.IndexOf("At:")>=0 || content.IndexOf("[博]")>=0) {
-							continue;
-						}
-						if(sc.TimeZone!=0) {
-							localtime = channel.Items[i].PubDate.AddHours(sc.TimeZone);
-						}else{
-							localtime = channel.Items[i].PubDate;
-						}
-                        ClipInfo cp = new ClipInfo(
-                            0,
-                            content,
-                            localtime,
-                            channel.Items[i].Link.ToString(),
-							sc.Type,
-                            sc.Owner
-                        );
-                        clip.Update(cp);
+                        if (reader.NodeType == XmlNodeType.Element)
+                        {
+                            break;
+                        }
                     }
+                    outerXml = RssXmlHelper.ConvertToRssXml(reader.ReadOuterXml());
                 }
-				//updated the last modify time of Feed
-                sc.LastUpdate = lastUpdate;
-			}
-			//源的updateHit加1，不管是否更新过HIT都要加1
-			sc.UpdateHit++;
-			src.Update(sc);
+            }
+
+            if (outerXml != null)
+            {
+                RssDocument rssDoc = RssDocument.Load(outerXml);
+                RssChannel feed = rssDoc.Channel;
+                DateTime lastUpdate = RssXmlHelper.Parse(feed.LastBuildDate);
+                if (feed.LastBuildDate == "")
+                {
+                    lastUpdate.AddHours(8);
+                }
+                else {
+                    lastUpdate.AddHours(sc.TimeZone);
+                }
+
+			    //if modified
+                if (lastUpdate > sc.LastUpdate)
+                {
+				    //foreach items
+                    for (int i = 0; i < feed.Items.Count-1; i++)
+                    {
+                        //if items pudate > feed's last modify time
+                        //give up the else
+                        thisTime = feed.Items[i].PubDateParsed.AddHours(sc.TimeZone);
+                        if (thisTime > sc.LastUpdate)
+                        {
+                            //save one new item into database
+                            Clip clip = new Clip();
+                            //对不同Feed的Item，例如Twitter、Del.icio.us、Flickr，需要处理成理想的格式然后才能入库。
+                            content = Fliter.getContent(sc.Type, feed.Items[i].Title, feed.Items[i].Description, feed.Items[i].Link.ToString());
+
+                            ClipInfo cp = new ClipInfo(
+                                0,
+                                content,
+                                feed.Items[i].PubDateParsed.AddHours(sc.TimeZone),
+                                feed.Items[i].Link.ToString(),
+							    sc.Type,
+                                sc.Owner
+                            );
+                            clip.Update(cp);
+                            if (lastUpdate < thisTime)
+                                lastUpdate = thisTime;
+                        }
+                    }
+				    //updated the last modify time of Feed
+                    //sc.LastUpdate = lastUpdate;
+			    }
+                //*/ 
+
+			    //源的updateHit加1，不管是否更新过HIT都要加1
+			    sc.UpdateHit++;
+			    src.Update(sc);
+
+            }
 		}
 	}
 }

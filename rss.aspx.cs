@@ -18,6 +18,7 @@ namespace Avalon.Web {
 		private int _year;
 		private int _month;
 		private int _day;
+		private DateTime _after;
 		private string _keyword;
         private PersonInfo p;
 
@@ -26,15 +27,17 @@ namespace Avalon.Web {
 
 			Person person = new Person();
 			p = person.GetPerson(personName);
+			DateTime dt = DateTime.Now.AddDays(-1);
+			_after = dt;
 
             if (p == null)
             {
-                Response.Redirect("/");
+               // Response.Redirect("/error.html");
             }
             else
             {
                 Clip c = new Clip();
-                lst = c.GetDays(_year, _month, _day, p.ID , false, 5, dt);
+				lst = c.GetDays(_year, _month, _day, p.ID , 5, _after, false);
 
                 if (lst != null)
                 {
@@ -60,7 +63,7 @@ namespace Avalon.Web {
 				//*/
 
 				Repeater clipInDay = (Repeater)e.Item.FindControl("clipInDay");
-				clipInDay.DataSource = d.GetOneDay(year, month, day ,p.ID , false, false);
+				clipInDay.DataSource = d.GetOneDay(year, month, day, p.ID, false);
 				clipInDay.DataBind();
 			} 
 		}

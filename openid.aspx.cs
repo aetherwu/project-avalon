@@ -62,7 +62,7 @@ namespace Avalon.Web {
 		}
 
 		protected void Check() {
-            if (Session["OpenID_UserObject"]!="")
+            if (Session["OpenID_UserObject"] != null)
             {
 				status.Text="1";
 			}else{

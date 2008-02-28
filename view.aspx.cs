@@ -21,6 +21,7 @@ namespace Avalon.Web {
 			int month = WebComponents.CleanString.GetInt(HttpContext.Current.Request["month"]);
 			int day = WebComponents.CleanString.GetInt(HttpContext.Current.Request["day"]);
 			string personName = HttpContext.Current.Request["person"];
+			DateTime dt = DateTime.Now.AddDays(1);
 
             //check if it is existed
 			Person person = new Person();
@@ -34,16 +35,19 @@ namespace Avalon.Web {
             {
 				persona.Text = p.Name;
 
+                clips.PersonID = p.ID;
+                clips.After = dt;
+				clips.GetPost = true;
 				clips.Year=year;
 				clips.Month=month;
 				clips.Day=day;
-                clips.PersonID = p.ID;
 
-				clips_f.Year=year;
-				clips_f.Month=month;
-				clips_f.Day=day;
-                clips_f.GetFriend = true;
-				clips_f.PersonID = p.ID;
+                live.PersonID = p.ID;
+                live.After = dt;
+				live.GetPost = false;
+				live.Year=year;
+				live.Month=month;
+				live.Day=day;
 
 				logTime = Convert.ToDateTime(Utility.FormatCode.GetFormatDay(year,month,day));
 				comments.LogTime = logTime;

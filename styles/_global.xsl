@@ -6,7 +6,8 @@
 
 	<!-- Navigation -->
 	<xsl:template match="navigation">
-	<div class="navigation">
+	<div class="navigation fix">
+		<img src="http://static.woooh.com/images/face/{//avalon/person}.jpg" />
 		<ul>
 			<xsl:for-each select="archor">
 				<li>

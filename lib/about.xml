@@ -3,10 +3,10 @@
 		<contact>admin.ae at gmail.com</contact>
 		<project>Avalon</project>
 		<version>Live</version>
-		<release>2008.1.21 r89</release>
+		<release>2008.1.21 r71</release>
 		<note>Born in Starbucks</note>
 		<base>PetShop4.0</base>
 		<theme>bigcartel.com</theme>
-		<link rel="openid.server" href="http://www.inu.cc/openid" />
-		<link rel="openid.delegate" href="http://aether.inu.cc/" />
+		<link rel="openid.server" href="http://jiwai.de/openid" />
+		<link rel="openid.delegate" href="http://jiwai.de/Aether/" />
 	</about>

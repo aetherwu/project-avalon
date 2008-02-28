@@ -2,13 +2,13 @@
 <% Response.ContentType = "text/xml";%><?xml version="1.0" encoding="UTF-8" ?>
 <?xml-stylesheet href="/styles/view.xsl" type="text/xsl"?>
 <avalon>
+	<person><txt:clr id="persona" runat="server"></txt:clr></person>
 	<my>
-		<person><txt:clr id="persona" runat="server"></txt:clr></person>
-		<include:posts id="clips" runat="server" />
+		<include:clips id="clips" runat="server" />
 	</my>
-	<friends>
-		<include:posts id="clips_f" runat="server" />
-	</friends>
+	<live>
+		<include:clips id="live" runat="server" />
+	</live>
 	<include:comments id="comments" runat="server" />
 	<!-- #Include File="lib/navigation.xml" -->
 	<!-- #Include File="lib/about.xml" -->

@@ -42,13 +42,20 @@ namespace Model
 	public class ClipIndexInfo
 	{
 		private DateTime postTime;
+		private String postDiffer;
 
 		public ClipIndexInfo(DateTime postTime)
 		{
 			this.postTime = postTime;
 		}
+		public ClipIndexInfo(DateTime postTime, String postDiffer)
+		{
+			this.postTime = postTime;
+			this.postDiffer = postDiffer;
+		}
 
 		public DateTime PostTime { get	{ return postTime; } }
+		public String PostDiffer { get	{ return postDiffer; } }
 	}
 
 	//»’÷æ‘¥
