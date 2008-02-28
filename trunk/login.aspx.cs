@@ -8,7 +8,7 @@ namespace Avalon.Web {
 	{
 
 		protected void Page_Load(object sender, EventArgs e) {
-            if (Session["OpenID_UserObject"] == null)
+            if (Session["OpenID_UserObject"] != null)
 			{
 				Response.Redirect("/ing");
 			}

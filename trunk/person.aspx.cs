@@ -1,5 +1,8 @@
 using System;
-using System.Web;   
+using System.Web;
+using System.Xml;
+using System.Xml.Xsl;
+using System.Xml.XPath;
 using System.Web.UI.WebControls;
 
 using BLL;
@@ -16,7 +19,7 @@ namespace Avalon.Web {
 			int year = WebComponents.CleanString.GetInt(HttpContext.Current.Request["year"]);
 			int month = WebComponents.CleanString.GetInt(HttpContext.Current.Request["month"]);
 			string personName = HttpContext.Current.Request["person"];
-			DateTime dt = DateTime.Now.Date;
+			DateTime dt = DateTime.Now.AddDays(1);
 
             //check if it is existed
 			Person person = new Person();
@@ -24,33 +27,22 @@ namespace Avalon.Web {
 
             if (p == null)
             {
-                Response.Redirect("/");
+                //Response.Redirect("/error.html");
             }
             else
             {
 				persona.Text = p.Name;
 
-                clips_today.GetToday = true;
-                clips_today.GetFriend = false;
-                clips_today.PersonID = p.ID;
-
-                clips.GetToday = false;
-                clips.GetFriend = false;
                 clips.PersonID = p.ID;
                 clips.After = dt;
+				clips.GetPost = true;
+				clips.Limit = 3;
 
-                clips_today_f.GetToday = true;
-                clips_today_f.GetFriend = true;
-                clips_today_f.PersonID = p.ID;
-
-                clips_f.GetToday = false;
-                clips_f.GetFriend = true;
-                clips_f.PersonID = p.ID;
-                clips_f.After = dt;
-            }
+                live.PersonID = p.ID;
+                live.After = dt;
+				live.GetPost = false;
+         }
 
 		}
-
 	}
-
 }

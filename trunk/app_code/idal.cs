@@ -9,8 +9,8 @@ namespace IDAL
 	{
 		void Update(ClipInfo existdClip);
 		void Delete(ClipInfo existdClip);
-		IList<ClipIndexInfo> GetDays(int year, int month, int day, int personID, bool getFriend, int limit, DateTime after);
-		IList<ClipInfo> GetOneDay(int year, int month, int day, int personID, bool getFriend, bool getToday);
+		IList<ClipIndexInfo> GetDays(int year, int month, int day, int personID, int limit, DateTime after, bool getPost);
+		IList<ClipInfo> GetOneDay(int year, int month, int day, int personID, bool getPost);
 		IList<ArchiveIndexInfo> GetArchives();
 	}
 

@@ -3,8 +3,6 @@
 <?xml-stylesheet href="/styles/default.xsl" type="text/xsl"?>
 <avalon>
 	<!-- #Include File="lib/navigation.xml" -->
-	<include:today id="clipToday" runat="server" />
-	<include:posts id="clips" runat="server" />
 	<relative>
 		<include:cmt id="recentComments" runat="server" />
 		<include:arv id="archives" runat="server" />

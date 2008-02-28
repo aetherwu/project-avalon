@@ -3,14 +3,13 @@
 <?xml-stylesheet href="/styles/default.xsl" type="text/xsl"?>
 <avalon>
 	<!-- #Include File="lib/navigation.xml" -->
+	<person><txt:clr id="persona" runat="server"></txt:clr></person>
 	<my>
-		<person><txt:clr id="persona" runat="server"></txt:clr></person>
-		<include:today id="clips_today" runat="server" />
-		<include:posts id="clips" runat="server" />
+		<include:clips id="clips" runat="server" />
 	</my>
-	<friends>
-		<include:today id="clips_today_f" runat="server" />
-		<include:posts id="clips_f" runat="server" />
-	</friends>
+	<live>
+		<include:clips id="live" runat="server" />
+	</live>
+	<include:cmt id="recentComments" runat="server" />
 	<!-- #Include File="lib/about.xml" -->
 </avalon>

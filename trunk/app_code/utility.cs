@@ -35,12 +35,42 @@ namespace Utility
 					}
 					return str;
 					break;
+				case "digg":
+					str = "<a href='"+ link +"' target='_blank'>"+ title +"</a>";
+					if (desc!="") {
+						str = str +"<br />¡°"+ desc +"¡±";
+					}
+					return str;
+					break;
+				case "diggcmt":
+                    title = title.Substring(0, title.IndexOf("commented on "));
+                    str = "<a href='" + link + "' title='" + title + "' target='_blank'>" + title + "</a><br />" + desc.Replace("\n\n","<br />");;
+                    return str;
+					break;
 				case "flickr":
 					rx = new Regex(@"(http(s)?://)?([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 					matches = rx.Matches(desc);
 
 					uri = matches[1].Value;
 					pic = matches[2].Value;
+					str = "<a href='"+ uri +"' target='_blank'><img src='"+ pic +"' alt='"+ title +"' /></a>";
+					return str;
+					break;
+				case "flickrfv":
+					rx = new Regex(@"(http(s)?://)?([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+					matches = rx.Matches(desc);
+
+					uri = matches[1].Value;
+					pic = matches[2].Value;
+					str = "<a href='"+ uri +"' target='_blank'><img src='"+ pic.Replace("farm1.","").Replace("farm2.","") +"' alt='"+ title +"' /></a>";
+					return str;
+					break;
+				case "footbig":
+					rx = new Regex(@"(http(s)?://)?([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+					matches = rx.Matches(desc);
+
+					pic = matches[1].Value;
+					uri = matches[2].Value;
 					str = "<a href='"+ uri +"' target='_blank'><img src='"+ pic +"' alt='"+ title +"' /></a>";
 					return str;
 					break;
@@ -65,6 +95,10 @@ namespace Utility
                     return str;
                     break;
                 case "gshare":
+                    str = "<a href='" + link + "' title='" + title + "' target='_blank'>" + title + "</a>";
+                    return str;
+                    break;
+                case "xianguo":
                     str = "<a href='" + link + "' title='" + title + "' target='_blank'>" + title + "</a>";
                     return str;
                     break;

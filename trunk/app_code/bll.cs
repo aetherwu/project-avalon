@@ -26,17 +26,17 @@ namespace BLL
 		}
 
 		//获取指定带有查询条件的日志索引
-		public IList<ClipIndexInfo> GetDays(int year, int month, int day, int personID, bool getFriend, int limit, DateTime after)
+		public IList<ClipIndexInfo> GetDays(int year, int month, int day, int personID, int limit, DateTime after, bool getPost)
 		{
 			IClip dal = DALFactory.Clip.Create();
-            return dal.GetDays(year, month, day, personID, getFriend, limit, after);
+            return dal.GetDays(year, month, day, personID, limit, after, getPost);
 		}
 
 		//获取指定某天的日志
-		public IList<ClipInfo> GetOneDay(int year, int month, int day, int personID, bool getFriend, bool getToday)
+		public IList<ClipInfo> GetOneDay(int year, int month, int day, int personID, bool getPost)
 		{
 			IClip dal = DALFactory.Clip.Create();
-			return dal.GetOneDay(year, month, day, personID, getFriend, getToday);
+			return dal.GetOneDay(year, month, day, personID, getPost);
 		}
 
 		//输出按月存档的列表

@@ -3,38 +3,31 @@
 
 	<!-- Single Article Templates-->
 	<xsl:template match="posts">
-		<xsl:variable name="owner" select="owner"  />
+
 		<xsl:for-each select="post">
-		<div class="box post {@type} fix">
-		<div>
-			<div class="caption">
+			<xsl:call-template name="box" />
+		</xsl:for-each>
+
+	</xsl:template>
+
+	<xsl:template name="box">
+		<xsl:param name="postType"/>
+		<div class="box {$postType} fix">
+		<div class="post">
+			<div class="caption fix">
 				<xsl:for-each select="date">
-					<xsl:choose>
-						<xsl:when test="../../../person">
-							<h2 class="date"><a href="/{../../../person}/{@address}"><xsl:value-of select="text()"/></a></h2>
-						</xsl:when>
-						<xsl:otherwise>
-							<h2 class="date"><xsl:value-of select="text()"/></h2>
-						</xsl:otherwise>
-					</xsl:choose>					
+					<h2 class="date"><a href="/{//avalon/person}/{@address}"><xsl:value-of select="text()"/></a></h2>
+				</xsl:for-each>
+				<xsl:for-each select="differ">
+					<span class="differ"><xsl:value-of select="text()"/></span>
 				</xsl:for-each>
 			</div>
 			<div class="contain fix">
 				<xsl:for-each select="clip">
 					<div class="clip fix">
-						<xsl:choose>
-							<xsl:when test="not(../../../person)">
-								<a href="/{owner}" class="face" target="new"><img src="/images/face/{owner}.jpg" /></a>
-							</xsl:when>
-						</xsl:choose>
 						<div class="text" id="{../date/@address} {time}">
 							<a href="{link}" class="source {source}" target="new"></a>							
 							<div class="time">
-								<xsl:choose>
-									<xsl:when test="not(../../../person)">
-										<span><xsl:value-of select="owner" /></span>
-									</xsl:when>
-								</xsl:choose>
 								<xsl:value-of select="time" />
 							</div>
 							<p><xsl:apply-templates select="text"/></p>
@@ -44,7 +37,6 @@
 			</div>
 		</div>
 		</div>
-		</xsl:for-each>
 	</xsl:template>
 
 	<xsl:template match="text">

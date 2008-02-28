@@ -85,10 +85,10 @@ var saveUpdate = function(logtime,content){
 bindDelete = function() {
 	$(".time").append("<a href='javascript://' class='deleteBtn'>删除</a>");
 	$(".deleteBtn").click(function(){
-		var logtime = $(this).parent().next().attr("id").replace(/\//g,"-");
+		var logtime = $(this).parent().parent().attr("id").replace(/\//g,"-");
 		if (confirm("确认删除？")) {
 			saveDelete(logtime);
-			$(this).parent().fadeOut().next().fadeOut();
+			$(this).parent().parent().parent().fadeOut();
 		}
 	});
 }
